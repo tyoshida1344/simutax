@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "taxYear": 2026,
+    "eraYear": "令和8年",
+    "lastVerified": "2026-07-08",
+    "sources": [
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm",
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm",
+      "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html"
+    ]
+  },
+  "incomeTax": {
+    "brackets": [
+      { "upperLimit": 1950000,  "rate": 0.05, "deduction": 0 },
+      { "upperLimit": 3300000,  "rate": 0.10, "deduction": 97500 },
+      { "upperLimit": 6950000,  "rate": 0.20, "deduction": 427500 },
+      { "upperLimit": 9000000,  "rate": 0.23, "deduction": 636000 },
+      { "upperLimit": 18000000, "rate": 0.33, "deduction": 1536000 },
+      { "upperLimit": 40000000, "rate": 0.40, "deduction": 2796000 },
+      { "upperLimit": null,     "rate": 0.45, "deduction": 4796000 }
+    ],
+    "reconstructionSurtaxRate": 0.021,
+    "basicDeduction": [
+      { "totalIncomeUpperLimit": 4890000,  "amount": 1040000 },
+      { "totalIncomeUpperLimit": 6550000,  "amount": 670000 },
+      { "totalIncomeUpperLimit": 23500000, "amount": 620000 },
+      { "totalIncomeUpperLimit": 24000000, "amount": 480000 },
+      { "totalIncomeUpperLimit": 24500000, "amount": 320000 },
+      { "totalIncomeUpperLimit": 25000000, "amount": 160000 },
+      { "totalIncomeUpperLimit": null,      "amount": 0 }
+    ],
+    "roundTaxableIncomeDownTo": 1000,
+    "roundTaxAmountDownTo": 100
+  },
+  "residentTax": {
+    "incomeRate": 0.10,
+    "perCapitaLevy": 5000,
+    "basicDeduction": 430000,
+    "roundTaxableIncomeDownTo": 1000,
+    "roundTaxAmountDownTo": 100
+  },
+  "businessTax": {
+    "businessOwnerDeduction": 2900000,
+    "types": {
+      "type1":     { "label": "第1種事業（物品販売・飲食等）", "rate": 0.05 },
+      "type2":     { "label": "第2種事業（畜産・水産等）",     "rate": 0.04 },
+      "type3_5pct": { "label": "第3種事業（医業・デザイン等）", "rate": 0.05 },
+      "type3_3pct": { "label": "第3種事業（あん摩・鍼灸等）",  "rate": 0.03 },
+      "exempt":    { "label": "非課税業種（文筆業等）",        "rate": 0 }
+    },
+    "defaultType": "type1"
+  },
+  "blueReturnDeductions": {
+    "blue65": 650000,
+    "blue55": 550000,
+    "blue10": 100000,
+    "white": 0
+  },
+  "socialInsurance": {
+    "nationalPension": {
+      "monthlyAmount": 17510,
+      "months": 12
+    },
+    "nationalHealthInsurance": {
+      "models": {
+        "standard": {
+          "label": "全国標準モデル",
+          "medical": {
+            "incomeRate": 0.0789,
+            "perCapita": 45400,
+            "perHousehold": 24800,
+            "cap": 650000
+          },
+          "elderlySupport": {
+            "incomeRate": 0.0278,
+            "perCapita": 15700,
+            "perHousehold": 8500,
+            "cap": 240000
+          },
+          "nursingCare": {
+            "incomeRate": 0.0224,
+            "perCapita": 16600,
+            "perHousehold": 5600,
+            "cap": 170000,
+            "minAge": 40,
+            "maxAge": 64
+          }
+        }
+      },
+      "baseDeduction": 430000
+    }
+  }
+}
