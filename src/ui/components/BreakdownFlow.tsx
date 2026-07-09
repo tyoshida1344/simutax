@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { SimulatorResult } from '../../data/types';
 import { formatYen } from '../format';
+import styles from '../styles/BreakdownFlow.module.css';
 
 interface Props {
   result: SimulatorResult;
@@ -23,41 +24,45 @@ function BreakdownRow({
 }) {
   const [expanded, setExpanded] = useState(false);
 
+  const rowClass = bold
+    ? styles.rowBold
+    : expandable
+      ? styles.rowExpandable
+      : styles.row;
+
+  const handleKeyDown = expandable
+    ? (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setExpanded(!expanded);
+        }
+      }
+    : undefined;
+
   return (
     <div>
       <div
         onClick={expandable ? () => setExpanded(!expanded) : undefined}
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '10px 0',
-          borderBottom: '1px solid var(--border)',
-          cursor: expandable ? 'pointer' : 'default',
-          fontWeight: bold ? 600 : 400,
-        }}
+        onKeyDown={handleKeyDown}
+        className={rowClass}
+        role={expandable ? 'button' : undefined}
+        tabIndex={expandable ? 0 : undefined}
+        aria-expanded={expandable ? expanded : undefined}
       >
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <span className={styles.rowLabel}>
           {expandable && (
-            <span
-              style={{
-                fontSize: 10,
-                transform: expanded ? 'rotate(90deg)' : 'none',
-                transition: 'transform 0.15s',
-                display: 'inline-block',
-              }}
-            >
+            <span className={expanded ? styles.expandIconOpen : styles.expandIcon}>
               ▶
             </span>
           )}
           {label}
         </span>
-        <span style={{ fontVariantNumeric: 'tabular-nums' }}>
+        <span className={bold ? styles.rowAmountBold : styles.rowAmount}>
           {prefix}{formatYen(amount)}
         </span>
       </div>
       {expanded && children && (
-        <div style={{ paddingLeft: 20, background: 'var(--bg-section)' }}>
+        <div className={styles.subRows}>
           {children}
         </div>
       )}
@@ -67,25 +72,17 @@ function BreakdownRow({
 
 function SubRow({ label, amount }: { label: string; amount: number }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '6px 8px',
-        fontSize: 13,
-        color: 'var(--text-secondary)',
-        borderBottom: '1px solid var(--border)',
-      }}
-    >
+    <div className={styles.subRow}>
       <span>{label}</span>
-      <span style={{ fontVariantNumeric: 'tabular-nums' }}>{formatYen(amount)}</span>
+      <span className={styles.subRowAmount}>{formatYen(amount)}</span>
     </div>
   );
 }
 
 export function BreakdownFlow({ result }: Props) {
   return (
-    <section style={{ marginBottom: 20 }}>
+    <section className={styles.section}>
+      <p className={styles.sectionLabel}>内訳</p>
       <BreakdownRow label="年間売上" amount={result.revenue} />
       <BreakdownRow label="経費" amount={result.expenses} prefix="− " />
       <BreakdownRow label="税金" amount={result.totalTax} prefix="− " expandable>
@@ -102,7 +99,7 @@ export function BreakdownFlow({ result }: Props) {
       )}
       <BreakdownRow label="自由に使えるお金" amount={result.disposableIncome} bold />
 
-      <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'right', marginTop: 8 }}>
+      <p className={styles.burdenRate}>
         実効負担率（税+社保/売上）: {(result.effectiveBurdenRate * 100).toFixed(1)}%
       </p>
     </section>

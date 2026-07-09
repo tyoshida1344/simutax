@@ -1,39 +1,12 @@
 import { useState } from 'react';
 import type { SimulatorInput, TaxParams } from '../../data/types';
+import { NumberInput } from './NumberInput';
+import styles from '../styles/DetailSettings.module.css';
 
 interface Props {
   input: SimulatorInput;
   updateField: <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => void;
   params: TaxParams;
-}
-
-function NumberInput({
-  label,
-  value,
-  onChange,
-  suffix,
-}: {
-  label: string;
-  value: number;
-  onChange: (v: number) => void;
-  suffix?: string;
-}) {
-  return (
-    <div style={{ marginBottom: 12 }}>
-      <label>{label}</label>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <input
-          type="number"
-          value={value || ''}
-          onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
-          min={0}
-          inputMode="numeric"
-          placeholder="0"
-        />
-        {suffix && <span style={{ color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{suffix}</span>}
-      </div>
-    </div>
-  );
 }
 
 export function DetailSettings({ input, updateField, params }: Props) {
@@ -42,35 +15,20 @@ export function DetailSettings({ input, updateField, params }: Props) {
   const businessTypes = Object.entries(params.businessTax.types);
 
   return (
-    <section style={{ marginBottom: 20 }}>
+    <section className={styles.section}>
       <button
         onClick={() => setOpen(!open)}
-        style={{
-          width: '100%',
-          padding: '10px 0',
-          background: 'none',
-          border: 'none',
-          borderTop: '1px solid var(--border)',
-          borderBottom: '1px solid var(--border)',
-          cursor: 'pointer',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          fontFamily: 'var(--font)',
-          fontSize: 14,
-          color: 'var(--text-secondary)',
-        }}
+        className={styles.toggle}
+        aria-expanded={open}
       >
         <span>詳細設定</span>
-        <span style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
-          ▼
-        </span>
+        <span className={open ? styles.toggleIconOpen : styles.toggleIcon}>▼</span>
       </button>
 
       {open && (
-        <div style={{ padding: '16px 0' }}>
-          <div style={{ marginBottom: 12 }}>
-            <label>事業の種類</label>
+        <div className={styles.content}>
+          <div className={styles.field}>
+            <label className={styles.label}>事業の種類</label>
             <select
               value={input.businessType}
               onChange={(e) => updateField('businessType', e.target.value)}
@@ -83,9 +41,7 @@ export function DetailSettings({ input, updateField, params }: Props) {
             </select>
           </div>
 
-          <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '16px 0 8px', fontWeight: 500 }}>
-            所得控除
-          </p>
+          <p className={styles.groupLabel}>所得控除</p>
 
           <NumberInput
             label="iDeCo（年額）"
@@ -105,15 +61,14 @@ export function DetailSettings({ input, updateField, params }: Props) {
             onChange={(v) => updateField('dependentCount', v)}
             suffix="人"
           />
-          <div style={{ marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div className={styles.checkboxRow}>
             <input
               type="checkbox"
               id="spouse"
               checked={input.spouseDeduction}
               onChange={(e) => updateField('spouseDeduction', e.target.checked)}
-              style={{ width: 'auto' }}
             />
-            <label htmlFor="spouse" style={{ marginBottom: 0 }}>
+            <label htmlFor="spouse" className={styles.checkboxLabel}>
               配偶者控除を適用
             </label>
           </div>
@@ -130,9 +85,7 @@ export function DetailSettings({ input, updateField, params }: Props) {
             suffix="円"
           />
 
-          <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '16px 0 8px', fontWeight: 500 }}>
-            国民健康保険
-          </p>
+          <p className={styles.groupLabel}>国民健康保険</p>
 
           <NumberInput
             label="年齢"
