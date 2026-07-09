@@ -4,6 +4,7 @@ import { DetailSettings } from './components/DetailSettings';
 import { DisposableIncome } from './components/DisposableIncome';
 import { BreakdownFlow } from './components/BreakdownFlow';
 import { Disclaimer } from './components/Disclaimer';
+import { ArrowDown } from './components/ArrowDown';
 import styles from './styles/App.module.css';
 
 export function App() {
@@ -17,7 +18,7 @@ export function App() {
       </header>
       <InputSection input={input} updateField={updateField} />
       <DetailSettings input={input} updateField={updateField} params={params} />
-      <div className={styles.sectionArrow}>↓</div>
+      <ArrowDown size="md" />
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
       <BreakdownFlow result={result} />
       <Disclaimer />

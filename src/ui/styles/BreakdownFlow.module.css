@@ -15,6 +15,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .rowExpandable {
@@ -33,6 +34,7 @@
   composes: row;
   font-weight: 600;
   padding: 14px 0;
+  border-bottom: 2px solid var(--text);
 }
 
 .rowLabel {
@@ -86,14 +88,6 @@
 
 .subRowAmount {
   font-variant-numeric: tabular-nums;
-}
-
-.arrow {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1;
-  padding: 2px 0;
 }
 
 .burdenRate {

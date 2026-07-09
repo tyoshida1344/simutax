@@ -15,10 +15,3 @@
   color: var(--text-muted);
 }
 
-.sectionArrow {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 18px;
-  line-height: 1;
-  padding: 16px 0;
-}
