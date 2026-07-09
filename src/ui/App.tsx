@@ -17,7 +17,7 @@ export function App() {
       </header>
       <InputSection input={input} updateField={updateField} />
       <DetailSettings input={input} updateField={updateField} params={params} />
-      <hr className={styles.sectionDivider} />
+      <div className={styles.sectionArrow}>↓</div>
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
       <BreakdownFlow result={result} />
       <Disclaimer />

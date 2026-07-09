@@ -70,6 +70,10 @@ function BreakdownRow({
   );
 }
 
+function Arrow() {
+  return <div className={styles.arrow}>↓</div>;
+}
+
 function SubRow({ label, amount }: { label: string; amount: number }) {
   return (
     <div className={styles.subRow}>
@@ -84,19 +88,26 @@ export function BreakdownFlow({ result }: Props) {
     <section className={styles.section}>
       <p className={styles.sectionLabel}>内訳</p>
       <BreakdownRow label="年間売上" amount={result.revenue} />
+      <Arrow />
       <BreakdownRow label="経費" amount={result.expenses} prefix="− " />
+      <Arrow />
       <BreakdownRow label="税金" amount={result.totalTax} prefix="− " expandable>
         <SubRow label="所得税＋復興特別所得税" amount={result.incomeTax.totalIncomeTax} />
         <SubRow label="住民税" amount={result.residentTax.totalResidentTax} />
         <SubRow label="個人事業税" amount={result.businessTax.totalBusinessTax} />
       </BreakdownRow>
+      <Arrow />
       <BreakdownRow label="社会保険料" amount={result.totalSocialInsurance} prefix="− " expandable>
         <SubRow label="国民年金" amount={result.socialInsurance.nationalPension.annualAmount} />
         <SubRow label="国民健康保険" amount={result.socialInsurance.nhi.totalNHI} />
       </BreakdownRow>
       {result.savingsDeduction > 0 && (
-        <BreakdownRow label="積立（iDeCo・共済）" amount={result.savingsDeduction} prefix="− " />
+        <>
+          <Arrow />
+          <BreakdownRow label="積立（iDeCo・共済）" amount={result.savingsDeduction} prefix="− " />
+        </>
       )}
+      <Arrow />
       <BreakdownRow label="自由に使えるお金" amount={result.disposableIncome} bold />
 
       <p className={styles.burdenRate}>

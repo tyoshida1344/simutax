@@ -10,10 +10,9 @@
 }
 
 .amount {
-  font-size: 44px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 
