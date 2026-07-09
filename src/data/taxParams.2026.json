@@ -56,6 +56,28 @@
     "blue10": 100000,
     "white": 0
   },
+  "consumptionTax": {
+    "taxRate": 0.10,
+    "taxRateFraction": [10, 110],
+    "taxableThreshold": 10000000,
+    "simplifiedThreshold": 50000000,
+    "simplifiedCategories": {
+      "cat1": { "label": "第1種（卸売業）", "deemedPurchaseRate": 0.90 },
+      "cat2": { "label": "第2種（小売業）", "deemedPurchaseRate": 0.80 },
+      "cat3": { "label": "第3種（製造業等）", "deemedPurchaseRate": 0.70 },
+      "cat4": { "label": "第4種（飲食業等）", "deemedPurchaseRate": 0.60 },
+      "cat5": { "label": "第5種（サービス業）", "deemedPurchaseRate": 0.50 },
+      "cat6": { "label": "第6種（不動産業）", "deemedPurchaseRate": 0.40 }
+    },
+    "defaultSimplifiedCategory": "cat5",
+    "twentyPercentSpecialRate": 0.20,
+    "twentyPercentSpecialEligibleYears": [2023, 2024, 2025, 2026],
+    "sources": [
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6505.htm",
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6509.htm",
+      "https://www.nta.go.jp/publication/pamph/shohi/kaisei/202308/01.htm"
+    ]
+  },
   "socialInsurance": {
     "nationalPension": {
       "monthlyAmount": 17510,

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { SimulatorResult } from '../../data/types';
 import { formatYen } from '../format';
 import styles from '../styles/BreakdownFlow.module.css';
@@ -89,6 +90,9 @@ export function BreakdownFlow({ result }: Props) {
         <SubRow label="所得税＋復興特別所得税" amount={result.incomeTax.totalIncomeTax} />
         <SubRow label="住民税" amount={result.residentTax.totalResidentTax} />
         <SubRow label="個人事業税" amount={result.businessTax.totalBusinessTax} />
+        {result.consumptionTax.isTaxable && (
+          <SubRow label="消費税" amount={result.consumptionTax.appliedAmount} />
+        )}
       </BreakdownRow>
       <BreakdownRow label="社会保険料" amount={result.totalSocialInsurance} prefix="− " expandable>
         <SubRow label="国民年金" amount={result.socialInsurance.nationalPension.annualAmount} />
@@ -102,6 +106,10 @@ export function BreakdownFlow({ result }: Props) {
       <p className={styles.burdenRate}>
         実効負担率（税+社保/売上）: {(result.effectiveBurdenRate * 100).toFixed(1)}%
       </p>
+
+      <Link to="/consumption-tax" className={styles.pageLink}>
+        消費税3方式を比較する →
+      </Link>
     </section>
   );
 }

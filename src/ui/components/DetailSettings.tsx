@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import type { SimulatorInput } from '../../data/types';
+import taxParams from '../../data/taxParams.2026.json';
+import type { TaxParams } from '../../data/types';
 import { NumberInput } from './NumberInput';
 import styles from '../styles/DetailSettings.module.css';
+
+const params = taxParams as unknown as TaxParams;
+const simplifiedCategories = Object.entries(params.consumptionTax.simplifiedCategories).map(
+  ([value, cat]) => ({ value, label: cat.label }),
+);
 
 interface Props {
   input: SimulatorInput;
@@ -123,6 +130,46 @@ export function DetailSettings({ input, updateField }: Props) {
             onChange={(v) => updateField('householdMembers', Math.max(1, v))}
             suffix="人"
           />
+
+          <p className={styles.groupLabel}>消費税</p>
+
+          <NumberInput
+            label="基準期間の課税売上高（2年前）"
+            value={input.basePeriodSales}
+            onChange={(v) => updateField('basePeriodSales', v)}
+            suffix="円"
+          />
+          <div className={styles.checkboxRow}>
+            <input
+              type="checkbox"
+              id="invoiceRegistered"
+              checked={input.invoiceRegistered}
+              onChange={(e) => updateField('invoiceRegistered', e.target.checked)}
+            />
+            <label htmlFor="invoiceRegistered" className={styles.checkboxLabel}>
+              インボイス発行事業者に登録済み
+            </label>
+          </div>
+          <NumberInput
+            label="課税仕入の割合"
+            value={input.taxablePurchaseRatio}
+            onChange={(v) => updateField('taxablePurchaseRatio', Math.min(100, v))}
+            suffix="%"
+          />
+          <div className={styles.field}>
+            <label htmlFor="simplifiedTaxCategory" className={styles.label}>簡易課税の事業区分</label>
+            <select
+              id="simplifiedTaxCategory"
+              value={input.simplifiedTaxCategory}
+              onChange={(e) => updateField('simplifiedTaxCategory', e.target.value)}
+            >
+              {simplifiedCategories.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       )}
     </section>

@@ -21,6 +21,11 @@ function makeInput(overrides: Partial<SimulatorInput> = {}): SimulatorInput {
     age: 35,
     householdMembers: 1,
     nhiModel: 'standard',
+    basePeriodSales: 0,
+    invoiceRegistered: false,
+    taxablePurchaseRatio: 0,
+    simplifiedTaxCategory: 'cat5',
+    selectedConsumptionTaxMethod: null,
     ...overrides,
   };
 }

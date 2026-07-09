@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { useSimulator } from './hooks/useSimulator';
 import { InputSection } from './components/InputSection';
 import { DetailSettings } from './components/DetailSettings';
@@ -5,11 +6,14 @@ import { DisposableIncome } from './components/DisposableIncome';
 import { BreakdownFlow } from './components/BreakdownFlow';
 import { Disclaimer } from './components/Disclaimer';
 import { ArrowDown } from './components/ArrowDown';
+import { ConsumptionTaxComparison } from './components/ConsumptionTaxComparison';
 import styles from './styles/App.module.css';
 
-export function App() {
-  const { input, result, updateField } = useSimulator();
-
+function SimulatorPage({
+  input,
+  result,
+  updateField,
+}: ReturnType<typeof useSimulator>) {
   return (
     <>
       <header className={styles.header}>
@@ -23,5 +27,25 @@ export function App() {
       <BreakdownFlow result={result} />
       <Disclaimer />
     </>
+  );
+}
+
+export function App() {
+  const simulator = useSimulator();
+
+  return (
+    <Routes>
+      <Route path="/" element={<SimulatorPage {...simulator} />} />
+      <Route
+        path="/consumption-tax"
+        element={
+          <ConsumptionTaxComparison
+            result={simulator.result.consumptionTax}
+            input={simulator.input}
+            updateField={simulator.updateField}
+          />
+        }
+      />
+    </Routes>
   );
 }

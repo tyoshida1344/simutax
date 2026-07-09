@@ -1,0 +1,173 @@
+.header {
+  margin-bottom: 24px;
+}
+
+.backLink {
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.exemptNotice {
+  background: var(--bg-section);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.exemptTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.exemptDescription {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.taxableNotice {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.taxSummary {
+  background: var(--bg-section);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+.taxSummaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.sectionLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.card {
+  width: 100%;
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: border-color 0.15s;
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+.cardSelected {
+  composes: card;
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.cardDisabled {
+  composes: card;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cardDisabled:hover {
+  border-color: var(--border);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.recommendedBadge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--positive);
+  background: color-mix(in srgb, var(--positive) 12%, var(--bg));
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.cardDescription {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.cardAmount {
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.cardReason {
+  font-size: 13px;
+  color: var(--negative);
+}
+
+.cardSelectedLabel {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.appliedSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--bg-section);
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.appliedAmount {
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}

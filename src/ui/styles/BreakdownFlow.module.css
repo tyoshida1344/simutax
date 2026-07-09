@@ -96,3 +96,20 @@
   text-align: right;
   margin-top: 12px;
 }
+
+.pageLink {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+
+.pageLink:hover {
+  background: var(--accent-light);
+}

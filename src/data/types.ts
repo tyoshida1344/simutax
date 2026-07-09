@@ -79,16 +79,36 @@ export interface SocialInsuranceParams {
   };
 }
 
+export interface SimplifiedCategory {
+  label: string;
+  deemedPurchaseRate: number;
+}
+
+export interface ConsumptionTaxParams {
+  taxRate: number;
+  taxRateFraction: [number, number];
+  taxableThreshold: number;
+  simplifiedThreshold: number;
+  simplifiedCategories: Record<string, SimplifiedCategory>;
+  defaultSimplifiedCategory: string;
+  twentyPercentSpecialRate: number;
+  twentyPercentSpecialEligibleYears: number[];
+  sources: string[];
+}
+
 export interface TaxParams {
   meta: TaxParamsMeta;
   incomeTax: IncomeTaxParams;
   residentTax: ResidentTaxParams;
   businessTax: BusinessTaxParams;
   blueReturnDeductions: BlueReturnDeductions;
+  consumptionTax: ConsumptionTaxParams;
   socialInsurance: SocialInsuranceParams;
 }
 
 export type FilingType = 'blue65' | 'blue55' | 'blue10' | 'white';
+
+export type ConsumptionTaxMethod = 'standard' | 'simplified' | 'special20';
 
 export interface SimulatorInput {
   revenue: number;
@@ -105,6 +125,11 @@ export interface SimulatorInput {
   age: number;
   householdMembers: number;
   nhiModel: string;
+  basePeriodSales: number;
+  invoiceRegistered: boolean;
+  taxablePurchaseRatio: number;
+  simplifiedTaxCategory: string;
+  selectedConsumptionTaxMethod: ConsumptionTaxMethod | null;
 }
 
 export interface IncomeTaxResult {
@@ -150,6 +175,25 @@ export interface SocialInsuranceResult {
   totalSocialInsurance: number;
 }
 
+export interface ConsumptionTaxMethodResult {
+  amount: number;
+  applicable: boolean;
+  reason: string | null;
+}
+
+export interface ConsumptionTaxResult {
+  isTaxable: boolean;
+  taxableReason: string | null;
+  salesTax: number;
+  purchaseTax: number;
+  standardMethod: ConsumptionTaxMethodResult;
+  simplifiedMethod: ConsumptionTaxMethodResult;
+  special20Method: ConsumptionTaxMethodResult;
+  recommendedMethod: ConsumptionTaxMethod | null;
+  appliedMethod: ConsumptionTaxMethod | null;
+  appliedAmount: number;
+}
+
 export interface SimulatorResult {
   revenue: number;
   expenses: number;
@@ -159,6 +203,7 @@ export interface SimulatorResult {
   incomeTax: IncomeTaxResult;
   residentTax: ResidentTaxResult;
   businessTax: BusinessTaxResult;
+  consumptionTax: ConsumptionTaxResult;
   socialInsurance: SocialInsuranceResult;
   totalTax: number;
   totalSocialInsurance: number;
