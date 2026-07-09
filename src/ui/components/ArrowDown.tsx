@@ -5,7 +5,7 @@ interface Props {
 }
 
 export function ArrowDown({ size = 'sm' }: Props) {
-  const px = size === 'md' ? 28 : 20;
+  const px = size === 'md' ? 32 : 24;
 
   return (
     <div className={styles.wrapper}>
@@ -16,8 +16,8 @@ export function ArrowDown({ size = 'sm' }: Props) {
         fill="currentColor"
         aria-hidden="true"
       >
-        <rect x="10" y="2" width="4" height="14" rx="1" />
-        <polygon points="12,23 4,13 20,13" />
+        <rect x="9" y="2" width="6" height="13" rx="1" />
+        <polygon points="12,23 3,12 21,12" />
       </svg>
     </div>
   );
