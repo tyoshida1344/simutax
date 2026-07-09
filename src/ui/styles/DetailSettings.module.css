@@ -1,0 +1,76 @@
+.section {
+  margin-bottom: 4px;
+}
+
+.toggle {
+  width: 100%;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.toggle:hover {
+  color: var(--text);
+}
+
+.toggleIcon {
+  transition: transform 0.2s;
+}
+
+.toggleIconOpen {
+  composes: toggleIcon;
+  transform: rotate(180deg);
+}
+
+.content {
+  padding: 20px 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.groupLabel {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkboxRow input[type="checkbox"] {
+  width: auto;
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}

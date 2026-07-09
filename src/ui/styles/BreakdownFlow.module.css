@@ -1,0 +1,98 @@
+.section {
+  margin-bottom: 20px;
+}
+
+.sectionLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.rowExpandable {
+  composes: row;
+  cursor: pointer;
+}
+
+.rowExpandable:hover {
+  background: var(--bg-section);
+  margin: 0 -8px;
+  padding: 12px 8px;
+  border-radius: 4px;
+}
+
+.rowBold {
+  composes: row;
+  font-weight: 600;
+  padding: 14px 0;
+  border-bottom: 2px solid var(--text);
+}
+
+.rowLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.rowAmount {
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+}
+
+.rowAmountBold {
+  composes: rowAmount;
+  font-size: 16px;
+}
+
+.expandIcon {
+  font-size: 10px;
+  display: inline-block;
+  transition: transform 0.15s;
+  color: var(--text-muted);
+}
+
+.expandIconOpen {
+  composes: expandIcon;
+  transform: rotate(90deg);
+}
+
+.subRows {
+  padding-left: 22px;
+  background: var(--bg-section);
+  border-radius: 0 0 6px 6px;
+  margin-bottom: 2px;
+}
+
+.subRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.subRow:last-child {
+  border-bottom: none;
+}
+
+.subRowAmount {
+  font-variant-numeric: tabular-nums;
+}
+
+.burdenRate {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 12px;
+}

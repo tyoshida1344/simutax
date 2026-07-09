@@ -1,0 +1,31 @@
+.section {
+  text-align: center;
+  padding: 8px 0 12px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.amount {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.positive {
+  color: var(--text);
+}
+
+.negative {
+  color: var(--negative);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
