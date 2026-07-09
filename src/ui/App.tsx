@@ -8,7 +8,7 @@ import { ArrowDown } from './components/ArrowDown';
 import styles from './styles/App.module.css';
 
 export function App() {
-  const { input, result, updateField, params } = useSimulator();
+  const { input, result, updateField } = useSimulator();
 
   return (
     <>
@@ -17,7 +17,7 @@ export function App() {
         <p className={styles.subtitle}>令和8年（2026年）分</p>
       </header>
       <InputSection input={input} updateField={updateField} />
-      <DetailSettings input={input} updateField={updateField} params={params} />
+      <DetailSettings input={input} updateField={updateField} />
       <ArrowDown size="md" />
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
       <BreakdownFlow result={result} />
