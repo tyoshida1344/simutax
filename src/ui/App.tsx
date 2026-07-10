@@ -6,7 +6,6 @@ import { DisposableIncome } from './components/DisposableIncome';
 import { BreakdownFlow } from './components/BreakdownFlow';
 import { Disclaimer } from './components/Disclaimer';
 import { ArrowDown } from './components/ArrowDown';
-import { ConsumptionTaxComparison } from './components/ConsumptionTaxComparison';
 import styles from './styles/App.module.css';
 
 function SimulatorPage({
@@ -24,7 +23,7 @@ function SimulatorPage({
       <DetailSettings input={input} updateField={updateField} />
       <ArrowDown size="md" />
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
-      <BreakdownFlow result={result} />
+      <BreakdownFlow result={result} input={input} updateField={updateField} />
       <Disclaimer />
     </>
   );
@@ -36,16 +35,6 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<SimulatorPage {...simulator} />} />
-      <Route
-        path="/consumption-tax"
-        element={
-          <ConsumptionTaxComparison
-            result={simulator.result.consumptionTax}
-            input={simulator.input}
-            updateField={simulator.updateField}
-          />
-        }
-      />
     </Routes>
   );
 }

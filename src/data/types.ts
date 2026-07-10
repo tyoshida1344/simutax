@@ -128,7 +128,6 @@ export interface SimulatorInput {
   basePeriodSales: number;
   invoiceRegistered: boolean;
   taxablePurchaseRatio: number;
-  simplifiedTaxCategory: string;
   selectedConsumptionTaxMethod: ConsumptionTaxMethod | null;
 }
 

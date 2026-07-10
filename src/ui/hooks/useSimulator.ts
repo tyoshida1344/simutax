@@ -23,7 +23,6 @@ const defaultInput: SimulatorInput = {
   basePeriodSales: 0,
   invoiceRegistered: false,
   taxablePurchaseRatio: 0,
-  simplifiedTaxCategory: 'cat5',
   selectedConsumptionTaxMethod: null,
 };
 

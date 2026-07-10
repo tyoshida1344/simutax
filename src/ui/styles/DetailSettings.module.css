@@ -1,14 +1,14 @@
 .section {
-  margin-bottom: 4px;
+  margin-inline: calc(-1 * var(--pad));
+  border: 3px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .toggle {
   width: 100%;
-  padding: 12px 0;
+  padding: 12px var(--pad);
   background: none;
   border: none;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -32,11 +32,61 @@
 }
 
 .content {
-  padding: 20px 0 8px;
+  padding: 4px var(--pad) 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- Accordion group --- */
+
+.group {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+
+.groupToggle {
+  width: 100%;
+  padding: 0 0 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font);
+}
+
+.groupToggle:hover .groupLabel {
+  color: var(--text);
+}
+
+.groupLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+
+.groupIcon {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+}
+
+.groupIconOpen {
+  composes: groupIcon;
+  transform: rotate(90deg);
+}
+
+.groupContent {
+  padding: 8px 0 4px 2px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
+/* --- Fields --- */
 
 .field {
   display: flex;
@@ -48,14 +98,6 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-}
-
-.groupLabel {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 600;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--border);
 }
 
 .checkboxRow {

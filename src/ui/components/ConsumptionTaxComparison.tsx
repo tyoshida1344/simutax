@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import type { ConsumptionTaxResult, ConsumptionTaxMethod, ConsumptionTaxMethodResult, SimulatorInput } from '../../data/types';
 import { formatYen } from '../format';
 import styles from '../styles/ConsumptionTaxComparison.module.css';
@@ -20,14 +19,12 @@ function MethodCard({
   description,
   methodResult,
   isSelected,
-  isRecommended,
   onSelect,
 }: {
   label: string;
   description: string;
   methodResult: ConsumptionTaxMethodResult;
   isSelected: boolean;
-  isRecommended: boolean;
   onSelect: () => void;
 }) {
   const cardClass = !methodResult.applicable
@@ -43,12 +40,7 @@ function MethodCard({
       disabled={!methodResult.applicable}
       type="button"
     >
-      <div className={styles.cardHeader}>
-        <span className={styles.cardTitle}>{label}</span>
-        {isRecommended && methodResult.applicable && (
-          <span className={styles.recommendedBadge}>おすすめ</span>
-        )}
-      </div>
+      <span className={styles.cardTitle}>{label}</span>
       <p className={styles.cardDescription}>{description}</p>
       {methodResult.applicable ? (
         <p className={styles.cardAmount}>{formatYen(methodResult.amount)}</p>
@@ -67,59 +59,46 @@ export function ConsumptionTaxComparison({ result, input, updateField }: Props) 
     updateField('selectedConsumptionTaxMethod', method);
   };
 
+  if (!result.isTaxable) return null;
+
   return (
-    <div>
-      <header className={styles.header}>
-        <Link to="/" className={styles.backLink} aria-label="メイン画面に戻る">← 戻る</Link>
-        <h1 className={styles.title}>消費税 3方式比較</h1>
-      </header>
+    <section className={styles.section}>
+      <p className={styles.sectionLabel}>消費税 3方式比較</p>
 
-      {!result.isTaxable ? (
-        <div className={styles.exemptNotice}>
-          <p className={styles.exemptTitle}>免税事業者</p>
-          <p className={styles.exemptDescription}>
-            基準期間の課税売上高が1,000万円以下で、インボイス発行事業者に登録していないため、消費税の納付義務はありません。
-          </p>
+      <p className={styles.taxableNotice}>
+        課税事業者（{result.taxableReason}）
+      </p>
+
+      <div className={styles.taxSummary}>
+        <div className={styles.taxSummaryRow}>
+          <span>売上にかかる消費税</span>
+          <span>{formatYen(result.salesTax)}</span>
         </div>
-      ) : (
-        <>
-          <p className={styles.taxableNotice}>
-            課税事業者（{result.taxableReason}）
-          </p>
+        <div className={styles.taxSummaryRow}>
+          <span>仕入にかかる消費税</span>
+          <span>{formatYen(result.purchaseTax)}</span>
+        </div>
+      </div>
 
-          <div className={styles.taxSummary}>
-            <div className={styles.taxSummaryRow}>
-              <span>売上にかかる消費税</span>
-              <span>{formatYen(result.salesTax)}</span>
-            </div>
-            <div className={styles.taxSummaryRow}>
-              <span>仕入にかかる消費税</span>
-              <span>{formatYen(result.purchaseTax)}</span>
-            </div>
-          </div>
+      <p className={styles.methodLabel}>方式を選択してください</p>
 
-          <p className={styles.sectionLabel}>方式を選択してください</p>
+      <div className={styles.cards}>
+        {METHODS.map((m) => (
+          <MethodCard
+            key={m.key}
+            label={m.label}
+            description={m.description}
+            methodResult={result[m.resultKey]}
+            isSelected={input.selectedConsumptionTaxMethod === m.key || (!input.selectedConsumptionTaxMethod && result.appliedMethod === m.key)}
+            onSelect={() => handleSelect(m.key)}
+          />
+        ))}
+      </div>
 
-          <div className={styles.cards}>
-            {METHODS.map((m) => (
-              <MethodCard
-                key={m.key}
-                label={m.label}
-                description={m.description}
-                methodResult={result[m.resultKey]}
-                isSelected={input.selectedConsumptionTaxMethod === m.key || (!input.selectedConsumptionTaxMethod && result.appliedMethod === m.key)}
-                isRecommended={result.recommendedMethod === m.key}
-                onSelect={() => handleSelect(m.key)}
-              />
-            ))}
-          </div>
-
-          <div className={styles.appliedSummary}>
-            <span>メイン画面に反映される消費税額</span>
-            <span className={styles.appliedAmount}>{formatYen(result.appliedAmount)}</span>
-          </div>
-        </>
-      )}
-    </div>
+      <div className={styles.appliedSummary}>
+        <span>反映される消費税額</span>
+        <span className={styles.appliedAmount}>{formatYen(result.appliedAmount)}</span>
+      </div>
+    </section>
   );
 }

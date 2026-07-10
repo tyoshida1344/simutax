@@ -1,43 +1,9 @@
-.header {
-  margin-bottom: 24px;
-}
-
-.backLink {
-  font-size: 14px;
-  color: var(--accent);
-  text-decoration: none;
-  display: inline-block;
-  margin-bottom: 12px;
-}
-
-.backLink:hover {
-  text-decoration: underline;
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.exemptNotice {
-  background: var(--bg-section);
-  border-radius: var(--radius);
-  padding: 20px;
-  text-align: center;
-}
-
-.exemptTitle {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-.exemptDescription {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
+.section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 3px solid var(--border);
+  margin-inline: calc(-1 * var(--pad));
+  padding-inline: var(--pad);
 }
 
 .taxableNotice {
@@ -62,6 +28,13 @@
 }
 
 .sectionLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.methodLabel {
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
@@ -107,26 +80,12 @@
   border-color: var(--border);
 }
 
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
 .cardTitle {
   font-size: 15px;
   font-weight: 600;
   color: var(--text);
-}
-
-.recommendedBadge {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--positive);
-  background: color-mix(in srgb, var(--positive) 12%, var(--bg));
-  padding: 2px 8px;
-  border-radius: 10px;
+  display: block;
+  margin-bottom: 6px;
 }
 
 .cardDescription {
