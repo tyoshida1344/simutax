@@ -252,7 +252,7 @@ export function DetailSettings({ input, result, updateField }: Props) {
             <div className={styles.fieldWithExtra}>
               <NumberInput
                 label="課税仕入の割合"
-                value={input.expenses > 0 ? Math.round(input.taxablePurchaseAmount / input.expenses * 100) : 0}
+                value={input.expenses > 0 ? Math.min(Math.round(input.taxablePurchaseAmount / input.expenses * 100), 100) : 0}
                 onChange={(v) => updateField('taxablePurchaseAmount', Math.floor(input.expenses * v / 100))}
                 suffix="%"
                 max={MAX_PERCENT}
