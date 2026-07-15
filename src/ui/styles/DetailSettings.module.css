@@ -48,8 +48,13 @@
   padding-bottom: 4px;
 }
 
+.groupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .groupToggle {
-  width: 100%;
   padding: 0 0 8px;
   background: none;
   border: none;

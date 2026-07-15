@@ -19,25 +19,30 @@ const businessTypeOptions = [
 function AccordionGroup({
   label,
   defaultOpen,
+  extra,
   children,
 }: {
   label: string;
   defaultOpen?: boolean;
+  extra?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(defaultOpen ?? false);
 
   return (
     <div className={styles.group}>
-      <button
-        onClick={() => setOpen(!open)}
-        className={styles.groupToggle}
-        aria-expanded={open}
-        type="button"
-      >
-        <span className={open ? styles.groupIconOpen : styles.groupIcon}>▶</span>
-        <span className={styles.groupLabel}>{label}</span>
-      </button>
+      <div className={styles.groupHeader}>
+        <button
+          onClick={() => setOpen(!open)}
+          className={styles.groupToggle}
+          aria-expanded={open}
+          type="button"
+        >
+          <span className={open ? styles.groupIconOpen : styles.groupIcon}>▶</span>
+          <span className={styles.groupLabel}>{label}</span>
+        </button>
+        {extra}
+      </div>
       {open && (
         <div className={styles.groupContent}>
           {children}
@@ -98,7 +103,19 @@ export function DetailSettings({ input, result, updateField }: Props) {
 
       {open && (
         <div className={styles.content}>
-          <AccordionGroup label="事業の種類" defaultOpen>
+          <AccordionGroup
+            label="事業の種類"
+            defaultOpen
+            extra={
+              <button
+                className={styles.infoLink}
+                onClick={() => setShowBusinessTypeInfo(true)}
+                type="button"
+              >
+                業種分類について
+              </button>
+            }
+          >
             <select
               value={input.businessType}
               onChange={(e) => updateField('businessType', e.target.value)}
@@ -109,13 +126,6 @@ export function DetailSettings({ input, result, updateField }: Props) {
                 </option>
               ))}
             </select>
-            <button
-              className={styles.infoLink}
-              onClick={() => setShowBusinessTypeInfo(true)}
-              type="button"
-            >
-              業種分類について
-            </button>
             {showBusinessTypeInfo && (
               <BusinessTypeInfo onClose={() => setShowBusinessTypeInfo(false)} />
             )}
