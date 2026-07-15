@@ -82,7 +82,7 @@ function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
           <p className={styles.popoverNote}>※ 上記の法定70業種に含まれない事業が該当</p>
         </div>
         <p className={styles.popoverLinks}>
-          詳細は<a href="https://www.tax.metro.tokyo.lg.jp/kazei/work/kojin_ji" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>東京都主税局</a>・<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_07.html" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>総務省</a>を参照
+          詳細は<a href="https://www.tax.metro.tokyo.lg.jp/kazei/work/kojin_ji#:~:text=%E4%B8%80%E8%A6%A7%E3%81%B8%E6%88%BB%E3%82%8B-,%EF%BC%94%20%E6%B3%95%E5%AE%9A%E6%A5%AD%E7%A8%AE%E3%81%A8%E7%A8%8E%E7%8E%87,-%E5%8C%BA%E5%88%86" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>東京都主税局</a>・<a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_07.html" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>総務省</a>を参照
         </p>
       </div>
     </div>
