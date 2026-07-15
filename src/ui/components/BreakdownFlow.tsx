@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import type { SimulatorResult, SimulatorInput } from '../../data/types';
+import type { SimulatorResult } from '../../data/types';
 import { formatYen } from '../format';
-import { ConsumptionTaxComparison } from './ConsumptionTaxComparison';
 import styles from '../styles/BreakdownFlow.module.css';
 
 interface Props {
   result: SimulatorResult;
-  input: SimulatorInput;
-  updateField: <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => void;
 }
 
 function BreakdownRow({
@@ -82,7 +79,7 @@ function SubRow({ label, amount }: { label: string; amount: number }) {
   );
 }
 
-export function BreakdownFlow({ result, input, updateField }: Props) {
+export function BreakdownFlow({ result }: Props) {
   return (
     <section className={styles.section}>
       <p className={styles.sectionLabel}>内訳</p>
@@ -108,12 +105,6 @@ export function BreakdownFlow({ result, input, updateField }: Props) {
       <p className={styles.burdenRate}>
         実効負担率（税+社保/売上）: {(result.effectiveBurdenRate * 100).toFixed(1)}%
       </p>
-
-      <ConsumptionTaxComparison
-        result={result.consumptionTax}
-        input={input}
-        updateField={updateField}
-      />
     </section>
   );
 }

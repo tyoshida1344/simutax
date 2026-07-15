@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import type { SimulatorInput } from '../../data/types';
+import type { SimulatorInput, SimulatorResult } from '../../data/types';
 import { NumberInput } from './NumberInput';
+import { ConsumptionTaxComparison } from './ConsumptionTaxComparison';
 import styles from '../styles/DetailSettings.module.css';
 
 interface Props {
   input: SimulatorInput;
+  result: SimulatorResult;
   updateField: <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => void;
 }
 
@@ -57,7 +59,7 @@ function AccordionGroup({
   );
 }
 
-export function DetailSettings({ input, updateField }: Props) {
+export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
 
   const selectedType = businessTypeOptions.find((o) => o.value === input.businessType)
@@ -157,12 +159,18 @@ export function DetailSettings({ input, updateField }: Props) {
           </AccordionGroup>
 
           <AccordionGroup label="消費税">
-            <NumberInput
-              label="基準期間の課税売上高（2年前）"
-              value={input.basePeriodSales}
-              onChange={(v) => updateField('basePeriodSales', v)}
-              suffix="円"
-            />
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="basePeriodSales">基準期間の課税売上高（2年前）</label>
+              <select
+                id="basePeriodSales"
+                value={input.basePeriodSales}
+                onChange={(e) => updateField('basePeriodSales', e.target.value as 'under10m' | 'over10m' | 'over50m')}
+              >
+                <option value="under10m">1,000万円以下</option>
+                <option value="over10m">1,000万円超〜5,000万円以下</option>
+                <option value="over50m">5,000万円超</option>
+              </select>
+            </div>
             <div className={styles.checkboxRow}>
               <input
                 type="checkbox"
@@ -171,7 +179,7 @@ export function DetailSettings({ input, updateField }: Props) {
                 onChange={(e) => updateField('invoiceRegistered', e.target.checked)}
               />
               <label htmlFor="invoiceRegistered" className={styles.checkboxLabel}>
-                インボイス発行事業者に登録済み
+                インボイス発行事業者
               </label>
             </div>
             <NumberInput
@@ -179,6 +187,11 @@ export function DetailSettings({ input, updateField }: Props) {
               value={input.taxablePurchaseRatio}
               onChange={(v) => updateField('taxablePurchaseRatio', Math.min(100, v))}
               suffix="%"
+            />
+            <ConsumptionTaxComparison
+              result={result.consumptionTax}
+              input={input}
+              updateField={updateField}
             />
           </AccordionGroup>
         </div>

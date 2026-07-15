@@ -20,10 +20,14 @@ function SimulatorPage({
         <p className={styles.subtitle}>令和8年（2026年）分</p>
       </header>
       <InputSection input={input} updateField={updateField} />
-      <DetailSettings input={input} updateField={updateField} />
+      <DetailSettings
+        input={input}
+        result={result}
+        updateField={updateField}
+      />
       <ArrowDown size="md" />
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
-      <BreakdownFlow result={result} input={input} updateField={updateField} />
+      <BreakdownFlow result={result} />
       <Disclaimer />
     </>
   );

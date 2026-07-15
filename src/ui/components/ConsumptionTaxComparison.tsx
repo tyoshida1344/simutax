@@ -47,9 +47,6 @@ function MethodCard({
       ) : (
         <p className={styles.cardReason}>{methodResult.reason}</p>
       )}
-      {isSelected && methodResult.applicable && (
-        <p className={styles.cardSelectedLabel}>選択中</p>
-      )}
     </button>
   );
 }

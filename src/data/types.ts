@@ -125,7 +125,7 @@ export interface SimulatorInput {
   age: number;
   householdMembers: number;
   nhiModel: string;
-  basePeriodSales: number;
+  basePeriodSales: 'under10m' | 'over10m' | 'over50m';
   invoiceRegistered: boolean;
   taxablePurchaseRatio: number;
   selectedConsumptionTaxMethod: ConsumptionTaxMethod | null;
