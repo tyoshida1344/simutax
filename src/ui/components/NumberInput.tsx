@@ -18,6 +18,7 @@ export function NumberInput({ label, value, onChange, suffix }: Props) {
         <input
           id={id}
           type="number"
+          className={styles.input}
           value={value || ''}
           onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
           min={0}

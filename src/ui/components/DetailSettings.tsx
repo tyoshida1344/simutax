@@ -47,8 +47,8 @@ function AccordionGroup({
         aria-expanded={open}
         type="button"
       >
-        <span className={styles.groupLabel}>{label}</span>
         <span className={open ? styles.groupIconOpen : styles.groupIcon}>▶</span>
+        <span className={styles.groupLabel}>{label}</span>
       </button>
       {open && (
         <div className={styles.groupContent}>
@@ -71,9 +71,10 @@ export function DetailSettings({ input, result, updateField }: Props) {
         onClick={() => setOpen(!open)}
         className={styles.toggle}
         aria-expanded={open}
+        type="button"
       >
+        <span className={open ? styles.toggleIconOpen : styles.toggleIcon}>▶</span>
         <span>詳細設定</span>
-        <span className={open ? styles.toggleIconOpen : styles.toggleIcon}>▼</span>
       </button>
 
       {open && (
@@ -190,7 +191,6 @@ export function DetailSettings({ input, result, updateField }: Props) {
             />
             <ConsumptionTaxComparison
               result={result.consumptionTax}
-              selectedMethod={input.selectedConsumptionTaxMethod}
               updateField={updateField}
             />
           </AccordionGroup>

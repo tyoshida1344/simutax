@@ -26,7 +26,7 @@ function SimulatorPage({
         updateField={updateField}
       />
       <ArrowDown size="md" />
-      <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
+      <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} effectiveBurdenRate={result.effectiveBurdenRate} />
       <BreakdownFlow result={result} />
       <Disclaimer />
     </>

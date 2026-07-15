@@ -12,6 +12,7 @@ function BreakdownRow({
   amount,
   prefix,
   bold,
+  deduction,
   expandable,
   children,
 }: {
@@ -19,6 +20,7 @@ function BreakdownRow({
   amount: number;
   prefix?: string;
   bold?: boolean;
+  deduction?: boolean;
   expandable?: boolean;
   children?: React.ReactNode;
 }) {
@@ -29,6 +31,12 @@ function BreakdownRow({
     : expandable
       ? styles.rowExpandable
       : styles.row;
+
+  const amountClass = bold
+    ? styles.rowAmountBold
+    : deduction
+      ? styles.rowAmountDeduction
+      : styles.rowAmount;
 
   const handleKeyDown = expandable
     ? (e: React.KeyboardEvent) => {
@@ -57,7 +65,7 @@ function BreakdownRow({
           )}
           {label}
         </span>
-        <span className={bold ? styles.rowAmountBold : styles.rowAmount}>
+        <span className={amountClass}>
           {prefix}{formatYen(amount)}
         </span>
       </div>
@@ -84,8 +92,8 @@ export function BreakdownFlow({ result }: Props) {
     <section className={styles.section}>
       <p className={styles.sectionLabel}>内訳</p>
       <BreakdownRow label="年間売上" amount={result.revenue} />
-      <BreakdownRow label="経費" amount={result.expenses} prefix="− " />
-      <BreakdownRow label="税金" amount={result.totalTax} prefix="− " expandable>
+      <BreakdownRow label="経費" amount={result.expenses} prefix="− " deduction />
+      <BreakdownRow label="税金" amount={result.totalTax} prefix="− " deduction expandable>
         <SubRow label="所得税＋復興特別所得税" amount={result.incomeTax.totalIncomeTax} />
         <SubRow label="住民税" amount={result.residentTax.totalResidentTax} />
         <SubRow label="個人事業税" amount={result.businessTax.totalBusinessTax} />
@@ -93,18 +101,14 @@ export function BreakdownFlow({ result }: Props) {
           <SubRow label="消費税" amount={result.consumptionTax.appliedAmount} />
         )}
       </BreakdownRow>
-      <BreakdownRow label="社会保険料" amount={result.totalSocialInsurance} prefix="− " expandable>
+      <BreakdownRow label="社会保険料" amount={result.totalSocialInsurance} prefix="− " deduction expandable>
         <SubRow label="国民年金" amount={result.socialInsurance.nationalPension.annualAmount} />
         <SubRow label="国民健康保険" amount={result.socialInsurance.nhi.totalNHI} />
       </BreakdownRow>
       {result.savingsDeduction > 0 && (
-        <BreakdownRow label="積立（iDeCo・共済）" amount={result.savingsDeduction} prefix="− " />
+        <BreakdownRow label="積立（iDeCo・共済）" amount={result.savingsDeduction} prefix="− " deduction />
       )}
       <BreakdownRow label="自由に使えるお金" amount={result.disposableIncome} bold />
-
-      <p className={styles.burdenRate}>
-        実効負担率（税+社保/売上）: {(result.effectiveBurdenRate * 100).toFixed(1)}%
-      </p>
     </section>
   );
 }
