@@ -11,21 +11,9 @@ interface Props {
 }
 
 const businessTypeOptions = [
-  {
-    value: 'type1',
-    label: '税率5%（一般）',
-    hint: '物品販売・飲食・デザイン・コンサル・IT など大半の業種',
-  },
-  {
-    value: 'type3_3pct',
-    label: '税率3%（鍼灸等）',
-    hint: 'あん摩・鍼灸・柔道整復など',
-  },
-  {
-    value: 'exempt',
-    label: '非課税',
-    hint: '文筆業・漫画家・音楽家・農業など',
-  },
+  { value: 'type1', label: '一般的な事業（物品販売・飲食・IT等）' },
+  { value: 'type3_3pct', label: 'あん摩・鍼灸・柔道整復等' },
+  { value: 'exempt', label: '文筆業・漫画家・音楽家・農業等' },
 ];
 
 function AccordionGroup({
@@ -62,9 +50,6 @@ function AccordionGroup({
 export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
 
-  const selectedType = businessTypeOptions.find((o) => o.value === input.businessType)
-    ?? businessTypeOptions[0];
-
   return (
     <section className={styles.section}>
       <button
@@ -80,19 +65,16 @@ export function DetailSettings({ input, result, updateField }: Props) {
       {open && (
         <div className={styles.content}>
           <AccordionGroup label="事業の種類" defaultOpen>
-            <div className={styles.field}>
-              <select
-                value={selectedType.value}
-                onChange={(e) => updateField('businessType', e.target.value)}
-              >
-                {businessTypeOptions.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-              <p className={styles.hint}>{selectedType.hint}</p>
-            </div>
+            <select
+              value={input.businessType}
+              onChange={(e) => updateField('businessType', e.target.value)}
+            >
+              {businessTypeOptions.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
           </AccordionGroup>
 
           <AccordionGroup label="所得控除">
