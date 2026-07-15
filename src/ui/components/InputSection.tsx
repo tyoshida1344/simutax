@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import type { SimulatorInput, FilingType } from '../../data/types';
 import { NumberInput } from './NumberInput';
+import { FilingTypeChecker, filingTypeLabels } from './FilingTypeChecker';
 import { MAX_AMOUNT } from '../constants';
 import styles from '../styles/InputSection.module.css';
 
-const filingOptions: { value: FilingType; label: string }[] = [
-  { value: 'blue65', label: '青色申告（65万円控除）' },
-  { value: 'blue55', label: '青色申告（55万円控除）' },
-  { value: 'blue10', label: '青色申告（10万円控除）' },
-  { value: 'white', label: '白色申告' },
-];
+const filingOptions = (Object.keys(filingTypeLabels) as FilingType[]).map((value) => ({
+  value,
+  label: filingTypeLabels[value],
+}));
 
 interface Props {
   input: SimulatorInput;
@@ -16,6 +16,8 @@ interface Props {
 }
 
 export function InputSection({ input, updateField }: Props) {
+  const [showChecker, setShowChecker] = useState(false);
+
   return (
     <section className={styles.section}>
       <NumberInput
@@ -44,7 +46,23 @@ export function InputSection({ input, updateField }: Props) {
             </option>
           ))}
         </select>
+        <button
+          type="button"
+          className={styles.helperLink}
+          onClick={() => setShowChecker(true)}
+        >
+          申告区分が分からない場合
+        </button>
       </div>
+      {showChecker && (
+        <FilingTypeChecker
+          onApply={(filingType) => {
+            updateField('filingType', filingType);
+            setShowChecker(false);
+          }}
+          onClose={() => setShowChecker(false)}
+        />
+      )}
     </section>
   );
 }

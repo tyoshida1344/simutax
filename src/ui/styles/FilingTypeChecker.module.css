@@ -1,0 +1,99 @@
+.step {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.question {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.answerButton {
+  flex: 1;
+  padding: 12px;
+  font-family: var(--font);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.answerButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.answerButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.resultLabel {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.resultValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.applyButton {
+  width: 100%;
+  padding: 12px;
+  font-family: var(--font);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.applyButton:hover {
+  opacity: 0.9;
+}
+
+.applyButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.resetButton {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-family: var(--font);
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.resetButton:hover {
+  color: var(--text-secondary);
+}
+
+.resetButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

@@ -16,3 +16,18 @@
   font-weight: 500;
   color: var(--text-secondary);
 }
+
+.helperLink {
+  font-family: var(--font);
+  font-size: var(--font-xs);
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.helperLink:hover {
+  text-decoration: underline;
+}
