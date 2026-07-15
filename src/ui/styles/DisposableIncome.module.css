@@ -3,6 +3,7 @@
   padding: 20px 16px;
   background: var(--bg-section);
   border-radius: var(--radius);
+  margin-bottom: 24px;
 }
 
 .label {
