@@ -11,6 +11,12 @@
   gap: 6px;
 }
 
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
 .label {
   font-size: 14px;
   font-weight: 500;

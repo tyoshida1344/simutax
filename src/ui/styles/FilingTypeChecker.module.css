@@ -12,6 +12,17 @@
   line-height: 1.6;
 }
 
+.hint {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.question + .hint {
+  margin-top: -16px;
+}
+
 .buttons {
   display: flex;
   gap: 12px;

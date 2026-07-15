@@ -35,7 +35,16 @@ export function InputSection({ input, updateField }: Props) {
         max={MAX_AMOUNT}
       />
       <div className={styles.field}>
-        <label className={styles.label}>申告区分</label>
+        <div className={styles.labelRow}>
+          <label className={styles.label}>申告区分</label>
+          <button
+            type="button"
+            className={styles.helperLink}
+            onClick={() => setShowChecker(true)}
+          >
+            分からない場合
+          </button>
+        </div>
         <select
           value={input.filingType}
           onChange={(e) => updateField('filingType', e.target.value as FilingType)}
@@ -46,13 +55,6 @@ export function InputSection({ input, updateField }: Props) {
             </option>
           ))}
         </select>
-        <button
-          type="button"
-          className={styles.helperLink}
-          onClick={() => setShowChecker(true)}
-        >
-          申告区分が分からない場合
-        </button>
       </div>
       {showChecker && (
         <FilingTypeChecker

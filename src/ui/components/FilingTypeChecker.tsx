@@ -3,12 +3,26 @@ import type { FilingType } from '../../data/types';
 import { Modal } from './Modal';
 import styles from '../styles/FilingTypeChecker.module.css';
 
-const questions = [
-  '青色申告承認申請書を提出していますか？',
-  '複式簿記で記帳していますか？',
-  '貸借対照表と損益計算書を添付できますか？',
-  '期限内に申告しますか？',
-  'e-Taxで申告、または優良な電子帳簿保存をしていますか？',
+const questions: { text: string; hint?: string }[] = [
+  {
+    text: '青色申告承認申請書を税務署に提出していますか？',
+    hint: '開業時などに「青色申告で確定申告します」と届け出る書類です',
+  },
+  {
+    text: '複式簿記で記帳していますか？',
+    hint: '会計ソフト（freee・マネーフォワード等）を使っていれば通常は複式簿記です',
+  },
+  {
+    text: '貸借対照表と損益計算書を確定申告書に添付できますか？',
+    hint: '会計ソフトで自動作成できる、資産・負債の一覧表と収支の一覧表です',
+  },
+  {
+    text: '確定申告の期限内（通常3月15日まで）に申告しますか？',
+  },
+  {
+    text: 'e-Taxで申告、または電子帳簿保存をしていますか？',
+    hint: 'e-Taxは国税庁のオンライン申告システムです。電子帳簿保存は帳簿データを電子的に保存する制度です',
+  },
 ];
 
 export const filingTypeLabels: Record<FilingType, string> = {
@@ -55,7 +69,10 @@ export function FilingTypeChecker({ onApply, onClose }: Props) {
           <p className={styles.step}>
             質問 {step + 1} / {questions.length}
           </p>
-          <p className={styles.question}>{questions[step]}</p>
+          <p className={styles.question}>{questions[step].text}</p>
+          {questions[step].hint && (
+            <p className={styles.hint}>{questions[step].hint}</p>
+          )}
           <div className={styles.buttons}>
             <button
               type="button"
