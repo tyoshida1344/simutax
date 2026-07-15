@@ -215,3 +215,12 @@
   color: var(--text-muted);
   margin-top: 4px;
 }
+
+.popoverLink {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.popoverLink:hover {
+  text-decoration: underline;
+}

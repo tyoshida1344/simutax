@@ -65,7 +65,11 @@ function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
           <p className={styles.popoverDetail}>
             物品販売業 / 製造業 / 請負業 / 飲食店業 / 不動産貸付業 / 運送業 / 広告業 / 出版業 / 写真業 / 旅館業 / 周旋業 / 代理業 / 仲立業 / 問屋業 / 印刷業 / デザイン業 / コンサルタント業 / IT関連業 など
           </p>
-          <p className={styles.popoverNote}>※ 第1種事業（37業種）および第3種事業の大部分が該当</p>
+          <p className={styles.popoverNote}>
+            ※ 第1種事業（37業種）および第3種事業の大部分が該当（
+            <a href="https://www.tax.metro.tokyo.lg.jp/kazei/work/kojin_ji" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>全業種一覧 - 東京都主税局</a>
+            ）
+          </p>
         </div>
         <div className={styles.popoverSection}>
           <p className={styles.popoverCategory}>施術業（税率3%）</p>
@@ -79,7 +83,11 @@ function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
           <p className={styles.popoverDetail}>
             文筆業（作家・ライター）/ 漫画家 / 画家 / 音楽家 / スポーツ選手 / 芸能人 / 農業 / 林業 など
           </p>
-          <p className={styles.popoverNote}>※ 法定70業種に含まれない事業が該当</p>
+          <p className={styles.popoverNote}>
+            ※ 上記の法定70業種に含まれない事業が該当（
+            <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_07.html" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>個人事業税の概要 - 総務省</a>
+            ）
+          </p>
         </div>
       </div>
     </div>
