@@ -1,21 +1,21 @@
 .section {
-  margin-inline: calc(-1 * var(--pad));
-  border: 3px solid var(--border);
+  background: var(--bg-section);
   border-radius: var(--radius);
 }
 
 .toggle {
   width: 100%;
-  padding: 12px var(--pad);
+  padding: 12px 16px;
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 8px;
   font-family: var(--font);
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text);
 }
 
 .toggle:hover {
@@ -23,16 +23,19 @@
 }
 
 .toggleIcon {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: inline-block;
   transition: transform 0.2s;
 }
 
 .toggleIconOpen {
   composes: toggleIcon;
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .content {
-  padding: 4px var(--pad) 16px;
+  padding: 4px 16px 16px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -45,27 +48,27 @@
   padding-bottom: 4px;
 }
 
+.groupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .groupToggle {
-  width: 100%;
   padding: 0 0 8px;
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 6px;
   font-family: var(--font);
 }
 
-.groupToggle:hover .groupLabel {
-  color: var(--text);
-}
-
 .groupLabel {
-  font-size: 14px;
+  font-size: var(--font-sm);
   font-weight: 600;
   color: var(--text-secondary);
-  transition: color 0.15s;
 }
 
 .groupIcon {
@@ -95,7 +98,7 @@
 }
 
 .label {
-  font-size: 14px;
+  font-size: var(--font-sm);
   font-weight: 500;
   color: var(--text-secondary);
 }
@@ -111,14 +114,121 @@
 }
 
 .checkboxLabel {
-  font-size: 14px;
+  font-size: var(--font-sm);
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: 0;
 }
 
 .hint {
-  font-size: 12px;
+  font-size: var(--font-xs);
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+/* --- Info link & Popover --- */
+
+.infoLink {
+  font-size: var(--font-xs);
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: var(--font);
+  text-align: left;
+}
+
+.infoLink:hover {
+  text-decoration: underline;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.popover {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.popoverClose {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.popoverClose:hover {
+  color: var(--text);
+}
+
+.popoverTitle {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.popoverSection {
+  margin-bottom: 16px;
+}
+
+.popoverSection:last-child {
+  margin-bottom: 0;
+}
+
+.popoverCategory {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.popoverDetail {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.popoverNote {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.popoverLinks {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.popoverLink {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.popoverLink:hover {
+  text-decoration: underline;
 }

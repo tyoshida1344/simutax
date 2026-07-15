@@ -11,45 +11,38 @@ interface Props {
 }
 
 const businessTypeOptions = [
-  {
-    value: 'type1',
-    label: '税率5%（一般）',
-    hint: '物品販売・飲食・デザイン・コンサル・IT など大半の業種',
-  },
-  {
-    value: 'type3_3pct',
-    label: '税率3%（鍼灸等）',
-    hint: 'あん摩・鍼灸・柔道整復など',
-  },
-  {
-    value: 'exempt',
-    label: '非課税',
-    hint: '文筆業・漫画家・音楽家・農業など',
-  },
+  { value: 'type1', label: '一般的な事業（物品販売・飲食・IT等）' },
+  { value: 'type3_3pct', label: '施術業（あん摩・鍼灸等）' },
+  { value: 'exempt', label: '文筆業・漫画家・音楽家・農業等' },
 ];
 
 function AccordionGroup({
   label,
   defaultOpen,
+  extra,
   children,
 }: {
   label: string;
   defaultOpen?: boolean;
+  extra?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(defaultOpen ?? false);
 
   return (
     <div className={styles.group}>
-      <button
-        onClick={() => setOpen(!open)}
-        className={styles.groupToggle}
-        aria-expanded={open}
-        type="button"
-      >
-        <span className={styles.groupLabel}>{label}</span>
-        <span className={open ? styles.groupIconOpen : styles.groupIcon}>▶</span>
-      </button>
+      <div className={styles.groupHeader}>
+        <button
+          onClick={() => setOpen(!open)}
+          className={styles.groupToggle}
+          aria-expanded={open}
+          type="button"
+        >
+          <span className={open ? styles.groupIconOpen : styles.groupIcon}>▶</span>
+          <span className={styles.groupLabel}>{label}</span>
+        </button>
+        {extra}
+      </div>
       {open && (
         <div className={styles.groupContent}>
           {children}
@@ -59,11 +52,46 @@ function AccordionGroup({
   );
 }
 
+function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.popover} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.popoverClose} onClick={onClose} type="button" aria-label="閉じる">
+          ×
+        </button>
+        <p className={styles.popoverTitle}>事業税の業種分類</p>
+        <div className={styles.popoverSection}>
+          <p className={styles.popoverCategory}>一般的な事業（税率5%）</p>
+          <p className={styles.popoverDetail}>
+            物品販売業 / 製造業 / 請負業 / 飲食店業 / 不動産貸付業 / 運送業 / 広告業 / 出版業 / 写真業 / 旅館業 / 周旋業 / 代理業 / 仲立業 / 問屋業 / 印刷業 / デザイン業 / コンサルタント業 / IT関連業 など
+          </p>
+          <p className={styles.popoverNote}>※ 第1種事業（37業種）および第3種事業の大部分が該当</p>
+        </div>
+        <div className={styles.popoverSection}>
+          <p className={styles.popoverCategory}>施術業（税率3%）</p>
+          <p className={styles.popoverDetail}>
+            あん摩マッサージ指圧業 / はり業 / きゅう業 / 柔道整復業 / その他の医業に類する事業
+          </p>
+          <p className={styles.popoverNote}>※ 医師・歯科医師・薬剤師等は上記「一般的な事業」（税率5%）に該当します</p>
+        </div>
+        <div className={styles.popoverSection}>
+          <p className={styles.popoverCategory}>非課税の業種</p>
+          <p className={styles.popoverDetail}>
+            文筆業（作家・ライター）/ 漫画家 / 画家 / 音楽家 / スポーツ選手 / 芸能人 / 農業 / 林業 など
+          </p>
+          <p className={styles.popoverNote}>※ 上記の法定70業種に含まれない事業が該当</p>
+        </div>
+        <p className={styles.popoverLinks}>
+          詳細は<a href="https://www.tax.metro.tokyo.lg.jp/kazei/work/kojin_ji#:~:text=%E4%B8%80%E8%A6%A7%E3%81%B8%E6%88%BB%E3%82%8B-,%EF%BC%94%20%E6%B3%95%E5%AE%9A%E6%A5%AD%E7%A8%AE%E3%81%A8%E7%A8%8E%E7%8E%87,-%E5%8C%BA%E5%88%86" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>東京都主税局のページ</a>を参照
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
-
-  const selectedType = businessTypeOptions.find((o) => o.value === input.businessType)
-    ?? businessTypeOptions[0];
+  const [showBusinessTypeInfo, setShowBusinessTypeInfo] = useState(false);
 
   return (
     <section className={styles.section}>
@@ -71,27 +99,40 @@ export function DetailSettings({ input, result, updateField }: Props) {
         onClick={() => setOpen(!open)}
         className={styles.toggle}
         aria-expanded={open}
+        type="button"
       >
+        <span className={open ? styles.toggleIconOpen : styles.toggleIcon}>▶</span>
         <span>詳細設定</span>
-        <span className={open ? styles.toggleIconOpen : styles.toggleIcon}>▼</span>
       </button>
 
       {open && (
         <div className={styles.content}>
-          <AccordionGroup label="事業の種類" defaultOpen>
-            <div className={styles.field}>
-              <select
-                value={selectedType.value}
-                onChange={(e) => updateField('businessType', e.target.value)}
+          <AccordionGroup
+            label="事業の種類"
+            defaultOpen
+            extra={
+              <button
+                className={styles.infoLink}
+                onClick={() => setShowBusinessTypeInfo(true)}
+                type="button"
               >
-                {businessTypeOptions.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-              <p className={styles.hint}>{selectedType.hint}</p>
-            </div>
+                業種分類について
+              </button>
+            }
+          >
+            <select
+              value={input.businessType}
+              onChange={(e) => updateField('businessType', e.target.value)}
+            >
+              {businessTypeOptions.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+            {showBusinessTypeInfo && (
+              <BusinessTypeInfo onClose={() => setShowBusinessTypeInfo(false)} />
+            )}
           </AccordionGroup>
 
           <AccordionGroup label="所得控除">
@@ -190,7 +231,6 @@ export function DetailSettings({ input, result, updateField }: Props) {
             />
             <ConsumptionTaxComparison
               result={result.consumptionTax}
-              selectedMethod={input.selectedConsumptionTaxMethod}
               updateField={updateField}
             />
           </AccordionGroup>

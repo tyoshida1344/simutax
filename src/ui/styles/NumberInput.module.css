@@ -5,7 +5,7 @@
 }
 
 .label {
-  font-size: 14px;
+  font-size: var(--font-sm);
   font-weight: 500;
   color: var(--text-secondary);
 }
@@ -13,11 +13,28 @@
 .inputRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: border-color 0.15s;
+}
+
+.inputRow:focus-within {
+  border-color: var(--accent);
+}
+
+input[type="number"].input {
+  border: none;
+  background: none;
+  outline: none;
+  flex: 1;
+  min-width: 0;
 }
 
 .suffix {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   white-space: nowrap;
-  font-size: 14px;
+  font-size: var(--font-sm);
+  padding-right: 12px;
+  user-select: none;
 }

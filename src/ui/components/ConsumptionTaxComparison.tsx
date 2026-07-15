@@ -4,7 +4,6 @@ import styles from '../styles/ConsumptionTaxComparison.module.css';
 
 interface Props {
   result: ConsumptionTaxResult;
-  selectedMethod: ConsumptionTaxMethod | null;
   updateField: <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => void;
 }
 
@@ -51,7 +50,7 @@ function MethodCard({
   );
 }
 
-export function ConsumptionTaxComparison({ result, selectedMethod, updateField }: Props) {
+export function ConsumptionTaxComparison({ result, updateField }: Props) {
   const handleSelect = (method: ConsumptionTaxMethod) => {
     updateField('selectedConsumptionTaxMethod', method);
   };

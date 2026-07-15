@@ -1,21 +1,19 @@
 .section {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .sectionLabel {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-  margin-bottom: 8px;
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px var(--pad);
-  margin-inline: calc(-1 * var(--pad));
+  padding: 12px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -41,17 +39,22 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 15px;
+  font-size: var(--font-sm);
 }
 
 .rowAmount {
   font-variant-numeric: tabular-nums;
-  font-size: 15px;
+  font-size: var(--font-sm);
 }
 
 .rowAmountBold {
   composes: rowAmount;
-  font-size: 16px;
+  font-size: var(--font-md);
+}
+
+.rowAmountDeduction {
+  composes: rowAmount;
+  color: var(--deduction);
 }
 
 .expandIcon {
@@ -68,9 +71,8 @@
 
 .subRows {
   padding-left: 22px;
-  margin-inline: calc(-1 * var(--pad));
-  padding-right: var(--pad);
   background: var(--bg-section);
+  border-radius: 4px;
   margin-bottom: 2px;
 }
 
@@ -78,7 +80,7 @@
   display: flex;
   justify-content: space-between;
   padding: 8px 10px;
-  font-size: 13px;
+  font-size: var(--font-xs);
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border);
 }
@@ -89,11 +91,4 @@
 
 .subRowAmount {
   font-variant-numeric: tabular-nums;
-}
-
-.burdenRate {
-  font-size: 12px;
-  color: var(--text-muted);
-  text-align: right;
-  margin-top: 12px;
 }

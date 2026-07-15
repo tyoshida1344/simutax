@@ -11,7 +11,7 @@
 }
 
 .subtitle {
-  font-size: 13px;
+  font-size: var(--font-xs);
   color: var(--text-muted);
 }
 
