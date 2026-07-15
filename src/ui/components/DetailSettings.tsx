@@ -108,6 +108,7 @@ function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
 export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
   const [showBusinessTypeInfo, setShowBusinessTypeInfo] = useState(false);
+  const [showPurchaseCalculator, setShowPurchaseCalculator] = useState(false);
   const [purchaseBreakdown, setPurchaseBreakdown] = useState(defaultBreakdown);
   const purchaseTotal = Object.values(purchaseBreakdown).reduce((sum, v) => sum + v, 0);
 
@@ -255,30 +256,58 @@ export function DetailSettings({ input, result, updateField }: Props) {
               suffix="%"
               max={MAX_PERCENT}
             />
-            <AccordionGroup label="課税仕入額を計算する">
-              {purchaseCategories.map((cat) => (
-                <NumberInput
-                  key={cat.key}
-                  label={cat.label}
-                  value={purchaseBreakdown[cat.key]}
-                  onChange={(v) => setPurchaseBreakdown((prev) => ({ ...prev, [cat.key]: v }))}
-                  suffix="円"
-                  max={MAX_AMOUNT}
-                />
-              ))}
-              <div className={styles.calculatorFooter}>
-                <span className={styles.calculatorTotal}>
-                  合計: ¥{purchaseTotal.toLocaleString()}
-                </span>
-                <button
-                  className={purchaseTotal !== input.taxablePurchaseAmount ? styles.applyButtonPending : styles.applyButton}
-                  type="button"
-                  onClick={() => updateField('taxablePurchaseAmount', Math.min(purchaseTotal, input.expenses))}
-                >
-                  反映する
-                </button>
+            <button
+              className={styles.infoLink}
+              onClick={() => setShowPurchaseCalculator(true)}
+              type="button"
+            >
+              課税仕入額を計算する
+            </button>
+            {showPurchaseCalculator && (
+              <div className={styles.overlay} onClick={() => setShowPurchaseCalculator(false)}>
+                <div className={styles.popover} onClick={(e) => e.stopPropagation()}>
+                  <button
+                    className={styles.popoverClose}
+                    onClick={() => setShowPurchaseCalculator(false)}
+                    type="button"
+                    aria-label="閉じる"
+                  >
+                    ×
+                  </button>
+                  <p className={styles.popoverTitle}>課税仕入額の計算</p>
+                  <p className={styles.popoverNote}>
+                    経費のうち消費税がかかっている取引の金額を入力してください
+                  </p>
+                  <div className={styles.calculatorBody}>
+                    {purchaseCategories.map((cat) => (
+                      <NumberInput
+                        key={cat.key}
+                        label={cat.label}
+                        value={purchaseBreakdown[cat.key]}
+                        onChange={(v) => setPurchaseBreakdown((prev) => ({ ...prev, [cat.key]: v }))}
+                        suffix="円"
+                        max={MAX_AMOUNT}
+                      />
+                    ))}
+                  </div>
+                  <div className={styles.calculatorFooter}>
+                    <span className={styles.calculatorTotal}>
+                      合計: ¥{purchaseTotal.toLocaleString()}
+                    </span>
+                    <button
+                      className={styles.applyButton}
+                      type="button"
+                      onClick={() => {
+                        updateField('taxablePurchaseAmount', Math.min(purchaseTotal, input.expenses));
+                        setShowPurchaseCalculator(false);
+                      }}
+                    >
+                      反映して閉じる
+                    </button>
+                  </div>
+                </div>
               </div>
-            </AccordionGroup>
+            )}
             <ConsumptionTaxComparison
               result={result.consumptionTax}
               updateField={updateField}

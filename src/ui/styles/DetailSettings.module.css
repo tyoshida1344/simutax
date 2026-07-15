@@ -128,11 +128,18 @@
 
 /* --- Purchase calculator --- */
 
+.calculatorBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
 .calculatorFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 8px;
+  padding-top: 12px;
   border-top: 1px solid var(--border);
 }
 
@@ -145,24 +152,17 @@
 .applyButton {
   font-size: var(--font-xs);
   font-weight: 500;
-  color: var(--accent);
-  background: none;
+  color: #ffffff;
+  background: var(--accent);
   border: 1px solid var(--accent);
   border-radius: var(--radius);
-  padding: 4px 12px;
+  padding: 8px 16px;
   cursor: pointer;
   font-family: var(--font);
 }
 
 .applyButton:hover {
-  background: var(--accent);
-  color: #ffffff;
-}
-
-.applyButtonPending {
-  composes: applyButton;
-  background: var(--accent);
-  color: #ffffff;
+  opacity: 0.9;
 }
 
 /* --- Info link & Popover --- */
