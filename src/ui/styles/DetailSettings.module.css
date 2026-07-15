@@ -208,18 +208,17 @@
   font-size: var(--font-xs);
   color: var(--text-secondary);
   line-height: 1.7;
+  margin-bottom: 4px;
 }
 
 .popoverNote {
   font-size: var(--font-xs);
   color: var(--text-muted);
-  margin-top: 4px;
 }
 
 .popoverLinks {
   font-size: var(--font-xs);
   color: var(--text-muted);
-  margin-top: 16px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
