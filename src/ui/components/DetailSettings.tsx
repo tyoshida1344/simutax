@@ -47,8 +47,42 @@ function AccordionGroup({
   );
 }
 
+function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.popover} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.popoverClose} onClick={onClose} type="button" aria-label="閉じる">
+          ×
+        </button>
+        <p className={styles.popoverTitle}>事業税の業種分類</p>
+        <div className={styles.popoverSection}>
+          <p className={styles.popoverCategory}>一般的な事業（税率5%）</p>
+          <p className={styles.popoverDetail}>
+            物品販売業 / 製造業 / 請負業 / 飲食店業 / 不動産貸付業 / 運送業 / 広告業 / 出版業 / 写真業 / 旅館業 / 周旋業 / 代理業 / 仲立業 / 問屋業 / 印刷業 / デザイン業 / コンサルタント業 / IT関連業 など
+          </p>
+          <p className={styles.popoverNote}>※ 第1種事業（37業種）および第3種事業の大部分が該当</p>
+        </div>
+        <div className={styles.popoverSection}>
+          <p className={styles.popoverCategory}>あん摩・鍼灸・柔道整復等（税率3%）</p>
+          <p className={styles.popoverDetail}>
+            あん摩マッサージ指圧業 / はり業 / きゅう業 / 柔道整復業 / その他の医業に類する事業
+          </p>
+        </div>
+        <div className={styles.popoverSection}>
+          <p className={styles.popoverCategory}>非課税の業種</p>
+          <p className={styles.popoverDetail}>
+            文筆業（作家・ライター）/ 漫画家 / 画家 / 音楽家 / スポーツ選手 / 芸能人 / 農業 / 林業 など
+          </p>
+          <p className={styles.popoverNote}>※ 法定70業種に含まれない事業が該当</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
+  const [showBusinessTypeInfo, setShowBusinessTypeInfo] = useState(false);
 
   return (
     <section className={styles.section}>
@@ -75,6 +109,16 @@ export function DetailSettings({ input, result, updateField }: Props) {
                 </option>
               ))}
             </select>
+            <button
+              className={styles.infoLink}
+              onClick={() => setShowBusinessTypeInfo(true)}
+              type="button"
+            >
+              業種分類について
+            </button>
+            {showBusinessTypeInfo && (
+              <BusinessTypeInfo onClose={() => setShowBusinessTypeInfo(false)} />
+            )}
           </AccordionGroup>
 
           <AccordionGroup label="所得控除">
