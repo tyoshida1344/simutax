@@ -89,6 +89,9 @@ export function BreakdownFlow({ result }: Props) {
         <SubRow label="所得税＋復興特別所得税" amount={result.incomeTax.totalIncomeTax} />
         <SubRow label="住民税" amount={result.residentTax.totalResidentTax} />
         <SubRow label="個人事業税" amount={result.businessTax.totalBusinessTax} />
+        {result.consumptionTax.isTaxable && (
+          <SubRow label="消費税" amount={result.consumptionTax.appliedAmount} />
+        )}
       </BreakdownRow>
       <BreakdownRow label="社会保険料" amount={result.totalSocialInsurance} prefix="− " expandable>
         <SubRow label="国民年金" amount={result.socialInsurance.nationalPension.annualAmount} />

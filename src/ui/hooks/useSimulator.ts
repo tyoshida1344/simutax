@@ -20,6 +20,10 @@ const defaultInput: SimulatorInput = {
   age: 35,
   householdMembers: 1,
   nhiModel: 'standard',
+  basePeriodSales: 'under10m',
+  invoiceRegistered: false,
+  taxablePurchaseRatio: 0,
+  selectedConsumptionTaxMethod: null,
 };
 
 export function useSimulator() {

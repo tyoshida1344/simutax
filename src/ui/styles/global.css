@@ -13,7 +13,7 @@
   --text: #1a1a1a;
   --text-secondary: #666666;
   --text-muted: #999999;
-  --border: #e5e5e5;
+  --border: #d0d0d0;
   --accent: #2563eb;
   --accent-light: #eff6ff;
   --positive: #16a34a;
@@ -37,9 +37,10 @@ body {
 }
 
 #root {
+  --pad: 24px;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px var(--pad);
   padding-bottom: 80px;
 }
 

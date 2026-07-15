@@ -4,6 +4,7 @@ import { getBlueReturnDeduction, calcDeductionsForIncomeTax, calcDeductionsForRe
 import { calcIncomeTax } from './incomeTax';
 import { calcResidentTax } from './residentTax';
 import { calcBusinessTax } from './businessTax';
+import { calcConsumptionTax } from './consumptionTax';
 import { calcSocialInsurance } from './socialInsurance';
 
 export function simulate(input: SimulatorInput, params: TaxParams): SimulatorResult {
@@ -56,7 +57,19 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
   // 事業税は青色申告控除を戻した事業所得で計算
   const businessTax = calcBusinessTax(businessIncome, input.businessType, params.businessTax);
 
-  const totalTax = incomeTax.totalIncomeTax + residentTax.totalResidentTax + businessTax.totalBusinessTax;
+  const consumptionTax = calcConsumptionTax(
+    input.revenue,
+    input.expenses,
+    input.basePeriodSales,
+    input.invoiceRegistered,
+    input.taxablePurchaseRatio,
+    params.consumptionTax.defaultSimplifiedCategory,
+    input.selectedConsumptionTaxMethod,
+    params.meta.taxYear,
+    params.consumptionTax,
+  );
+
+  const totalTax = incomeTax.totalIncomeTax + residentTax.totalResidentTax + businessTax.totalBusinessTax + consumptionTax.appliedAmount;
   const totalSocialInsurance = si.totalSocialInsurance;
   const savingsDeduction = input.iDeCoContribution + input.smallBusinessMutualAid;
 
@@ -74,6 +87,7 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
     incomeTax,
     residentTax,
     businessTax,
+    consumptionTax,
     socialInsurance: si,
     totalTax,
     totalSocialInsurance,

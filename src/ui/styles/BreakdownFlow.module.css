@@ -14,7 +14,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 12px var(--pad);
+  margin-inline: calc(-1 * var(--pad));
   border-bottom: 1px solid var(--border);
 }
 
@@ -25,15 +26,14 @@
 
 .rowExpandable:hover {
   background: var(--bg-section);
-  margin: 0 -8px;
-  padding: 12px 8px;
   border-radius: 4px;
 }
 
 .rowBold {
   composes: row;
   font-weight: 600;
-  padding: 14px 0;
+  padding-top: 14px;
+  padding-bottom: 14px;
   border-bottom: 2px solid var(--text);
 }
 
@@ -68,8 +68,9 @@
 
 .subRows {
   padding-left: 22px;
+  margin-inline: calc(-1 * var(--pad));
+  padding-right: var(--pad);
   background: var(--bg-section);
-  border-radius: 0 0 6px 6px;
   margin-bottom: 2px;
 }
 

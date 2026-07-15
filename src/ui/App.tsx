@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { useSimulator } from './hooks/useSimulator';
 import { InputSection } from './components/InputSection';
 import { DetailSettings } from './components/DetailSettings';
@@ -7,9 +8,11 @@ import { Disclaimer } from './components/Disclaimer';
 import { ArrowDown } from './components/ArrowDown';
 import styles from './styles/App.module.css';
 
-export function App() {
-  const { input, result, updateField } = useSimulator();
-
+function SimulatorPage({
+  input,
+  result,
+  updateField,
+}: ReturnType<typeof useSimulator>) {
   return (
     <>
       <header className={styles.header}>
@@ -17,11 +20,25 @@ export function App() {
         <p className={styles.subtitle}>令和8年（2026年）分</p>
       </header>
       <InputSection input={input} updateField={updateField} />
-      <DetailSettings input={input} updateField={updateField} />
+      <DetailSettings
+        input={input}
+        result={result}
+        updateField={updateField}
+      />
       <ArrowDown size="md" />
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} />
       <BreakdownFlow result={result} />
       <Disclaimer />
     </>
+  );
+}
+
+export function App() {
+  const simulator = useSimulator();
+
+  return (
+    <Routes>
+      <Route path="/" element={<SimulatorPage {...simulator} />} />
+    </Routes>
   );
 }

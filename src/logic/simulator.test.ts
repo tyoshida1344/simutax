@@ -21,6 +21,10 @@ function makeInput(overrides: Partial<SimulatorInput> = {}): SimulatorInput {
     age: 35,
     householdMembers: 1,
     nhiModel: 'standard',
+    basePeriodSales: 'under10m',
+    invoiceRegistered: false,
+    taxablePurchaseRatio: 0,
+    selectedConsumptionTaxMethod: null,
     ...overrides,
   };
 }
@@ -124,6 +128,20 @@ describe('simulate 統合テスト', () => {
     // 手取りは正で売上未満
     expect(r.disposableIncome).toBeGreaterThan(0);
     expect(r.disposableIncome).toBeLessThan(input.revenue);
+  });
+
+  it('課税事業者の場合、消費税がtotalTaxに含まれる', () => {
+    const input = makeInput({
+      revenue: 5500000,
+      expenses: 1100000,
+      basePeriodSales: 'over10m',
+      taxablePurchaseRatio: 50,
+    });
+    const r = simulate(input, params);
+    expect(r.consumptionTax.isTaxable).toBe(true);
+    expect(r.consumptionTax.appliedAmount).toBeGreaterThan(0);
+    const taxWithoutConsumption = r.incomeTax.totalIncomeTax + r.residentTax.totalResidentTax + r.businessTax.totalBusinessTax;
+    expect(r.totalTax).toBe(taxWithoutConsumption + r.consumptionTax.appliedAmount);
   });
 
   it('高所得シナリオ: 売上2000万', () => {
