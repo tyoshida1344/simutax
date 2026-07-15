@@ -23,7 +23,7 @@ function makeInput(overrides: Partial<SimulatorInput> = {}): SimulatorInput {
     nhiModel: 'standard',
     basePeriodSales: 'under10m',
     invoiceRegistered: false,
-    taxablePurchaseRatio: 0,
+    taxablePurchaseAmount: 0,
     selectedConsumptionTaxMethod: null,
     ...overrides,
   };
@@ -135,7 +135,7 @@ describe('simulate 統合テスト', () => {
       revenue: 5500000,
       expenses: 1100000,
       basePeriodSales: 'over10m',
-      taxablePurchaseRatio: 50,
+      taxablePurchaseAmount: 550000,
     });
     const r = simulate(input, params);
     expect(r.consumptionTax.isTaxable).toBe(true);

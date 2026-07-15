@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { SimulatorInput, SimulatorResult } from '../../data/types';
 import { NumberInput } from './NumberInput';
+import { Modal } from './Modal';
 import { ConsumptionTaxComparison } from './ConsumptionTaxComparison';
 import { MAX_AMOUNT, MAX_PEOPLE, MAX_PERCENT } from '../constants';
 import styles from '../styles/DetailSettings.module.css';
@@ -10,6 +11,21 @@ interface Props {
   result: SimulatorResult;
   updateField: <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => void;
 }
+
+const purchaseCategories = [
+  { key: 'materials', label: '仕入・材料費' },
+  { key: 'outsourcing', label: '外注費' },
+  { key: 'communication', label: '通信費' },
+  { key: 'supplies', label: '消耗品費' },
+  { key: 'transportation', label: '交通費・旅費' },
+  { key: 'rent', label: '家賃（事務所）' },
+  { key: 'utilities', label: '水道光熱費' },
+  { key: 'other', label: 'その他の課税仕入' },
+];
+
+const defaultBreakdown: Record<string, number> = Object.fromEntries(
+  purchaseCategories.map((c) => [c.key, 0]),
+);
 
 const businessTypeOptions = [
   { value: 'type1', label: '一般的な事業（物品販売・飲食・IT等）' },
@@ -55,44 +71,41 @@ function AccordionGroup({
 
 function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.popover} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.popoverClose} onClick={onClose} type="button" aria-label="閉じる">
-          ×
-        </button>
-        <p className={styles.popoverTitle}>事業税の業種分類</p>
-        <div className={styles.popoverSection}>
-          <p className={styles.popoverCategory}>一般的な事業（税率5%）</p>
-          <p className={styles.popoverDetail}>
-            物品販売業 / 製造業 / 請負業 / 飲食店業 / 不動産貸付業 / 運送業 / 広告業 / 出版業 / 写真業 / 旅館業 / 周旋業 / 代理業 / 仲立業 / 問屋業 / 印刷業 / デザイン業 / コンサルタント業 / IT関連業 など
-          </p>
-          <p className={styles.popoverNote}>※ 第1種事業（37業種）および第3種事業の大部分が該当</p>
-        </div>
-        <div className={styles.popoverSection}>
-          <p className={styles.popoverCategory}>施術業（税率3%）</p>
-          <p className={styles.popoverDetail}>
-            あん摩マッサージ指圧業 / はり業 / きゅう業 / 柔道整復業 / その他の医業に類する事業
-          </p>
-          <p className={styles.popoverNote}>※ 医師・歯科医師・薬剤師等は上記「一般的な事業」（税率5%）に該当します</p>
-        </div>
-        <div className={styles.popoverSection}>
-          <p className={styles.popoverCategory}>非課税の業種</p>
-          <p className={styles.popoverDetail}>
-            文筆業（作家・ライター）/ 漫画家 / 画家 / 音楽家 / スポーツ選手 / 芸能人 / 農業 / 林業 など
-          </p>
-          <p className={styles.popoverNote}>※ 上記の法定70業種に含まれない事業が該当</p>
-        </div>
-        <p className={styles.popoverLinks}>
-          詳細は<a href="https://www.tax.metro.tokyo.lg.jp/kazei/work/kojin_ji#:~:text=%E4%B8%80%E8%A6%A7%E3%81%B8%E6%88%BB%E3%82%8B-,%EF%BC%94%20%E6%B3%95%E5%AE%9A%E6%A5%AD%E7%A8%AE%E3%81%A8%E7%A8%8E%E7%8E%87,-%E5%8C%BA%E5%88%86" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>東京都主税局のページ</a>を参照
+    <Modal title="事業税の業種分類" onClose={onClose}>
+      <div className={styles.popoverSection}>
+        <p className={styles.popoverCategory}>一般的な事業（税率5%）</p>
+        <p className={styles.popoverDetail}>
+          物品販売業 / 製造業 / 請負業 / 飲食店業 / 不動産貸付業 / 運送業 / 広告業 / 出版業 / 写真業 / 旅館業 / 周旋業 / 代理業 / 仲立業 / 問屋業 / 印刷業 / デザイン業 / コンサルタント業 / IT関連業 など
         </p>
+        <p className={styles.popoverNote}>※ 第1種事業（37業種）および第3種事業の大部分が該当</p>
       </div>
-    </div>
+      <div className={styles.popoverSection}>
+        <p className={styles.popoverCategory}>施術業（税率3%）</p>
+        <p className={styles.popoverDetail}>
+          あん摩マッサージ指圧業 / はり業 / きゅう業 / 柔道整復業 / その他の医業に類する事業
+        </p>
+        <p className={styles.popoverNote}>※ 医師・歯科医師・薬剤師等は上記「一般的な事業」（税率5%）に該当します</p>
+      </div>
+      <div className={styles.popoverSection}>
+        <p className={styles.popoverCategory}>非課税の業種</p>
+        <p className={styles.popoverDetail}>
+          文筆業（作家・ライター）/ 漫画家 / 画家 / 音楽家 / スポーツ選手 / 芸能人 / 農業 / 林業 など
+        </p>
+        <p className={styles.popoverNote}>※ 上記の法定70業種に含まれない事業が該当</p>
+      </div>
+      <p className={styles.popoverLinks}>
+        詳細は<a href="https://www.tax.metro.tokyo.lg.jp/kazei/work/kojin_ji#:~:text=%E4%B8%80%E8%A6%A7%E3%81%B8%E6%88%BB%E3%82%8B-,%EF%BC%94%20%E6%B3%95%E5%AE%9A%E6%A5%AD%E7%A8%AE%E3%81%A8%E7%A8%8E%E7%8E%87,-%E5%8C%BA%E5%88%86" target="_blank" rel="noopener noreferrer" className={styles.popoverLink}>東京都主税局のページ</a>を参照
+      </p>
+    </Modal>
   );
 }
 
 export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
   const [showBusinessTypeInfo, setShowBusinessTypeInfo] = useState(false);
+  const [showPurchaseCalculator, setShowPurchaseCalculator] = useState(false);
+  const [purchaseBreakdown, setPurchaseBreakdown] = useState(defaultBreakdown);
+  const purchaseTotal = Object.values(purchaseBreakdown).reduce((sum, v) => sum + v, 0);
 
   return (
     <section className={styles.section}>
@@ -231,13 +244,56 @@ export function DetailSettings({ input, result, updateField }: Props) {
                 インボイス発行事業者
               </label>
             </div>
-            <NumberInput
-              label="課税仕入の割合"
-              value={input.taxablePurchaseRatio}
-              onChange={(v) => updateField('taxablePurchaseRatio', v)}
-              suffix="%"
-              max={MAX_PERCENT}
-            />
+            <div className={styles.fieldWithExtra}>
+              <NumberInput
+                label="課税仕入の割合"
+                value={input.expenses > 0 ? Math.min(Math.round(input.taxablePurchaseAmount / input.expenses * 100), 100) : 0}
+                onChange={(v) => updateField('taxablePurchaseAmount', Math.floor(input.expenses * v / 100))}
+                suffix="%"
+                max={MAX_PERCENT}
+              />
+              <button
+                className={`${styles.infoLink} ${styles.fieldExtra}`}
+                onClick={() => setShowPurchaseCalculator(true)}
+                type="button"
+              >
+                計算する
+              </button>
+            </div>
+            {showPurchaseCalculator && (
+              <Modal title="課税仕入額の計算" onClose={() => setShowPurchaseCalculator(false)}>
+                <p className={styles.popoverNote}>
+                  経費のうち消費税がかかっている取引の金額を入力してください
+                </p>
+                <div className={styles.calculatorBody}>
+                  {purchaseCategories.map((cat) => (
+                    <NumberInput
+                      key={cat.key}
+                      label={cat.label}
+                      value={purchaseBreakdown[cat.key]}
+                      onChange={(v) => setPurchaseBreakdown((prev) => ({ ...prev, [cat.key]: v }))}
+                      suffix="円"
+                      max={MAX_AMOUNT}
+                    />
+                  ))}
+                </div>
+                <div className={styles.calculatorFooter}>
+                  <span className={styles.calculatorTotal}>
+                    合計: ¥{purchaseTotal.toLocaleString()}
+                  </span>
+                  <button
+                    className={styles.applyButton}
+                    type="button"
+                    onClick={() => {
+                      updateField('taxablePurchaseAmount', Math.min(purchaseTotal, input.expenses));
+                      setShowPurchaseCalculator(false);
+                    }}
+                  >
+                    反映して閉じる
+                  </button>
+                </div>
+              </Modal>
+            )}
             <ConsumptionTaxComparison
               result={result.consumptionTax}
               updateField={updateField}

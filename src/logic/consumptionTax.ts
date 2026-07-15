@@ -6,10 +6,9 @@ import type {
 } from '../data/types';
 export function calcConsumptionTax(
   revenue: number,
-  expenses: number,
   basePeriodSales: 'under10m' | 'over10m' | 'over50m',
   invoiceRegistered: boolean,
-  taxablePurchaseRatio: number,
+  taxablePurchaseAmount: number,
   simplifiedCategoryKey: string,
   selectedMethod: ConsumptionTaxMethod | null,
   taxYear: number,
@@ -43,7 +42,7 @@ export function calcConsumptionTax(
     : 'インボイス発行事業者';
 
   const salesTax = Math.floor(revenue * num / denom);
-  const purchaseTax = Math.floor(expenses * (taxablePurchaseRatio / 100) * num / denom);
+  const purchaseTax = Math.floor(taxablePurchaseAmount * num / denom);
 
   // 本則課税
   const standardMethod: ConsumptionTaxMethodResult = {

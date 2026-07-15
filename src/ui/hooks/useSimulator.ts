@@ -22,7 +22,7 @@ const defaultInput: SimulatorInput = {
   nhiModel: 'standard',
   basePeriodSales: 'under10m',
   invoiceRegistered: false,
-  taxablePurchaseRatio: 0,
+  taxablePurchaseAmount: 0,
   selectedConsumptionTaxMethod: null,
 };
 
