@@ -130,6 +130,20 @@ describe('simulate 統合テスト', () => {
     expect(r.disposableIncome).toBeLessThan(input.revenue);
   });
 
+  it('課税事業者の場合、消費税がtotalTaxに含まれる', () => {
+    const input = makeInput({
+      revenue: 5500000,
+      expenses: 1100000,
+      basePeriodSales: 'over10m',
+      taxablePurchaseRatio: 50,
+    });
+    const r = simulate(input, params);
+    expect(r.consumptionTax.isTaxable).toBe(true);
+    expect(r.consumptionTax.appliedAmount).toBeGreaterThan(0);
+    const taxWithoutConsumption = r.incomeTax.totalIncomeTax + r.residentTax.totalResidentTax + r.businessTax.totalBusinessTax;
+    expect(r.totalTax).toBe(taxWithoutConsumption + r.consumptionTax.appliedAmount);
+  });
+
   it('高所得シナリオ: 売上2000万', () => {
     const input = makeInput({ revenue: 20000000, expenses: 5000000 });
     const r = simulate(input, params);

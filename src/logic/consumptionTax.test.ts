@@ -151,6 +151,43 @@ describe('calcConsumptionTax', () => {
       expect(r.salesTax).toBe(500000);
       expect(r.purchaseTax).toBe(100000);
     });
+
+    it('簡易課税のみなし仕入控除は切り捨て', () => {
+      // salesTax=500000, cat5 rate=0.50 → 500000 * 0.50 = 250000（端数なし）
+      // cat3 rate=0.70 → 500000 * 0.70 = 350000（端数なし）
+      // 端数が出る売上: 5500001 → salesTax=500000, 500000 * 0.50 = 250000
+      // salesTax - floor(salesTax * 0.50) = 500000 - 250000 = 250000
+      const r = calcConsumptionTax(5500001, 0, 'under10m', true, 0, 'cat5', null, TAX_YEAR, params);
+      expect(r.simplifiedMethod.amount).toBe(250000);
+    });
+
+    it('2割特例は切り捨て', () => {
+      // 5,500,001 → salesTax=500000, 500000 * 0.20 = 100000（端数なし）
+      // 5,555,557 → salesTax = floor(5555557 * 10 / 110) = floor(505050.636...) = 505050
+      // 505050 * 0.20 = 101010.0 → 101010
+      const r = calcConsumptionTax(5555557, 0, 'under10m', true, 0, 'cat5', null, TAX_YEAR, params);
+      expect(r.salesTax).toBe(505050);
+      expect(r.special20Method.amount).toBe(101010);
+    });
+  });
+
+  describe('還付（本則課税でマイナス）', () => {
+    it('仕入税が売上税を上回る場合、本則課税はマイナス（還付）', () => {
+      // revenue=1,100,000, expenses=5,500,000, ratio=100%
+      // salesTax = floor(1100000 * 10 / 110) = 100000
+      // purchaseTax = floor(5500000 * 1.0 * 10 / 110) = 500000
+      // standard = 100000 - 500000 = -400000
+      const r = calcConsumptionTax(1100000, 5500000, 'over10m', false, 100, 'cat5', null, TAX_YEAR, params);
+      expect(r.standardMethod.amount).toBe(-400000);
+      expect(r.standardMethod.applicable).toBe(true);
+    });
+
+    it('還付がある場合、本則課税が推奨される', () => {
+      const r = calcConsumptionTax(1100000, 5500000, 'under10m', true, 100, 'cat5', null, TAX_YEAR, params);
+      // standard: -400000, simplified: 50000, special20: 20000
+      expect(r.recommendedMethod).toBe('standard');
+      expect(r.appliedAmount).toBe(-400000);
+    });
   });
 
   describe('ゼロ・境界値', () => {

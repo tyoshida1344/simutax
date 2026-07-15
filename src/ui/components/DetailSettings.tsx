@@ -190,7 +190,7 @@ export function DetailSettings({ input, result, updateField }: Props) {
             />
             <ConsumptionTaxComparison
               result={result.consumptionTax}
-              input={input}
+              selectedMethod={input.selectedConsumptionTaxMethod}
               updateField={updateField}
             />
           </AccordionGroup>

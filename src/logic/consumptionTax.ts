@@ -4,8 +4,6 @@ import type {
   ConsumptionTaxMethod,
   ConsumptionTaxMethodResult,
 } from '../data/types';
-import { clampMin } from './common';
-
 export function calcConsumptionTax(
   revenue: number,
   expenses: number,
@@ -37,8 +35,11 @@ export function calcConsumptionTax(
     };
   }
 
+  const thresholdLabel = `${(params.taxableThreshold / 10000).toLocaleString()}万円`;
+  const simplifiedThresholdLabel = `${(params.simplifiedThreshold / 10000).toLocaleString()}万円`;
+
   const taxableReason = isTaxableByThreshold
-    ? '基準期間の課税売上高が1,000万円超'
+    ? `基準期間の課税売上高が${thresholdLabel}超`
     : 'インボイス発行事業者';
 
   const salesTax = Math.floor(revenue * num / denom);
@@ -46,7 +47,7 @@ export function calcConsumptionTax(
 
   // 本則課税
   const standardMethod: ConsumptionTaxMethodResult = {
-    amount: clampMin(salesTax - purchaseTax, 0),
+    amount: salesTax - purchaseTax,
     applicable: true,
     reason: null,
   };
@@ -58,7 +59,7 @@ export function calcConsumptionTax(
   const simplifiedMethod: ConsumptionTaxMethodResult = {
     amount: simplifiedApplicable ? salesTax - Math.floor(salesTax * category.deemedPurchaseRate) : 0,
     applicable: simplifiedApplicable,
-    reason: simplifiedApplicable ? null : '基準期間の課税売上高が5,000万円超のため適用不可',
+    reason: simplifiedApplicable ? null : `基準期間の課税売上高が${simplifiedThresholdLabel}超のため適用不可`,
   };
 
   // 2割特例
@@ -70,7 +71,7 @@ export function calcConsumptionTax(
     amount: special20Eligible ? Math.floor(salesTax * params.twentyPercentSpecialRate) : 0,
     applicable: special20Eligible,
     reason: isTaxableByThreshold
-      ? '基準期間の課税売上高が1,000万円超のため適用不可'
+      ? `基準期間の課税売上高が${thresholdLabel}超のため適用不可`
       : !invoiceRegistered
         ? 'インボイス発行事業者でないため適用不可'
         : !params.twentyPercentSpecialEligibleYears.includes(taxYear)

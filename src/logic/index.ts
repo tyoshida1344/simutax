@@ -57,15 +57,13 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
   // 事業税は青色申告控除を戻した事業所得で計算
   const businessTax = calcBusinessTax(businessIncome, input.businessType, params.businessTax);
 
-  const simplifiedTaxCategory = 'cat5';
-
   const consumptionTax = calcConsumptionTax(
     input.revenue,
     input.expenses,
     input.basePeriodSales,
     input.invoiceRegistered,
     input.taxablePurchaseRatio,
-    simplifiedTaxCategory,
+    params.consumptionTax.defaultSimplifiedCategory,
     input.selectedConsumptionTaxMethod,
     params.meta.taxYear,
     params.consumptionTax,
