@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { SimulatorInput, SimulatorResult } from '../../data/types';
 import { NumberInput } from './NumberInput';
 import { ConsumptionTaxComparison } from './ConsumptionTaxComparison';
+import { MAX_AMOUNT, MAX_PEOPLE, MAX_PERCENT } from '../constants';
 import styles from '../styles/DetailSettings.module.css';
 
 interface Props {
@@ -141,18 +142,21 @@ export function DetailSettings({ input, result, updateField }: Props) {
               value={input.iDeCoContribution}
               onChange={(v) => updateField('iDeCoContribution', v)}
               suffix="円"
+              max={MAX_AMOUNT}
             />
             <NumberInput
               label="小規模企業共済（年額）"
               value={input.smallBusinessMutualAid}
               onChange={(v) => updateField('smallBusinessMutualAid', v)}
               suffix="円"
+              max={MAX_AMOUNT}
             />
             <NumberInput
               label="扶養親族の人数"
               value={input.dependentCount}
               onChange={(v) => updateField('dependentCount', v)}
               suffix="人"
+              max={MAX_PEOPLE}
             />
             <div className={styles.checkboxRow}>
               <input
@@ -170,12 +174,14 @@ export function DetailSettings({ input, result, updateField }: Props) {
               value={input.lifeInsuranceDeduction}
               onChange={(v) => updateField('lifeInsuranceDeduction', v)}
               suffix="円"
+              max={MAX_AMOUNT}
             />
             <NumberInput
               label="医療費控除"
               value={input.medicalExpenseDeduction}
               onChange={(v) => updateField('medicalExpenseDeduction', v)}
               suffix="円"
+              max={MAX_AMOUNT}
             />
           </AccordionGroup>
 
@@ -194,8 +200,10 @@ export function DetailSettings({ input, result, updateField }: Props) {
             <NumberInput
               label="国保の加入人数（世帯）"
               value={input.householdMembers}
-              onChange={(v) => updateField('householdMembers', Math.max(1, v))}
+              onChange={(v) => updateField('householdMembers', v)}
               suffix="人"
+              min={1}
+              max={MAX_PEOPLE}
             />
           </AccordionGroup>
 
@@ -226,8 +234,9 @@ export function DetailSettings({ input, result, updateField }: Props) {
             <NumberInput
               label="課税仕入の割合"
               value={input.taxablePurchaseRatio}
-              onChange={(v) => updateField('taxablePurchaseRatio', Math.min(100, v))}
+              onChange={(v) => updateField('taxablePurchaseRatio', v)}
               suffix="%"
+              max={MAX_PERCENT}
             />
             <ConsumptionTaxComparison
               result={result.consumptionTax}

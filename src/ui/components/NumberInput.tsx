@@ -6,10 +6,18 @@ interface Props {
   value: number;
   onChange: (v: number) => void;
   suffix?: string;
+  min?: number;
+  max?: number;
 }
 
-export function NumberInput({ label, value, onChange, suffix }: Props) {
+export function NumberInput({ label, value, onChange, suffix, min = 0, max }: Props) {
   const id = useId();
+
+  const clamp = (v: number): number => {
+    let clamped = Math.max(min, v);
+    if (max !== undefined) clamped = Math.min(max, clamped);
+    return clamped;
+  };
 
   return (
     <div className={styles.field}>
@@ -20,8 +28,9 @@ export function NumberInput({ label, value, onChange, suffix }: Props) {
           type="number"
           className={styles.input}
           value={value || ''}
-          onChange={(e) => onChange(Math.max(0, Number(e.target.value) || 0))}
-          min={0}
+          onChange={(e) => onChange(clamp(Number(e.target.value) || 0))}
+          min={min}
+          max={max}
           inputMode="numeric"
           placeholder="0"
         />
