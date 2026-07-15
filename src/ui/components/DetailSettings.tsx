@@ -12,7 +12,7 @@ interface Props {
 
 const businessTypeOptions = [
   { value: 'type1', label: '一般的な事業（物品販売・飲食・IT等）' },
-  { value: 'type3_3pct', label: 'あん摩・鍼灸・柔道整復等' },
+  { value: 'type3_3pct', label: '医業類似の事業' },
   { value: 'exempt', label: '文筆業・漫画家・音楽家・農業等' },
 ];
 
