@@ -1,5 +1,6 @@
 import type { SimulatorInput, FilingType } from '../../data/types';
 import { NumberInput } from './NumberInput';
+import { MAX_AMOUNT } from '../constants';
 import styles from '../styles/InputSection.module.css';
 
 const filingOptions: { value: FilingType; label: string }[] = [
@@ -22,12 +23,14 @@ export function InputSection({ input, updateField }: Props) {
         value={input.revenue}
         onChange={(v) => updateField('revenue', v)}
         suffix="円"
+        max={MAX_AMOUNT}
       />
       <NumberInput
         label="必要経費"
         value={input.expenses}
         onChange={(v) => updateField('expenses', v)}
         suffix="円"
+        max={MAX_AMOUNT}
       />
       <div className={styles.field}>
         <label className={styles.label}>申告区分</label>
