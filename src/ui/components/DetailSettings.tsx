@@ -249,20 +249,22 @@ export function DetailSettings({ input, result, updateField }: Props) {
                 インボイス発行事業者
               </label>
             </div>
-            <NumberInput
-              label="課税仕入の割合"
-              value={input.expenses > 0 ? Math.round(input.taxablePurchaseAmount / input.expenses * 100) : 0}
-              onChange={(v) => updateField('taxablePurchaseAmount', Math.floor(input.expenses * v / 100))}
-              suffix="%"
-              max={MAX_PERCENT}
-            />
-            <button
-              className={styles.infoLink}
-              onClick={() => setShowPurchaseCalculator(true)}
-              type="button"
-            >
-              課税仕入額を計算する
-            </button>
+            <div className={styles.fieldWithExtra}>
+              <NumberInput
+                label="課税仕入の割合"
+                value={input.expenses > 0 ? Math.round(input.taxablePurchaseAmount / input.expenses * 100) : 0}
+                onChange={(v) => updateField('taxablePurchaseAmount', Math.floor(input.expenses * v / 100))}
+                suffix="%"
+                max={MAX_PERCENT}
+              />
+              <button
+                className={`${styles.infoLink} ${styles.fieldExtra}`}
+                onClick={() => setShowPurchaseCalculator(true)}
+                type="button"
+              >
+                計算する
+              </button>
+            </div>
             {showPurchaseCalculator && (
               <div className={styles.overlay} onClick={() => setShowPurchaseCalculator(false)}>
                 <div className={styles.popover} onClick={(e) => e.stopPropagation()}>

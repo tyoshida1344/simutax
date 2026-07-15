@@ -126,6 +126,18 @@
   line-height: 1.5;
 }
 
+/* --- Field with extra link --- */
+
+.fieldWithExtra {
+  position: relative;
+}
+
+.fieldExtra {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 /* --- Purchase calculator --- */
 
 .calculatorBody {
