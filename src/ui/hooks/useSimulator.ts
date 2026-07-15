@@ -22,7 +22,7 @@ const defaultInput: SimulatorInput = {
   nhiModel: 'standard',
   basePeriodSales: 'under10m',
   invoiceRegistered: false,
-  taxablePurchaseRatio: 0,
+  taxablePurchaseAmount: 0,
   selectedConsumptionTaxMethod: null,
 };
 
@@ -32,7 +32,13 @@ export function useSimulator() {
   const result: SimulatorResult = useMemo(() => simulate(input, params), [input]);
 
   const updateField = <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => {
-    setInput((prev) => ({ ...prev, [field]: value }));
+    setInput((prev) => {
+      const next = { ...prev, [field]: value };
+      if (field === 'expenses') {
+        next.taxablePurchaseAmount = Math.min(next.taxablePurchaseAmount, Math.max(0, next.expenses));
+      }
+      return next;
+    });
   };
 
   return { input, result, updateField, params };

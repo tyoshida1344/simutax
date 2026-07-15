@@ -11,6 +11,21 @@ interface Props {
   updateField: <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => void;
 }
 
+const purchaseCategories = [
+  { key: 'materials', label: '仕入・材料費' },
+  { key: 'outsourcing', label: '外注費' },
+  { key: 'communication', label: '通信費' },
+  { key: 'supplies', label: '消耗品費' },
+  { key: 'transportation', label: '交通費・旅費' },
+  { key: 'rent', label: '家賃（事務所）' },
+  { key: 'utilities', label: '水道光熱費' },
+  { key: 'other', label: 'その他の課税仕入' },
+];
+
+const defaultBreakdown: Record<string, number> = Object.fromEntries(
+  purchaseCategories.map((c) => [c.key, 0]),
+);
+
 const businessTypeOptions = [
   { value: 'type1', label: '一般的な事業（物品販売・飲食・IT等）' },
   { value: 'type3_3pct', label: '施術業（あん摩・鍼灸等）' },
@@ -93,6 +108,8 @@ function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
 export function DetailSettings({ input, result, updateField }: Props) {
   const [open, setOpen] = useState(false);
   const [showBusinessTypeInfo, setShowBusinessTypeInfo] = useState(false);
+  const [purchaseBreakdown, setPurchaseBreakdown] = useState(defaultBreakdown);
+  const purchaseTotal = Object.values(purchaseBreakdown).reduce((sum, v) => sum + v, 0);
 
   return (
     <section className={styles.section}>
@@ -233,11 +250,35 @@ export function DetailSettings({ input, result, updateField }: Props) {
             </div>
             <NumberInput
               label="課税仕入の割合"
-              value={input.taxablePurchaseRatio}
-              onChange={(v) => updateField('taxablePurchaseRatio', v)}
+              value={input.expenses > 0 ? Math.round(input.taxablePurchaseAmount / input.expenses * 100) : 0}
+              onChange={(v) => updateField('taxablePurchaseAmount', Math.floor(input.expenses * v / 100))}
               suffix="%"
               max={MAX_PERCENT}
             />
+            <AccordionGroup label="課税仕入額を計算する">
+              {purchaseCategories.map((cat) => (
+                <NumberInput
+                  key={cat.key}
+                  label={cat.label}
+                  value={purchaseBreakdown[cat.key]}
+                  onChange={(v) => setPurchaseBreakdown((prev) => ({ ...prev, [cat.key]: v }))}
+                  suffix="円"
+                  max={MAX_AMOUNT}
+                />
+              ))}
+              <div className={styles.calculatorFooter}>
+                <span className={styles.calculatorTotal}>
+                  合計: ¥{purchaseTotal.toLocaleString()}
+                </span>
+                <button
+                  className={purchaseTotal !== input.taxablePurchaseAmount ? styles.applyButtonPending : styles.applyButton}
+                  type="button"
+                  onClick={() => updateField('taxablePurchaseAmount', Math.min(purchaseTotal, input.expenses))}
+                >
+                  反映する
+                </button>
+              </div>
+            </AccordionGroup>
             <ConsumptionTaxComparison
               result={result.consumptionTax}
               updateField={updateField}

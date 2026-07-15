@@ -126,6 +126,45 @@
   line-height: 1.5;
 }
 
+/* --- Purchase calculator --- */
+
+.calculatorFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.calculatorTotal {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.applyButton {
+  font-size: var(--font-xs);
+  font-weight: 500;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 4px 12px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+
+.applyButton:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.applyButtonPending {
+  composes: applyButton;
+  background: var(--accent);
+  color: #ffffff;
+}
+
 /* --- Info link & Popover --- */
 
 .infoLink {

@@ -59,10 +59,9 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
 
   const consumptionTax = calcConsumptionTax(
     input.revenue,
-    input.expenses,
     input.basePeriodSales,
     input.invoiceRegistered,
-    input.taxablePurchaseRatio,
+    input.taxablePurchaseAmount,
     params.consumptionTax.defaultSimplifiedCategory,
     input.selectedConsumptionTaxMethod,
     params.meta.taxYear,
