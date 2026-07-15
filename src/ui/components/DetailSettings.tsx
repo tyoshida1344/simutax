@@ -12,7 +12,7 @@ interface Props {
 
 const businessTypeOptions = [
   { value: 'type1', label: '一般的な事業（物品販売・飲食・IT等）' },
-  { value: 'type3_3pct', label: '医業類似の事業' },
+  { value: 'type3_3pct', label: '施術業（あん摩・鍼灸等）' },
   { value: 'exempt', label: '文筆業・漫画家・音楽家・農業等' },
 ];
 
@@ -68,10 +68,11 @@ function BusinessTypeInfo({ onClose }: { onClose: () => void }) {
           <p className={styles.popoverNote}>※ 第1種事業（37業種）および第3種事業の大部分が該当</p>
         </div>
         <div className={styles.popoverSection}>
-          <p className={styles.popoverCategory}>あん摩・鍼灸・柔道整復等（税率3%）</p>
+          <p className={styles.popoverCategory}>施術業（税率3%）</p>
           <p className={styles.popoverDetail}>
             あん摩マッサージ指圧業 / はり業 / きゅう業 / 柔道整復業 / その他の医業に類する事業
           </p>
+          <p className={styles.popoverNote}>※ 医師・歯科医師・薬剤師等は上記「一般的な事業」（税率5%）に該当します</p>
         </div>
         <div className={styles.popoverSection}>
           <p className={styles.popoverCategory}>非課税の業種</p>
