@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { calcConsumptionTax } from './consumptionTax';
-import taxParams from '../data/taxParams.2026.json';
-import type { TaxParams } from '../data/types';
+import { taxParams } from '../data/taxParams';
 
-const params = (taxParams as unknown as TaxParams).consumptionTax;
+const params = taxParams.consumptionTax;
 const TAX_YEAR = 2026;
 
 describe('calcConsumptionTax', () => {

@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { calcBusinessTax } from './businessTax';
-import taxParams from '../data/taxParams.2026.json';
-import type { TaxParams } from '../data/types';
+import { taxParams } from '../data/taxParams';
 
-const params = (taxParams as unknown as TaxParams).businessTax;
+const params = taxParams.businessTax;
 
 describe('calcBusinessTax', () => {
   it('事業所得290万以下 → 税額0', () => {

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { simulate } from './index';
-import taxParams from '../data/taxParams.2026.json';
-import type { TaxParams, SimulatorInput } from '../data/types';
+import { taxParams } from '../data/taxParams';
+import type { SimulatorInput } from '../data/types';
 
-const params = taxParams as unknown as TaxParams;
+const params = taxParams;
 
 function makeInput(overrides: Partial<SimulatorInput> = {}): SimulatorInput {
   return {

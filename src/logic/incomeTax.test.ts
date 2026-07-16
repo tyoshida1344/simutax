@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { calcIncomeTax } from './incomeTax';
-import taxParams from '../data/taxParams.2026.json';
-import type { TaxParams } from '../data/types';
+import { taxParams } from '../data/taxParams';
 
-const params = (taxParams as unknown as TaxParams).incomeTax;
+const params = taxParams.incomeTax;
 
 describe('calcIncomeTax', () => {
   it('所得0 → 税額0', () => {

@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import type { SimulatorInput, SimulatorResult, TaxParams } from '../../data/types';
+import type { SimulatorInput, SimulatorResult } from '../../data/types';
 import { simulate } from '../../logic';
-import taxParams from '../../data/taxParams.2026.json';
+import { taxParams } from '../../data/taxParams';
 
-const params = taxParams as unknown as TaxParams;
+const params = taxParams;
 
 const defaultInput: SimulatorInput = {
   revenue: 4000000,

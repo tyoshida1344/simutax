@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { calcNationalPension, calcNHI, calcSocialInsurance } from './socialInsurance';
-import taxParams from '../data/taxParams.2026.json';
-import type { TaxParams } from '../data/types';
+import { taxParams } from '../data/taxParams';
 
-const params = (taxParams as unknown as TaxParams).socialInsurance;
+const params = taxParams.socialInsurance;
 
 describe('calcNationalPension', () => {
   it('月額×12ヶ月', () => {
