@@ -30,14 +30,18 @@
       { "totalIncomeUpperLimit": null,      "amount": 0 }
     ],
     "roundTaxableIncomeDownTo": 1000,
-    "roundTaxAmountDownTo": 100
+    "roundTaxAmountDownTo": 100,
+    "dependentDeduction": 380000,
+    "spouseDeduction": 380000
   },
   "residentTax": {
     "incomeRate": 0.10,
     "perCapitaLevy": 5000,
     "basicDeduction": 430000,
     "roundTaxableIncomeDownTo": 1000,
-    "roundTaxAmountDownTo": 100
+    "roundTaxAmountDownTo": 100,
+    "dependentDeduction": 330000,
+    "spouseDeduction": 330000
   },
   "businessTax": {
     "businessOwnerDeduction": 2900000,

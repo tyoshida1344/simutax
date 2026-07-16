@@ -29,11 +29,6 @@ export function getResidentTaxBasicDeduction(params: ResidentTaxParams): number 
   return params.basicDeduction;
 }
 
-const DEPENDENT_DEDUCTION_INCOME_TAX = 380000;
-const DEPENDENT_DEDUCTION_RESIDENT_TAX = 330000;
-const SPOUSE_DEDUCTION_INCOME_TAX = 380000;
-const SPOUSE_DEDUCTION_RESIDENT_TAX = 330000;
-
 export interface DeductionBreakdown {
   total: number;
   basicDeduction: number;
@@ -58,8 +53,8 @@ export function calcDeductionsForIncomeTax(
 ): DeductionBreakdown {
   const basicDeduction = getIncomeTaxBasicDeduction(totalIncome, params.basicDeduction);
   const smallBusinessDeduction = iDeCo + smallBusinessMutualAid;
-  const dependentDeduction = dependentCount * DEPENDENT_DEDUCTION_INCOME_TAX;
-  const spouseDeduction = hasSpouse ? SPOUSE_DEDUCTION_INCOME_TAX : 0;
+  const dependentDeduction = dependentCount * params.dependentDeduction;
+  const spouseDeduction = hasSpouse ? params.spouseDeduction : 0;
 
   const total =
     basicDeduction +
@@ -94,8 +89,8 @@ export function calcDeductionsForResidentTax(
 ): DeductionBreakdown {
   const basicDeduction = getResidentTaxBasicDeduction(params);
   const smallBusinessDeduction = iDeCo + smallBusinessMutualAid;
-  const dependentDeduction = dependentCount * DEPENDENT_DEDUCTION_RESIDENT_TAX;
-  const spouseDeduction = hasSpouse ? SPOUSE_DEDUCTION_RESIDENT_TAX : 0;
+  const dependentDeduction = dependentCount * params.dependentDeduction;
+  const spouseDeduction = hasSpouse ? params.spouseDeduction : 0;
 
   const total =
     basicDeduction +
