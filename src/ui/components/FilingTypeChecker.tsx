@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { FilingType } from '../../data/types';
 import { Modal } from './Modal';
+import { filingTypeLabels } from '../constants';
 import styles from '../styles/FilingTypeChecker.module.css';
 
 const questions: { text: string; hint?: string }[] = [
@@ -24,13 +25,6 @@ const questions: { text: string; hint?: string }[] = [
     hint: 'e-Taxは国税庁のオンライン申告システムです。freee・マネーフォワード等からe-Tax連携で申告する場合も該当します',
   },
 ];
-
-export const filingTypeLabels: Record<FilingType, string> = {
-  blue65: '青色申告（65万円控除）',
-  blue55: '青色申告（55万円控除）',
-  blue10: '青色申告（10万円控除）',
-  white: '白色申告',
-};
 
 function resolve(step: number, yes: boolean): FilingType | null {
   if (step === 0 && !yes) return 'white';
