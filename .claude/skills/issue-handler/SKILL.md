@@ -92,6 +92,8 @@ gh issue view <番号> --json title,body,comments,labels,state
 ユーザの回答を反映して最終仕様をまとめ、**実装に入る前に** イシューへコメントとして残す。
 これは「何を作ると合意したか」の記録になり、後から実装の意図を追えるようにするため。
 
+> **注意**: `--body` には必ず `"$(cat <<'EOF' ... EOF)"` パターンを使うこと。`--body @-` や `--body @- <<'EOF'` は `gh` のサブコマンドやシェル環境によって動作が不安定で、本文が `@-` という文字列になる事故が起きる。
+
 ```sh
 gh issue comment <番号> --body "$(cat <<'EOF'
 ## 確定仕様
@@ -162,6 +164,8 @@ git commit -m "prefix: #<番号> 説明"
 - prefix はイシューの内容に応じて判別する（`feat` / `fix` / `refactor` / `chore` 等）
 
 2. PR 作成: `.github/PULL_REQUEST_TEMPLATE.md` を読み、各セクションを埋めた内容を `--body` に渡す。
+
+> **注意**: `--body` には必ず `"$(cat <<'EOF' ... EOF)"` パターンを使うこと。`--body @-` は使わない（本文が `@-` という文字列になる事故が起きる）。
 
 ```sh
 git push -u origin issues/<番号>
