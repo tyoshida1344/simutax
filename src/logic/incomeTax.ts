@@ -1,6 +1,13 @@
 import type { IncomeTaxParams, IncomeTaxResult } from '../data/types';
 import { roundDownTo, clampMin } from './common';
 
+/**
+ * 所得税額（復興特別所得税を含む）を計算する。
+ * @param incomeAfterDeductions 所得控除後の金額（合計所得 − 所得控除合計）
+ * @param params 税率表・端数処理などの税制パラメータ
+ * @param basicDeduction 適用された基礎控除額（所得に応じた逓減計算は呼び出し側で解決済み）
+ * @returns 課税所得・所得税額・復興特別所得税・適用税率・基礎控除額を含む計算結果
+ */
 export function calcIncomeTax(
   incomeAfterDeductions: number,
   params: IncomeTaxParams,
