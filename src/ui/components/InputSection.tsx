@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import type { SimulatorInput, FilingType } from '../../data/types';
 import { NumberInput } from './NumberInput';
-import { FilingTypeChecker, filingTypeLabels } from './FilingTypeChecker';
-import { MAX_AMOUNT } from '../constants';
+import { FilingTypeChecker } from './FilingTypeChecker';
+import { MAX_AMOUNT, filingTypeLabels } from '../constants';
 import styles from '../styles/InputSection.module.css';
 
 const filingOptions = (Object.keys(filingTypeLabels) as FilingType[]).map((value) => ({
