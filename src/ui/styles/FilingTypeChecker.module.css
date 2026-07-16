@@ -4,11 +4,14 @@
   margin-bottom: 8px;
 }
 
+.questionArea {
+  margin-bottom: 24px;
+}
+
 .question {
   font-size: var(--font-md);
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 24px;
   line-height: 1.6;
 }
 
@@ -16,11 +19,7 @@
   font-size: var(--font-xs);
   color: var(--text-muted);
   line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-.question + .hint {
-  margin-top: -16px;
+  margin-bottom: 0;
 }
 
 .buttons {

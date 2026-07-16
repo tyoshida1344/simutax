@@ -69,10 +69,12 @@ export function FilingTypeChecker({ onApply, onClose }: Props) {
           <p className={styles.step}>
             質問 {step + 1} / {questions.length}
           </p>
-          <p className={styles.question}>{questions[step].text}</p>
-          {questions[step].hint && (
-            <p className={styles.hint}>{questions[step].hint}</p>
-          )}
+          <div className={styles.questionArea}>
+            <p className={styles.question}>{questions[step].text}</p>
+            {questions[step].hint && (
+              <p className={styles.hint}>{questions[step].hint}</p>
+            )}
+          </div>
           <div className={styles.buttons}>
             <button
               type="button"
