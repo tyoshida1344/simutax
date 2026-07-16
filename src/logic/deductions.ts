@@ -40,21 +40,21 @@ export interface DeductionBreakdown {
   medicalExpenseDeduction: number;
 }
 
-export function calcDeductionsForIncomeTax(
-  totalIncome: number,
-  params: IncomeTaxParams,
+function calcDeductions(
+  basicDeduction: number,
   socialInsuranceAmount: number,
   iDeCo: number,
   smallBusinessMutualAid: number,
   dependentCount: number,
   hasSpouse: boolean,
+  dependentAmount: number,
+  spouseAmount: number,
   lifeInsurance: number,
   medicalExpense: number,
 ): DeductionBreakdown {
-  const basicDeduction = getIncomeTaxBasicDeduction(totalIncome, params.basicDeduction);
   const smallBusinessDeduction = iDeCo + smallBusinessMutualAid;
-  const dependentDeduction = dependentCount * params.dependentDeduction;
-  const spouseDeduction = hasSpouse ? params.spouseDeduction : 0;
+  const dependentDeduction = dependentCount * dependentAmount;
+  const spouseDeduction = hasSpouse ? spouseAmount : 0;
 
   const total =
     basicDeduction +
@@ -77,6 +77,31 @@ export function calcDeductionsForIncomeTax(
   };
 }
 
+export function calcDeductionsForIncomeTax(
+  totalIncome: number,
+  params: IncomeTaxParams,
+  socialInsuranceAmount: number,
+  iDeCo: number,
+  smallBusinessMutualAid: number,
+  dependentCount: number,
+  hasSpouse: boolean,
+  lifeInsurance: number,
+  medicalExpense: number,
+): DeductionBreakdown {
+  return calcDeductions(
+    getIncomeTaxBasicDeduction(totalIncome, params.basicDeduction),
+    socialInsuranceAmount,
+    iDeCo,
+    smallBusinessMutualAid,
+    dependentCount,
+    hasSpouse,
+    params.dependentDeduction,
+    params.spouseDeduction,
+    lifeInsurance,
+    medicalExpense,
+  );
+}
+
 export function calcDeductionsForResidentTax(
   params: ResidentTaxParams,
   socialInsuranceAmount: number,
@@ -87,28 +112,16 @@ export function calcDeductionsForResidentTax(
   lifeInsurance: number,
   medicalExpense: number,
 ): DeductionBreakdown {
-  const basicDeduction = getResidentTaxBasicDeduction(params);
-  const smallBusinessDeduction = iDeCo + smallBusinessMutualAid;
-  const dependentDeduction = dependentCount * params.dependentDeduction;
-  const spouseDeduction = hasSpouse ? params.spouseDeduction : 0;
-
-  const total =
-    basicDeduction +
-    socialInsuranceAmount +
-    smallBusinessDeduction +
-    dependentDeduction +
-    spouseDeduction +
-    lifeInsurance +
-    medicalExpense;
-
-  return {
-    total,
-    basicDeduction,
-    socialInsuranceDeduction: socialInsuranceAmount,
-    smallBusinessDeduction,
-    dependentDeduction,
-    spouseDeduction,
-    lifeInsuranceDeduction: lifeInsurance,
-    medicalExpenseDeduction: medicalExpense,
-  };
+  return calcDeductions(
+    getResidentTaxBasicDeduction(params),
+    socialInsuranceAmount,
+    iDeCo,
+    smallBusinessMutualAid,
+    dependentCount,
+    hasSpouse,
+    params.dependentDeduction,
+    params.spouseDeduction,
+    lifeInsurance,
+    medicalExpense,
+  );
 }
