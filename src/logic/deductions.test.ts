@@ -6,10 +6,9 @@ import {
   calcDeductionsForIncomeTax,
   calcDeductionsForResidentTax,
 } from './deductions';
-import taxParams from '../data/taxParams.2026.json';
-import type { TaxParams } from '../data/types';
+import { taxParams } from '../data/taxParams';
 
-const params = taxParams as unknown as TaxParams;
+const params = taxParams;
 
 describe('getBlueReturnDeduction', () => {
   it('青色65万', () => {
