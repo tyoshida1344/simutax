@@ -22,6 +22,8 @@ export interface IncomeTaxParams {
   basicDeduction: BasicDeductionBracket[];
   roundTaxableIncomeDownTo: number;
   roundTaxAmountDownTo: number;
+  dependentDeduction: number;
+  spouseDeduction: number;
 }
 
 export interface ResidentTaxParams {
@@ -30,6 +32,8 @@ export interface ResidentTaxParams {
   basicDeduction: number;
   roundTaxableIncomeDownTo: number;
   roundTaxAmountDownTo: number;
+  dependentDeduction: number;
+  spouseDeduction: number;
 }
 
 export interface BusinessTaxType {
