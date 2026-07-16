@@ -49,8 +49,7 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
     input.medicalExpenseDeduction,
   );
 
-  const incomeTax = calcIncomeTax(totalIncome - incomeTaxDeductions.total, params.incomeTax);
-  incomeTax.basicDeduction = incomeTaxDeductions.basicDeduction;
+  const incomeTax = calcIncomeTax(totalIncome - incomeTaxDeductions.total, params.incomeTax, incomeTaxDeductions.basicDeduction);
 
   const residentTax = calcResidentTax(totalIncome - residentTaxDeductions.total, params.residentTax);
 
