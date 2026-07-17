@@ -1,0 +1,76 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.backLink {
+  display: inline-block;
+  font-size: var(--font-xs);
+  color: var(--accent);
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: var(--bg-section);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.card:hover {
+  background: var(--accent-light);
+}
+
+.cardTitle {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cardDescription {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}

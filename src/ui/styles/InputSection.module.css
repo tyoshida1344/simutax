@@ -13,8 +13,14 @@
 
 .labelRow {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
+}
+
+.labelWithHelp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .label {

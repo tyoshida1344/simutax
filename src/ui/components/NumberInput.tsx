@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, type ReactNode } from 'react';
 import styles from '../styles/NumberInput.module.css';
 
 interface Props {
@@ -8,9 +8,10 @@ interface Props {
   suffix?: string;
   min?: number;
   max?: number;
+  help?: ReactNode;
 }
 
-export function NumberInput({ label, value, onChange, suffix, min = 0, max }: Props) {
+export function NumberInput({ label, value, onChange, suffix, min = 0, max, help }: Props) {
   const id = useId();
 
   const clamp = (v: number): number => {
@@ -21,7 +22,10 @@ export function NumberInput({ label, value, onChange, suffix, min = 0, max }: Pr
 
   return (
     <div className={styles.field}>
-      <label htmlFor={id} className={styles.label}>{label}</label>
+      <div className={styles.labelRow}>
+        <label htmlFor={id} className={styles.label}>{label}</label>
+        {help}
+      </div>
       <div className={styles.inputRow}>
         <input
           id={id}
