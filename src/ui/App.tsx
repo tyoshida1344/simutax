@@ -5,6 +5,7 @@ import { DetailSettings } from './components/DetailSettings';
 import { DisposableIncome } from './components/DisposableIncome';
 import { BreakdownFlow } from './components/BreakdownFlow';
 import { Disclaimer } from './components/Disclaimer';
+import { IncorporationComparison } from './components/IncorporationComparison';
 import { ArrowDown } from './components/ArrowDown';
 import styles from './styles/App.module.css';
 
@@ -12,6 +13,7 @@ function SimulatorPage({
   input,
   result,
   updateField,
+  params,
 }: ReturnType<typeof useSimulator>) {
   return (
     <>
@@ -28,6 +30,7 @@ function SimulatorPage({
       <ArrowDown size="md" />
       <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} effectiveBurdenRate={result.effectiveBurdenRate} />
       <BreakdownFlow result={result} />
+      <IncorporationComparison input={input} result={result} params={params} />
       <Disclaimer />
     </>
   );

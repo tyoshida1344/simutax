@@ -115,5 +115,68 @@
       },
       "baseDeduction": 430000
     }
+  },
+  "corporateTax": {
+    "brackets": [
+      { "upperLimit": 8000000, "rate": 0.15 },
+      { "upperLimit": null, "rate": 0.232 }
+    ],
+    "localCorporateTaxRate": 0.103,
+    "roundTaxableIncomeDownTo": 1000,
+    "roundTaxAmountDownTo": 100,
+    "sources": [
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5759.htm"
+    ]
+  },
+  "corporateResidentTax": {
+    "taxLevyRate": 0.07,
+    "perCapitaLevy": {
+      "under10m":  { "label": "1,000万円以下",           "amount": 70000 },
+      "under100m": { "label": "1,000万円超〜1億円以下",   "amount": 180000 },
+      "under1b":   { "label": "1億円超〜10億円以下",      "amount": 290000 }
+    },
+    "defaultCapitalRange": "under10m"
+  },
+  "corporateEnterpriseTax": {
+    "brackets": [
+      { "upperLimit": 4000000, "rate": 0.035 },
+      { "upperLimit": 8000000, "rate": 0.053 },
+      { "upperLimit": null,    "rate": 0.070 }
+    ],
+    "specialTaxRate": 0.37,
+    "roundTaxableIncomeDownTo": 1000,
+    "roundTaxAmountDownTo": 100
+  },
+  "employmentIncomeDeduction": {
+    "brackets": [
+      { "upperLimit": 1625000,  "rate": 0,    "base": 650000 },
+      { "upperLimit": 1800000,  "rate": 0.40, "base": -100000 },
+      { "upperLimit": 3600000,  "rate": 0.30, "base": 80000 },
+      { "upperLimit": 6600000,  "rate": 0.20, "base": 440000 },
+      { "upperLimit": 8500000,  "rate": 0.10, "base": 1100000 },
+      { "upperLimit": null,     "rate": 0,    "base": 1950000 }
+    ],
+    "sources": [
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm"
+    ]
+  },
+  "corporateSocialInsurance": {
+    "healthInsurance": {
+      "rate": 0.1000,
+      "maxMonthlyCompensation": 1390000
+    },
+    "nursingCare": {
+      "rate": 0.0160,
+      "minAge": 40,
+      "maxAge": 64
+    },
+    "employeesPension": {
+      "rate": 0.18300,
+      "maxMonthlyCompensation": 650000
+    },
+    "sources": [
+      "https://www.kyoukaikenpo.or.jp/g7/cat330/sb3150/",
+      "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku.html"
+    ]
   }
 }

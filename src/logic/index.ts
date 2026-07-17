@@ -7,6 +7,8 @@ import { calcBusinessTax } from './businessTax';
 import { calcConsumptionTax } from './consumptionTax';
 import { calcSocialInsurance } from './socialInsurance';
 
+export { calcIncorporation } from './incorporation';
+
 export function simulate(input: SimulatorInput, params: TaxParams): SimulatorResult {
   const businessIncome = clampMin(input.revenue - input.expenses, 0);
 
