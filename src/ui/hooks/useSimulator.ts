@@ -59,5 +59,5 @@ export function useSimulator() {
     setInput((prev) => ({ ...prev, [field]: value }));
   };
 
-  return { input, result, updateField, params, incorporationResult };
+  return { input, result, updateField, incorporationResult };
 }
