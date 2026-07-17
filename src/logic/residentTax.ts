@@ -4,6 +4,7 @@ import { roundDownTo, clampMin } from './common';
 export function calcResidentTax(
   incomeAfterDeductions: number,
   params: ResidentTaxParams,
+  basicDeduction: number,
 ): ResidentTaxResult {
   const taxableIncome = roundDownTo(clampMin(incomeAfterDeductions, 0), params.roundTaxableIncomeDownTo);
 
@@ -16,6 +17,6 @@ export function calcResidentTax(
     incomeLevy,
     perCapitaLevy,
     totalResidentTax,
-    basicDeduction: params.basicDeduction,
+    basicDeduction,
   };
 }

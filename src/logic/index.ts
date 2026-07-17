@@ -51,7 +51,7 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
 
   const incomeTax = calcIncomeTax(totalIncome - incomeTaxDeductions.total, params.incomeTax, incomeTaxDeductions.basicDeduction);
 
-  const residentTax = calcResidentTax(totalIncome - residentTaxDeductions.total, params.residentTax);
+  const residentTax = calcResidentTax(totalIncome - residentTaxDeductions.total, params.residentTax, residentTaxDeductions.basicDeduction);
 
   // 事業税は青色申告控除を戻した事業所得で計算
   const businessTax = calcBusinessTax(businessIncome, input.businessType, params.businessTax);
