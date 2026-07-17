@@ -33,6 +33,12 @@ const businessTypeOptions = [
   { value: 'exempt', label: '文筆業・漫画家・音楽家・農業等' },
 ];
 
+const capitalRangeOptions = [
+  { value: 'under10m', label: '1,000万円以下' },
+  { value: 'under100m', label: '1,000万円超〜1億円以下' },
+  { value: 'under1b', label: '1億円超〜10億円以下' },
+];
+
 function AccordionGroup({
   label,
   defaultOpen,
@@ -298,6 +304,50 @@ export function DetailSettings({ input, result, updateField }: Props) {
               result={result.consumptionTax}
               updateField={updateField}
             />
+          </AccordionGroup>
+
+          <AccordionGroup label="法人">
+            <div className={styles.checkboxRow}>
+              <input
+                type="checkbox"
+                id="isIncorporation"
+                checked={input.isIncorporation}
+                onChange={(e) => updateField('isIncorporation', e.target.checked)}
+              />
+              <label htmlFor="isIncorporation" className={styles.checkboxLabel}>
+                法人として計算する
+              </label>
+            </div>
+            {input.isIncorporation && (
+              <>
+                <NumberInput
+                  label="役員報酬（月額）"
+                  value={input.officerCompensation}
+                  onChange={(v) => updateField('officerCompensation', v)}
+                  suffix="円"
+                  max={MAX_AMOUNT}
+                />
+                <NumberInput
+                  label="追加コスト（税理士報酬等・年額）"
+                  value={input.incorporationAdditionalCosts}
+                  onChange={(v) => updateField('incorporationAdditionalCosts', v)}
+                  suffix="円"
+                  max={MAX_AMOUNT}
+                />
+                <div className={styles.field}>
+                  <label className={styles.label} htmlFor="capitalRange">資本金</label>
+                  <select
+                    id="capitalRange"
+                    value={input.capitalRange}
+                    onChange={(e) => updateField('capitalRange', e.target.value)}
+                  >
+                    {capitalRangeOptions.map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            )}
           </AccordionGroup>
         </div>
       )}

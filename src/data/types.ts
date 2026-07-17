@@ -197,6 +197,10 @@ export interface SimulatorInput {
   invoiceRegistered: boolean;
   taxablePurchaseAmount: number;
   selectedConsumptionTaxMethod: ConsumptionTaxMethod | null;
+  isIncorporation: boolean;
+  officerCompensation: number;
+  incorporationAdditionalCosts: number;
+  capitalRange: string;
 }
 
 export interface IncomeTaxResult {

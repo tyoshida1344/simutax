@@ -47,7 +47,6 @@ body {
   margin: 0 auto;
   padding: 24px var(--pad);
   padding-bottom: 80px;
-  overflow-x: hidden;
 }
 
 input[type="number"] {

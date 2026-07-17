@@ -5,7 +5,6 @@ import { DetailSettings } from './components/DetailSettings';
 import { DisposableIncome } from './components/DisposableIncome';
 import { BreakdownFlow } from './components/BreakdownFlow';
 import { Disclaimer } from './components/Disclaimer';
-import { IncorporationComparison } from './components/IncorporationComparison';
 import { ArrowDown } from './components/ArrowDown';
 import styles from './styles/App.module.css';
 
@@ -13,8 +12,23 @@ function SimulatorPage({
   input,
   result,
   updateField,
-  params,
+  incorporationResult,
 }: ReturnType<typeof useSimulator>) {
+  const savingsDeduction = result.savingsDeduction;
+
+  let displayAmount: number;
+  let displayBurdenRate: number;
+
+  if (incorporationResult) {
+    displayAmount = incorporationResult.disposableIncome - savingsDeduction;
+    const incTax = incorporationResult.corporateSide.totalCorporateTax + incorporationResult.individualSide.totalIndividualTax;
+    const incSI = incorporationResult.corporateSide.socialInsurance + incorporationResult.individualSide.socialInsurance;
+    displayBurdenRate = result.revenue > 0 ? (incTax + incSI) / result.revenue : 0;
+  } else {
+    displayAmount = result.disposableIncome;
+    displayBurdenRate = result.effectiveBurdenRate;
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -28,9 +42,8 @@ function SimulatorPage({
         updateField={updateField}
       />
       <ArrowDown size="md" />
-      <DisposableIncome amount={result.disposableIncome} savingsDeduction={result.savingsDeduction} effectiveBurdenRate={result.effectiveBurdenRate} />
-      <BreakdownFlow result={result} />
-      <IncorporationComparison input={input} result={result} params={params} />
+      <DisposableIncome amount={displayAmount} savingsDeduction={savingsDeduction} effectiveBurdenRate={displayBurdenRate} />
+      <BreakdownFlow result={result} incorporationResult={incorporationResult} />
       <Disclaimer />
     </>
   );
