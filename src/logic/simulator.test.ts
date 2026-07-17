@@ -25,6 +25,10 @@ function makeInput(overrides: Partial<SimulatorInput> = {}): SimulatorInput {
     invoiceRegistered: false,
     taxablePurchaseAmount: 0,
     selectedConsumptionTaxMethod: null,
+    isIncorporation: false,
+    officerCompensation: 300000,
+    incorporationAdditionalCosts: 0,
+    capitalRange: 'under10m',
     ...overrides,
   };
 }

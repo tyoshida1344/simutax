@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import type { SimulatorInput, SimulatorResult } from '../../data/types';
-import { simulate } from '../../logic';
+import type { SimulatorInput, SimulatorResult, IncorporationResult } from '../../data/types';
+import { simulate, calcIncorporation } from '../../logic';
 import { taxParams } from '../../data/taxParams';
 
 const params = taxParams;
@@ -24,6 +24,10 @@ const defaultInput: SimulatorInput = {
   invoiceRegistered: false,
   taxablePurchaseAmount: 0,
   selectedConsumptionTaxMethod: null,
+  isIncorporation: false,
+  officerCompensation: 300000,
+  incorporationAdditionalCosts: 0,
+  capitalRange: 'under10m',
 };
 
 export function useSimulator() {
@@ -31,9 +35,29 @@ export function useSimulator() {
 
   const result: SimulatorResult = useMemo(() => simulate(input, params), [input]);
 
+  const incorporationResult: IncorporationResult | null = useMemo(() => {
+    if (!input.isIncorporation) return null;
+    return calcIncorporation(
+      {
+        businessProfit: result.businessIncome,
+        officerCompensation: input.officerCompensation,
+        additionalCosts: input.incorporationAdditionalCosts,
+        capitalRange: input.capitalRange,
+        age: input.age,
+        iDeCoContribution: input.iDeCoContribution,
+        smallBusinessMutualAid: input.smallBusinessMutualAid,
+        dependentCount: input.dependentCount,
+        spouseDeduction: input.spouseDeduction,
+        lifeInsuranceDeduction: input.lifeInsuranceDeduction,
+        medicalExpenseDeduction: input.medicalExpenseDeduction,
+      },
+      params,
+    );
+  }, [input, result.businessIncome, params]);
+
   const updateField = <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => {
     setInput((prev) => ({ ...prev, [field]: value }));
   };
 
-  return { input, result, updateField, params };
+  return { input, result, updateField, incorporationResult };
 }

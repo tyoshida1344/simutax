@@ -100,6 +100,65 @@ export interface ConsumptionTaxParams {
   sources: string[];
 }
 
+export interface CorporateTaxBracket {
+  upperLimit: number | null;
+  rate: number;
+}
+
+export interface CorporateTaxParams {
+  brackets: CorporateTaxBracket[];
+  localCorporateTaxRate: number;
+  roundTaxableIncomeDownTo: number;
+  roundTaxAmountDownTo: number;
+  sources: string[];
+}
+
+export interface PerCapitaLevyOption {
+  label: string;
+  amount: number;
+}
+
+export interface CorporateResidentTaxParams {
+  taxLevyRate: number;
+  perCapitaLevy: Record<string, PerCapitaLevyOption>;
+  defaultCapitalRange: string;
+}
+
+export interface CorporateEnterpriseTaxParams {
+  brackets: CorporateTaxBracket[];
+  specialTaxRate: number;
+  roundTaxableIncomeDownTo: number;
+  roundTaxAmountDownTo: number;
+}
+
+export interface EmploymentIncomeDeductionBracket {
+  upperLimit: number | null;
+  rate: number;
+  base: number;
+}
+
+export interface EmploymentIncomeDeductionParams {
+  brackets: EmploymentIncomeDeductionBracket[];
+  sources: string[];
+}
+
+export interface CorporateSocialInsuranceParams {
+  healthInsurance: {
+    rate: number;
+    maxMonthlyCompensation: number;
+  };
+  nursingCare: {
+    rate: number;
+    minAge: number;
+    maxAge: number;
+  };
+  employeesPension: {
+    rate: number;
+    maxMonthlyCompensation: number;
+  };
+  sources: string[];
+}
+
 export interface TaxParams {
   meta: TaxParamsMeta;
   incomeTax: IncomeTaxParams;
@@ -108,6 +167,11 @@ export interface TaxParams {
   blueReturnDeductions: BlueReturnDeductions;
   consumptionTax: ConsumptionTaxParams;
   socialInsurance: SocialInsuranceParams;
+  corporateTax: CorporateTaxParams;
+  corporateResidentTax: CorporateResidentTaxParams;
+  corporateEnterpriseTax: CorporateEnterpriseTaxParams;
+  employmentIncomeDeduction: EmploymentIncomeDeductionParams;
+  corporateSocialInsurance: CorporateSocialInsuranceParams;
 }
 
 export type FilingType = 'blue65' | 'blue55' | 'blue10' | 'white';
@@ -133,6 +197,10 @@ export interface SimulatorInput {
   invoiceRegistered: boolean;
   taxablePurchaseAmount: number;
   selectedConsumptionTaxMethod: ConsumptionTaxMethod | null;
+  isIncorporation: boolean;
+  officerCompensation: number;
+  incorporationAdditionalCosts: number;
+  capitalRange: string;
 }
 
 export interface IncomeTaxResult {
@@ -213,4 +281,51 @@ export interface SimulatorResult {
   savingsDeduction: number;
   disposableIncome: number;
   effectiveBurdenRate: number;
+}
+
+export interface IncorporationInput extends Pick<SimulatorInput,
+  | 'age'
+  | 'iDeCoContribution'
+  | 'smallBusinessMutualAid'
+  | 'dependentCount'
+  | 'spouseDeduction'
+  | 'lifeInsuranceDeduction'
+  | 'medicalExpenseDeduction'
+> {
+  businessProfit: number;
+  officerCompensation: number;
+  additionalCosts: number;
+  capitalRange: string;
+}
+
+export interface CorporateSideResult {
+  taxableIncome: number;
+  corporateTax: number;
+  localCorporateTax: number;
+  residentTaxLevy: number;
+  residentPerCapita: number;
+  enterpriseTax: number;
+  specialEnterpriseTax: number;
+  socialInsurance: number;
+  additionalCosts: number;
+  totalCorporateTax: number;
+  totalCorporateCost: number;
+}
+
+export interface IndividualSideResult {
+  annualCompensation: number;
+  employmentIncomeDeduction: number;
+  employmentIncome: number;
+  incomeTax: IncomeTaxResult;
+  residentTax: ResidentTaxResult;
+  socialInsurance: number;
+  totalIndividualTax: number;
+  totalIndividualCost: number;
+}
+
+export interface IncorporationResult {
+  corporateSide: CorporateSideResult;
+  individualSide: IndividualSideResult;
+  totalBurden: number;
+  disposableIncome: number;
 }
