@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { SimulatorInput, SimulatorResult } from '../../data/types';
 import { NumberInput } from './NumberInput';
 import { Modal } from './Modal';
@@ -105,7 +105,7 @@ export function DetailSettings({ input, result, updateField }: Props) {
   const [showBusinessTypeInfo, setShowBusinessTypeInfo] = useState(false);
   const [showPurchaseCalculator, setShowPurchaseCalculator] = useState(false);
   const [purchaseBreakdown, setPurchaseBreakdown] = useState(defaultBreakdown);
-  const purchaseTotal = Object.values(purchaseBreakdown).reduce((sum, v) => sum + v, 0);
+  const purchaseTotal = useMemo(() => Object.values(purchaseBreakdown).reduce((sum, v) => sum + v, 0), [purchaseBreakdown]);
 
   return (
     <section className={styles.section}>
