@@ -38,7 +38,10 @@ export function GlossaryPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <Link to="/learn" className={styles.backLink}>← しくみを学ぶに戻る</Link>
+        <nav className={styles.nav}>
+          <Link to="/" className={styles.backLink}>← シミュレータに戻る</Link>
+          <Link to="/learn" className={styles.backLink}>しくみを学ぶ</Link>
+        </nav>
         <h1 className={styles.title}>用語集</h1>
       </header>
 

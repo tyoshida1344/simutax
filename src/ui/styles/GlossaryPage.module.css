@@ -7,12 +7,16 @@
   margin-bottom: 24px;
 }
 
+.nav {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
 .backLink {
-  display: inline-block;
   font-size: var(--font-xs);
   color: var(--accent);
   text-decoration: none;
-  margin-bottom: 16px;
 }
 
 .backLink:hover {

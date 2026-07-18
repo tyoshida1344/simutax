@@ -25,7 +25,10 @@ export function LearnTopicPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <Link to="/learn" className={styles.backLink}>← 一覧に戻る</Link>
+        <nav className={styles.nav}>
+          <Link to="/" className={styles.backLink}>← シミュレータに戻る</Link>
+          <Link to="/learn" className={styles.backLink}>一覧に戻る</Link>
+        </nav>
         <h1 className={styles.title}>{topic.title}</h1>
       </header>
 
