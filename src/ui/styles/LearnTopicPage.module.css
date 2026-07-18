@@ -9,7 +9,8 @@
 
 .nav {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
   margin-bottom: 16px;
 }
 
