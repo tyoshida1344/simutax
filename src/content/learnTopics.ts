@@ -1,13 +1,22 @@
 import type { SimulatorInput, SimulatorResult, TaxParams } from '../data/types';
 import type { StepFlowStep } from '../ui/components/StepFlow';
 
+export interface NoteTable {
+  type: 'table';
+  title: string;
+  headers: string[];
+  rows: string[][];
+}
+
+export type NoteItem = string | NoteTable;
+
 export interface LearnTopic {
   id: string;
   title: string;
   description: string;
   introduction: string;
   getSteps: (input: SimulatorInput, result: SimulatorResult, params: TaxParams) => StepFlowStep[];
-  getNotes: (params: TaxParams) => string[];
+  getNotes: (params: TaxParams) => NoteItem[];
   relatedTerms: string[];
 }
 
@@ -47,12 +56,17 @@ export const learnTopics: LearnTopic[] = [
     ],
     getNotes: (params) => {
       const brackets = params.incomeTax.brackets;
-      const lines = brackets.map((b) => {
-        const upper = b.upperLimit ? `${(b.upperLimit / 10000).toLocaleString()}万円以下` : 'それ以上';
-        return `${upper}: ${(b.rate * 100).toFixed(0)}%`;
-      });
       return [
-        `所得税の税率（${params.meta.eraYear}分）: ${lines.join(' / ')}`,
+        {
+          type: 'table' as const,
+          title: `所得税の速算表（${params.meta.eraYear}分）`,
+          headers: ['課税所得金額', '税率', '控除額'],
+          rows: brackets.map((b) => [
+            b.upperLimit ? `${(b.upperLimit / 10000).toLocaleString()}万円以下` : `${(brackets[brackets.length - 2].upperLimit! / 10000).toLocaleString()}万円超`,
+            `${(b.rate * 100).toFixed(0)}%`,
+            `${b.deduction.toLocaleString()}円`,
+          ]),
+        },
         `復興特別所得税: 所得税額 × ${(params.incomeTax.reconstructionSurtaxRate * 100).toFixed(1)}%（2037年まで）`,
       ];
     },
@@ -170,9 +184,16 @@ export const learnTopics: LearnTopic[] = [
     getNotes: (params) => {
       const ct = params.consumptionTax;
       const years = ct.twentyPercentSpecialEligibleYears;
+      const categories = Object.values(ct.simplifiedCategories);
       return [
         `消費税率: ${(ct.taxRate * 100).toFixed(0)}%`,
         `免税事業者の基準: 基準期間の課税売上高${(ct.taxableThreshold / 10000).toLocaleString()}万円以下`,
+        {
+          type: 'table' as const,
+          title: '簡易課税のみなし仕入率',
+          headers: ['業種区分', 'みなし仕入率'],
+          rows: categories.map((c) => [c.label, `${(c.deemedPurchaseRate * 100).toFixed(0)}%`]),
+        },
         `簡易課税の適用条件: 基準期間の課税売上高${(ct.simplifiedThreshold / 10000).toLocaleString()}万円以下`,
         `2割特例: インボイス登録で新たに課税事業者になった場合に利用可能（${years[0]}〜${years[years.length - 1]}年分）`,
       ];

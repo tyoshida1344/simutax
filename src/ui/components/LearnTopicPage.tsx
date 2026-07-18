@@ -52,9 +52,35 @@ export function LearnTopicPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>ポイント</h2>
           <ul className={styles.notesList}>
-            {notes.map((note, i) => (
-              <li key={i} className={styles.noteItem}>{note}</li>
-            ))}
+            {notes.map((note, i) =>
+              typeof note === 'string' ? (
+                <li key={i} className={styles.noteItem}>{note}</li>
+              ) : (
+                <li key={i} className={styles.noteTableWrapper}>
+                  <div className={styles.noteTableScroll}>
+                    <table className={styles.noteTable}>
+                      <caption className={styles.noteTableTitle}>{note.title}</caption>
+                      <thead>
+                        <tr>
+                          {note.headers.map((h, hi) => (
+                            <th key={hi}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {note.rows.map((row, ri) => (
+                          <tr key={ri}>
+                            {row.map((cell, ci) => (
+                              <td key={ci}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </li>
+              ),
+            )}
           </ul>
         </section>
       )}

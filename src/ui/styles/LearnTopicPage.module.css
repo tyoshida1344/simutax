@@ -91,6 +91,49 @@
   color: var(--text-muted);
 }
 
+.noteTableWrapper {
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+.noteTableTitle {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-align: left;
+  caption-side: top;
+}
+
+.noteTableScroll {
+  overflow-x: auto;
+}
+
+.noteTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.noteTable th,
+.noteTable td {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.noteTable th {
+  background: var(--bg-section);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.noteTable tr:nth-child(even) td {
+  background: var(--bg-section);
+}
+
 .termsList {
   display: flex;
   flex-wrap: wrap;
