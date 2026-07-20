@@ -80,6 +80,10 @@
   color: #ffffff;
 }
 
+.tabActive:hover {
+  color: #ffffff;
+}
+
 .termsList {
   display: flex;
   flex-direction: column;
