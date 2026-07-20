@@ -240,6 +240,61 @@ export const learnTopics: LearnTopic[] = [
     },
     relatedTerms: ['kokumin-kenko-hoken', 'kokumin-nenkin', 'fuka-gendo-gaku'],
   },
+  {
+    id: 'withholding-tax',
+    title: '源泉徴収',
+    description: '報酬から天引きされる所得税の前払い',
+    introduction:
+      '源泉徴収とは、報酬を支払う側（クライアント）が、支払額から所得税分を差し引いて国に納付する仕組みです。フリーランスが受け取る報酬のうち、原稿料・デザイン料・コンサルティング料などの特定の報酬は源泉徴収の対象となります。天引きされた税額は確定申告で精算し、納めすぎた分は還付されます。',
+    getSteps: (_input, result, params) => {
+      const wt = params.withholdingTax;
+      return [
+        {
+          label: '報酬額（税込）',
+          value: result.revenue,
+          connector: { operator: '×', label: `源泉徴収税率${(wt.brackets[0].rate * 100).toFixed(2)}%` },
+        },
+        {
+          label: '源泉徴収税額（天引き額）',
+          connector: { operator: '→', label: 'クライアントが国に納付' },
+        },
+        {
+          label: '確定申告で精算',
+          connector: { operator: '−', label: '年間の所得税額と比較' },
+        },
+        {
+          label: '差額が還付 or 追加納付',
+          highlight: true,
+        },
+      ];
+    },
+    getNotes: (params) => {
+      const wt = params.withholdingTax;
+      return [
+        {
+          type: 'table' as const,
+          title: '報酬に対する源泉徴収税率',
+          headers: ['支払金額', '源泉徴収税額'],
+          rows: wt.brackets.map((b) =>
+            b.upperLimit
+              ? [
+                  `${(b.upperLimit / 10000).toLocaleString()}万円以下`,
+                  `支払金額 × ${(b.rate * 100).toFixed(2)}%`,
+                ]
+              : [
+                  `${(wt.brackets[0].upperLimit! / 10000).toLocaleString()}万円超`,
+                  `(支払金額 − ${(wt.brackets[0].upperLimit! / 10000).toLocaleString()}万円) × ${(b.rate * 100).toFixed(2)}% + ${b.base.toLocaleString()}円`,
+                ],
+          ),
+        },
+        `税率には復興特別所得税（${(wt.reconstructionSurtaxRate * 100).toFixed(1)}%）が含まれている`,
+        '源泉徴収の対象となる報酬: 原稿料、デザイン料、講演料、コンサルティング料、弁護士・税理士等の報酬など',
+        '源泉徴収されない報酬: プログラミング、Web制作、物品販売など（業務委託契約の内容による）',
+        '確定申告で源泉徴収額を申告すると、納めすぎた税金が還付される。経費が多い場合や各種控除を適用する場合は還付になることが多い',
+      ];
+    },
+    relatedTerms: ['gensen-choushu', 'gensen-choushu-hyou', 'kanpu-shinkoku'],
+  },
 ];
 
 export function getTopicById(id: string): LearnTopic | undefined {

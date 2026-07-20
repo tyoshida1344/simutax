@@ -12,7 +12,8 @@ export type GlossaryCategory =
   | 'deduction'
   | 'calculation'
   | 'socialInsurance'
-  | 'consumptionTax';
+  | 'consumptionTax'
+  | 'withholding';
 
 export const categoryLabels: Record<GlossaryCategory, string> = {
   filing: '申告・届出',
@@ -20,6 +21,7 @@ export const categoryLabels: Record<GlossaryCategory, string> = {
   calculation: '税額計算',
   socialInsurance: '社会保険',
   consumptionTax: 'インボイス・消費税',
+  withholding: '源泉徴収',
 };
 
 export const glossaryTerms: GlossaryTerm[] = [
@@ -250,5 +252,32 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition:
       '基準期間の課税売上高が5,000万円以下の事業者が選択できる消費税の計算方法。実際の仕入額の代わりに、業種ごとの「みなし仕入率」を使って消費税額を計算する。事前に届出書の提出が必要。',
     relatedTopicId: 'consumption-tax',
+  },
+  {
+    id: 'gensen-choushu',
+    term: '源泉徴収',
+    reading: 'げんせんちょうしゅう',
+    category: 'withholding',
+    definition:
+      '報酬や給与を支払う側が、支払額から所得税を差し引いて国に納付する仕組み。フリーランスの場合、原稿料・デザイン料・講演料・コンサルティング料などの報酬が対象となる。天引きされた額は確定申告で精算される。',
+    relatedTopicId: 'withholding-tax',
+  },
+  {
+    id: 'gensen-choushu-hyou',
+    term: '源泉徴収税額表',
+    reading: 'げんせんちょうしゅうぜいがくひょう',
+    category: 'withholding',
+    definition:
+      '源泉徴収する税額を求めるための国税庁が公開する表。フリーランスへの報酬は「報酬・料金等」の区分で、1回の支払金額が100万円以下なら10.21%、100万円超の部分は20.42%の税率が適用される。',
+    relatedTopicId: 'withholding-tax',
+  },
+  {
+    id: 'kanpu-shinkoku',
+    term: '還付申告',
+    reading: 'かんぷしんこく',
+    category: 'withholding',
+    definition:
+      '源泉徴収等で納めすぎた税金の還付を受けるための確定申告。フリーランスは経費や各種控除を適用すると、源泉徴収された金額よりも実際の税額が少なくなることが多く、差額が還付される。還付申告は翌年1月1日から5年間提出可能。',
+    relatedTopicId: 'withholding-tax',
   },
 ];

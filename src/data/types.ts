@@ -159,6 +159,18 @@ export interface CorporateSocialInsuranceParams {
   sources: string[];
 }
 
+export interface WithholdingTaxBracket {
+  upperLimit: number | null;
+  rate: number;
+  base: number;
+}
+
+export interface WithholdingTaxParams {
+  brackets: WithholdingTaxBracket[];
+  reconstructionSurtaxRate: number;
+  sources: string[];
+}
+
 export interface TaxParams {
   meta: TaxParamsMeta;
   incomeTax: IncomeTaxParams;
@@ -172,6 +184,7 @@ export interface TaxParams {
   corporateEnterpriseTax: CorporateEnterpriseTaxParams;
   employmentIncomeDeduction: EmploymentIncomeDeductionParams;
   corporateSocialInsurance: CorporateSocialInsuranceParams;
+  withholdingTax: WithholdingTaxParams;
 }
 
 export type FilingType = 'blue65' | 'blue55' | 'blue10' | 'white';

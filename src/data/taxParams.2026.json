@@ -160,6 +160,16 @@
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm"
     ]
   },
+  "withholdingTax": {
+    "brackets": [
+      { "upperLimit": 1000000, "rate": 0.1021, "base": 0 },
+      { "upperLimit": null,    "rate": 0.2042, "base": 102100 }
+    ],
+    "reconstructionSurtaxRate": 0.021,
+    "sources": [
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2795.htm"
+    ]
+  },
   "corporateSocialInsurance": {
     "healthInsurance": {
       "rate": 0.1000,
