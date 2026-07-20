@@ -153,6 +153,35 @@
   text-decoration: underline;
 }
 
+.referencesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referenceItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.referenceLink {
+  font-size: var(--font-xs);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.referenceLink:hover {
+  text-decoration: underline;
+}
+
+.referenceDescription {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
 .simulatorLink {
   display: block;
   text-align: center;

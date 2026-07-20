@@ -98,6 +98,24 @@ export function LearnTopicPage() {
         </section>
       )}
 
+      {topic.references && topic.references.length > 0 && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>公式リンク・届出</h2>
+          <ul className={styles.referencesList}>
+            {topic.references.map((ref, i) => (
+              <li key={i} className={styles.referenceItem}>
+                <a href={ref.url} target="_blank" rel="noopener noreferrer" className={styles.referenceLink}>
+                  {ref.label}
+                </a>
+                {ref.description && (
+                  <span className={styles.referenceDescription}>{ref.description}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <Link to="/" className={styles.simulatorLink}>
         この数字でシミュレーションする →
       </Link>

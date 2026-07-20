@@ -10,6 +10,12 @@ export interface NoteTable {
 
 export type NoteItem = string | NoteTable;
 
+export interface TopicReference {
+  label: string;
+  url: string;
+  description?: string;
+}
+
 export interface LearnTopic {
   id: string;
   title: string;
@@ -17,6 +23,7 @@ export interface LearnTopic {
   introduction: string;
   getSteps: (input: SimulatorInput, result: SimulatorResult, params: TaxParams) => StepFlowStep[];
   getNotes: (params: TaxParams) => NoteItem[];
+  references?: TopicReference[];
   relatedTerms: string[];
 }
 
@@ -70,6 +77,11 @@ export const learnTopics: LearnTopic[] = [
         `復興特別所得税: 所得税額 × ${(params.incomeTax.reconstructionSurtaxRate * 100).toFixed(1)}%（2037年まで）`,
       ];
     },
+    references: [
+      { label: '所得税のしくみ（国税庁）', url: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm' },
+      { label: '確定申告書等作成コーナー', url: 'https://www.keisan.nta.go.jp/kyoutu/ky/sm/top', description: 'e-Taxで確定申告書を作成・提出できる' },
+      { label: '青色申告承認申請書の提出（国税庁）', url: 'https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/shinkoku/annai/09.htm', description: '青色申告を始めるための届出' },
+    ],
     relatedTerms: ['ruishin-kazei', 'kiso-koujo', 'kazei-shotoku', 'fukkou-tokubetsu-zei', 'aoiro-tokubetsu-koujo'],
   },
   {
@@ -105,6 +117,9 @@ export const learnTopics: LearnTopic[] = [
       `均等割: 年額${params.residentTax.perCapitaLevy.toLocaleString()}円（森林環境税を含む）`,
       `基礎控除: ${(params.residentTax.basicDeduction / 10000).toLocaleString()}万円（所得税とは異なり一律）`,
     ],
+    references: [
+      { label: '個人住民税のしくみ（総務省）', url: 'https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html' },
+    ],
     relatedTerms: ['shotokuwari', 'kintouwari', 'kiso-koujo'],
   },
   {
@@ -134,6 +149,9 @@ export const learnTopics: LearnTopic[] = [
       `事業主控除: 年額${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円`,
       `税率: 業種により3%〜5%（大半の業種は5%）`,
       `非課税業種: 文筆業・漫画家・音楽家など`,
+    ],
+    references: [
+      { label: '個人事業税（東京都主税局）', url: 'https://www.tax.metro.tokyo.lg.jp/kazei/kojin_ji.html' },
     ],
     relatedTerms: ['jigyounushi-koujo'],
   },
@@ -198,6 +216,10 @@ export const learnTopics: LearnTopic[] = [
         `2割特例: インボイス登録で新たに課税事業者になった場合に利用可能（${years[0]}〜${years[years.length - 1]}年分）`,
       ];
     },
+    references: [
+      { label: '消費税のしくみ（国税庁）', url: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6505.htm' },
+      { label: '簡易課税制度（国税庁）', url: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6509.htm' },
+    ],
     relatedTerms: ['invoice', 'kijun-kikan', 'minashi-shiirritsu', 'niwari-tokurei', 'kani-kazei'],
   },
   {
@@ -245,6 +267,11 @@ export const learnTopics: LearnTopic[] = [
         '登録の届出は「適格請求書発行事業者の登録申請書」を税務署に提出する（e-Taxでも可能）',
       ];
     },
+    references: [
+      { label: 'インボイス制度の概要（国税庁）', url: 'https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice_about.htm' },
+      { label: '適格請求書発行事業者の登録申請（e-Tax）', url: 'https://www.e-tax.nta.go.jp/invoice/index.htm', description: 'オンラインで登録申請ができる' },
+      { label: '2割特例の概要（国税庁）', url: 'https://www.nta.go.jp/publication/pamph/shohi/kaisei/202308/01.htm', description: '新たに課税事業者になった場合の負担軽減措置' },
+    ],
     relatedTerms: ['invoice', 'kijun-kikan', 'niwari-tokurei', 'kani-kazei', 'tekikaku-seikyusho'],
   },
   {
@@ -285,6 +312,10 @@ export const learnTopics: LearnTopic[] = [
         `介護分は40歳以上65歳未満の場合に加算`,
       ];
     },
+    references: [
+      { label: '国民年金の届出・手続き（日本年金機構）', url: 'https://www.nenkin.go.jp/service/kokunen/kanyu/index.html', description: '加入手続き・保険料の納付方法' },
+      { label: '国民健康保険の届出（各市区町村）', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/index.html', description: '退職後14日以内に届出が必要' },
+    ],
     relatedTerms: ['kokumin-kenko-hoken', 'kokumin-nenkin', 'fuka-gendo-gaku'],
   },
   {
@@ -340,6 +371,10 @@ export const learnTopics: LearnTopic[] = [
         '確定申告で源泉徴収額を申告すると、納めすぎた税金が還付される。経費が多い場合や各種控除を適用する場合は還付になることが多い',
       ];
     },
+    references: [
+      { label: '報酬等に対する源泉徴収（国税庁）', url: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2795.htm' },
+      { label: '源泉徴収税額表（国税庁）', url: 'https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2024/02.htm', description: '報酬・料金等の源泉徴収税額の算出方法' },
+    ],
     relatedTerms: ['gensen-choushu', 'gensen-choushu-hyou', 'kanpu-shinkoku'],
   },
   {
@@ -389,6 +424,12 @@ export const learnTopics: LearnTopic[] = [
         '両制度の併用も可能。合計で年間最大約165万円の所得控除を受けられる',
       ];
     },
+    references: [
+      { label: 'iDeCo公式サイト', url: 'https://www.ideco-koushiki.jp/', description: '加入手続き・金融機関の選び方・運用商品の情報' },
+      { label: 'iDeCo加入の申込み', url: 'https://www.ideco-koushiki.jp/start/', description: '金融機関（運営管理機関）を通じて申込む' },
+      { label: '小規模企業共済（中小機構）', url: 'https://www.smrj.go.jp/kyosai/skyosai/', description: '制度の概要・シミュレーション・加入手続き' },
+      { label: '小規模企業共済の加入申込み', url: 'https://www.smrj.go.jp/kyosai/skyosai/entry/index.html', description: '金融機関の窓口または郵送で申込む' },
+    ],
     relatedTerms: ['ideco', 'shoukibo-kyousai', 'shotoku-koujo-zeigaku-koujo'],
   },
 ];
