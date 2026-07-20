@@ -1,0 +1,177 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.backLink {
+  font-size: var(--font-xs);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.introduction {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.sectionTitle {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.notesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.noteItem {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+
+.noteItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.noteTableWrapper {
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+.noteTableTitle {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-align: left;
+  caption-side: top;
+}
+
+.noteTableScroll {
+  overflow-x: auto;
+}
+
+.noteTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.noteTable th,
+.noteTable td {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.noteTable th {
+  background: var(--bg-section);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.noteTable tr:nth-child(even) td {
+  background: var(--bg-section);
+}
+
+.termsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.termLink {
+  font-size: var(--font-xs);
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.termLink:hover {
+  text-decoration: underline;
+}
+
+.referencesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referenceItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.referenceLink {
+  font-size: var(--font-xs);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.referenceLink:hover {
+  text-decoration: underline;
+}
+
+.referenceDescription {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.simulatorLink {
+  display: block;
+  text-align: center;
+  font-size: var(--font-sm);
+  color: var(--accent);
+  text-decoration: none;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+
+.simulatorLink:hover {
+  text-decoration: underline;
+}

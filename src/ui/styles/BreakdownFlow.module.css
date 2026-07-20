@@ -92,3 +92,25 @@
 .subRowAmount {
   font-variant-numeric: tabular-nums;
 }
+
+.subRowLink {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.subRowLink:hover {
+  text-decoration: underline;
+}
+
+.learnLink {
+  display: block;
+  text-align: center;
+  font-size: var(--font-sm);
+  color: var(--accent);
+  text-decoration: none;
+  padding: 16px 0;
+}
+
+.learnLink:hover {
+  text-decoration: underline;
+}

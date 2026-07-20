@@ -159,6 +159,32 @@ export interface CorporateSocialInsuranceParams {
   sources: string[];
 }
 
+export interface SavingsDeductionParams {
+  iDeCo: {
+    minMonthlyContribution: number;
+    maxMonthlyContribution: number;
+    months: number;
+  };
+  smallBusinessMutualAid: {
+    minMonthlyContribution: number;
+    maxMonthlyContribution: number;
+    months: number;
+  };
+  sources: string[];
+}
+
+export interface WithholdingTaxBracket {
+  upperLimit: number | null;
+  rate: number;
+  base: number;
+}
+
+export interface WithholdingTaxParams {
+  brackets: WithholdingTaxBracket[];
+  reconstructionSurtaxRate: number;
+  sources: string[];
+}
+
 export interface TaxParams {
   meta: TaxParamsMeta;
   incomeTax: IncomeTaxParams;
@@ -172,6 +198,8 @@ export interface TaxParams {
   corporateEnterpriseTax: CorporateEnterpriseTaxParams;
   employmentIncomeDeduction: EmploymentIncomeDeductionParams;
   corporateSocialInsurance: CorporateSocialInsuranceParams;
+  savingsDeduction: SavingsDeductionParams;
+  withholdingTax: WithholdingTaxParams;
 }
 
 export type FilingType = 'blue65' | 'blue55' | 'blue10' | 'white';

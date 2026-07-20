@@ -1,0 +1,151 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.backLink {
+  font-size: var(--font-xs);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.controls {
+  margin-bottom: 24px;
+}
+
+.searchInput {
+  font-family: var(--font);
+  font-size: var(--font-sm);
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.searchInput:focus {
+  border-color: var(--accent);
+}
+
+.categoryTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tab {
+  font-family: var(--font);
+  font-size: var(--font-xs);
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tabActive {
+  composes: tab;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.tabActive:hover {
+  color: #ffffff;
+}
+
+.termsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.empty {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px 0;
+}
+
+.term {
+  padding: 16px;
+  background: var(--bg-section);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+}
+
+.termHighlighted {
+  composes: term;
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.termHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.termName {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.termCategory {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.termDefinition {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.termLink {
+  display: inline-block;
+  font-size: var(--font-xs);
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.termLink:hover {
+  text-decoration: underline;
+}

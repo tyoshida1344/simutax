@@ -1,11 +1,17 @@
+import { useMemo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSimulator } from './hooks/useSimulator';
+import { SimulatorProvider } from './contexts/SimulatorContext';
 import { InputSection } from './components/InputSection';
 import { DetailSettings } from './components/DetailSettings';
 import { DisposableIncome } from './components/DisposableIncome';
 import { BreakdownFlow } from './components/BreakdownFlow';
 import { Disclaimer } from './components/Disclaimer';
 import { ArrowDown } from './components/ArrowDown';
+import { LearnListPage } from './components/LearnListPage';
+import { LearnTopicPage } from './components/LearnTopicPage';
+import { GlossaryPage } from './components/GlossaryPage';
+import { ScrollToTop } from './components/ScrollToTop';
 import styles from './styles/App.module.css';
 
 function SimulatorPage({
@@ -51,10 +57,20 @@ function SimulatorPage({
 
 export function App() {
   const simulator = useSimulator();
+  const contextValue = useMemo(
+    () => ({ input: simulator.input, result: simulator.result }),
+    [simulator.input, simulator.result],
+  );
 
   return (
-    <Routes>
-      <Route path="/" element={<SimulatorPage {...simulator} />} />
-    </Routes>
+    <SimulatorProvider value={contextValue}>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<SimulatorPage {...simulator} />} />
+        <Route path="/learn" element={<LearnListPage />} />
+        <Route path="/learn/:topicId" element={<LearnTopicPage />} />
+        <Route path="/glossary" element={<GlossaryPage />} />
+      </Routes>
+    </SimulatorProvider>
   );
 }
