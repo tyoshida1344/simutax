@@ -40,33 +40,11 @@
   line-height: 1.8;
 }
 
-.exampleHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
 .sectionTitle {
   font-size: var(--font-sm);
   font-weight: 600;
   color: var(--text-secondary);
-}
-
-.sampleBadge {
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-  background: var(--bg-section);
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.liveBadge {
-  font-size: var(--font-xs);
-  color: var(--accent);
-  background: var(--accent-light);
-  padding: 2px 8px;
-  border-radius: 4px;
+  margin-bottom: 12px;
 }
 
 .notesList {

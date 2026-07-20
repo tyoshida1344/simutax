@@ -10,7 +10,7 @@ import styles from '../styles/LearnTopicPage.module.css';
 export function LearnTopicPage() {
   const { topicId } = useParams<{ topicId: string }>();
   const topic = topicId ? getTopicById(topicId) : undefined;
-  const { input, result, isSample } = useSimulatorContext();
+  const { input, result } = useSimulatorContext();
 
   if (!topic) {
     return <Navigate to="/learn" replace />;
@@ -37,14 +37,7 @@ export function LearnTopicPage() {
       </section>
 
       <section className={styles.section}>
-        <div className={styles.exampleHeader}>
-          <h2 className={styles.sectionTitle}>計算の流れ</h2>
-          {isSample ? (
-            <span className={styles.sampleBadge}>サンプル値で計算</span>
-          ) : (
-            <span className={styles.liveBadge}>あなたの入力値で計算</span>
-          )}
-        </div>
+        <h2 className={styles.sectionTitle}>計算の流れ</h2>
         <StepFlow steps={steps} />
       </section>
 

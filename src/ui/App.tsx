@@ -58,8 +58,8 @@ function SimulatorPage({
 export function App() {
   const simulator = useSimulator();
   const contextValue = useMemo(
-    () => ({ input: simulator.input, result: simulator.result, isSample: simulator.isSample }),
-    [simulator.input, simulator.result, simulator.isSample],
+    () => ({ input: simulator.input, result: simulator.result }),
+    [simulator.input, simulator.result],
   );
 
   return (

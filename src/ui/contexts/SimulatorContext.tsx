@@ -33,7 +33,6 @@ const sampleResult = simulate(sampleInput, taxParams);
 interface SimulatorContextValue {
   input: SimulatorInput;
   result: SimulatorResult;
-  isSample: boolean;
 }
 
 const SimulatorContext = createContext<SimulatorContextValue | null>(null);
@@ -42,5 +41,5 @@ export const SimulatorProvider = SimulatorContext.Provider;
 
 export function useSimulatorContext() {
   const ctx = useContext(SimulatorContext);
-  return ctx ?? { input: sampleInput, result: sampleResult, isSample: true };
+  return ctx ?? { input: sampleInput, result: sampleResult };
 }
