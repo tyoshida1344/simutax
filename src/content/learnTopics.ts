@@ -127,7 +127,7 @@ export const learnTopics: LearnTopic[] = [
     title: '個人事業税',
     description: '一定の事業を営む個人にかかる地方税',
     introduction:
-      '個人事業税は、法律で定められた業種の事業を営む個人事業主にかかる地方税です。事業所得から290万円の事業主控除を差し引いた金額に、業種ごとの税率（3%〜5%）を掛けて計算します。事業所得が290万円以下なら課税されません。',
+      '個人事業税は、法律で定められた業種の事業を営む個人事業主にかかる地方税です。青色申告特別控除を適用する前の事業所得から290万円の事業主控除を差し引いた金額に、業種ごとの税率（3%〜5%）を掛けて計算します。事業所得が290万円以下なら課税されません。',
     getSteps: (_input, result, _params) => [
       {
         label: '事業所得',
@@ -271,7 +271,7 @@ export const learnTopics: LearnTopic[] = [
             ['2割特例の利用', `可能（${years[years.length - 1]}年分まで）`, '−'],
           ],
         },
-        `登録した場合でも、2割特例を使えば売上税額の2割の納付で済む（${years[0]}〜${years[years.length - 1]}年分）。売上500万円なら年間約9万円の負担`,
+        `登録した場合でも、2割特例を使えば売上税額の2割の納付で済む（${years[0]}〜${years[years.length - 1]}年分）。売上500万円（税込）なら年間約9万円の負担`,
         '登録の届出は「適格請求書発行事業者の登録申請書」を税務署に提出する（e-Taxでも可能）',
       ];
     },
@@ -332,12 +332,11 @@ export const learnTopics: LearnTopic[] = [
     description: '報酬から天引きされる所得税の前払い',
     introduction:
       '源泉徴収とは、報酬を支払う側（クライアント）が、支払額から所得税分を差し引いて国に納付する仕組みです。フリーランスが受け取る報酬のうち、原稿料・デザイン料・コンサルティング料などの特定の報酬は源泉徴収の対象となります。天引きされた税額は確定申告で精算し、納めすぎた分は還付されます。',
-    getSteps: (_input, result, params) => {
+    getSteps: (_input, _result, params) => {
       const wt = params.withholdingTax;
       return [
         {
-          label: '報酬額（税込）',
-          value: result.revenue,
+          label: '報酬額（1回の支払い）',
           connector: { operator: '×', label: `源泉徴収税率${(wt.brackets[0].rate * 100).toFixed(2)}%` },
         },
         {
@@ -418,11 +417,11 @@ export const learnTopics: LearnTopic[] = [
           headers: ['', 'iDeCo', '小規模企業共済'],
           rows: [
             ['掛金上限', `月額${idecoMax.toLocaleString()}円`, `月額${sbMax.toLocaleString()}円`],
-            ['掛金下限', `月額${(5000).toLocaleString()}円`, `月額${sbMin.toLocaleString()}円`],
+            ['掛金下限', `月額${sd.iDeCo.minMonthlyContribution.toLocaleString()}円`, `月額${sbMin.toLocaleString()}円`],
             ['年間最大控除額', `${(idecoMax * sd.iDeCo.months).toLocaleString()}円`, `${(sbMax * sd.smallBusinessMutualAid.months).toLocaleString()}円`],
             ['受取時期', '原則60歳以降', '廃業・退職時'],
             ['中途解約', '原則不可', '可能（元本割れあり）'],
-            ['運用', '自分で運用商品を選択', '機構が運用（予定利率1.0%）'],
+            ['運用', '自分で運用商品を選択', '機構が運用（予定利率は変動あり）'],
             ['所得控除の種類', '小規模企業共済等掛金控除', '小規模企業共済等掛金控除'],
           ],
         },

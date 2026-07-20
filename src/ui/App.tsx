@@ -11,6 +11,7 @@ import { ArrowDown } from './components/ArrowDown';
 import { LearnListPage } from './components/LearnListPage';
 import { LearnTopicPage } from './components/LearnTopicPage';
 import { GlossaryPage } from './components/GlossaryPage';
+import { ScrollToTop } from './components/ScrollToTop';
 import styles from './styles/App.module.css';
 
 function SimulatorPage({
@@ -63,6 +64,7 @@ export function App() {
 
   return (
     <SimulatorProvider value={contextValue}>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<SimulatorPage {...simulator} />} />
         <Route path="/learn" element={<LearnListPage />} />

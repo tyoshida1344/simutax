@@ -166,7 +166,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     reading: 'きんとうわり',
     category: 'calculation',
     definition:
-      '住民税のうち、所得の金額に関係なく定額で課される部分。市区町村民税と道府県民税の合計で年額5,000円（森林環境税を含む）。',
+      '住民税のうち、所得の金額に関係なく定額で課される部分。市区町村民税と道府県民税の合計に森林環境税を加えた額が課される。',
     relatedTopicId: 'resident-tax',
   },
   {
@@ -283,7 +283,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     reading: 'げんせんちょうしゅうぜいがくひょう',
     category: 'withholding',
     definition:
-      '源泉徴収する税額を求めるための国税庁が公開する表。フリーランスへの報酬は「報酬・料金等」の区分で、1回の支払金額が100万円以下なら10.21%、100万円超の部分は20.42%の税率が適用される。',
+      '源泉徴収する税額を求めるために国税庁が公開している表。フリーランスへの報酬は「報酬・料金等」の区分で、1回の支払金額が100万円以下なら10.21%、100万円超の部分は20.42%の税率が適用される。',
     relatedTopicId: 'withholding-tax',
   },
   {

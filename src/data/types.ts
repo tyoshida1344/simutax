@@ -161,6 +161,7 @@ export interface CorporateSocialInsuranceParams {
 
 export interface SavingsDeductionParams {
   iDeCo: {
+    minMonthlyContribution: number;
     maxMonthlyContribution: number;
     months: number;
   };

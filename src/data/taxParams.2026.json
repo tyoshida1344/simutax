@@ -162,6 +162,7 @@
   },
   "savingsDeduction": {
     "iDeCo": {
+      "minMonthlyContribution": 5000,
       "maxMonthlyContribution": 68000,
       "months": 12
     },
