@@ -1,5 +1,4 @@
 import type { TaxParams } from '../data/types';
-import type { FlowChartData } from '../ui/components/FlowChart';
 
 export interface NoteTable {
   type: 'table';
@@ -21,7 +20,7 @@ export interface LearnTopic {
   title: string;
   description: string;
   introduction: string;
-  getFlowChart: (params: TaxParams) => FlowChartData;
+  getFormula: (params: TaxParams) => string[];
   getNotes: (params: TaxParams) => NoteItem[];
   references?: TopicReference[];
   relatedTerms: string[];
@@ -34,21 +33,9 @@ export const learnTopics: LearnTopic[] = [
     description: 'フリーランスの所得にかかる国税',
     introduction:
       '所得税は、1年間の所得（もうけ）に対してかかる国税です。所得が多いほど税率が上がる「累進課税」方式で、税率は5%〜45%の7段階。東日本大震災の復興財源として、所得税額の2.1%が復興特別所得税として上乗せされます。',
-    getFlowChart: () => ({
-      nodes: [
-        { id: 'revenue', label: '年間売上' },
-        { id: 'businessIncome', label: '事業所得' },
-        { id: 'totalIncome', label: '所得金額' },
-        { id: 'taxableIncome', label: '課税所得金額' },
-        { id: 'incomeTax', label: '所得税＋復興特別所得税', type: 'result' },
-      ],
-      edges: [
-        { from: 'revenue', to: 'businessIncome', label: '−必要経費' },
-        { from: 'businessIncome', to: 'totalIncome', label: '−青色申告特別控除' },
-        { from: 'totalIncome', to: 'taxableIncome', label: '−所得控除' },
-        { from: 'taxableIncome', to: 'incomeTax', label: '×税率−控除額' },
-      ],
-    }),
+    getFormula: () => [
+      '所得税 =（年間売上 − 必要経費 − 青色申告特別控除 − 所得控除）× 税率 − 控除額',
+    ],
     getNotes: (params) => {
       const brackets = params.incomeTax.brackets;
       return [
@@ -78,19 +65,9 @@ export const learnTopics: LearnTopic[] = [
     description: '都道府県・市区町村に納める地方税',
     introduction:
       '住民税は、前年の所得をもとに都道府県と市区町村に納める地方税です。所得に応じた「所得割」（税率10%）と、所得に関係なく定額の「均等割」の合計で算出されます。所得税とは基礎控除額などが異なる点に注意が必要です。',
-    getFlowChart: (params) => ({
-      nodes: [
-        { id: 'totalIncome', label: '所得金額' },
-        { id: 'taxableIncome', label: '課税所得金額' },
-        { id: 'incomeLevy', label: '所得割' },
-        { id: 'residentTax', label: '住民税', type: 'result' },
-      ],
-      edges: [
-        { from: 'totalIncome', to: 'taxableIncome', label: '−所得控除（住民税用）' },
-        { from: 'taxableIncome', to: 'incomeLevy', label: `×税率${(params.residentTax.incomeRate * 100).toFixed(0)}%` },
-        { from: 'incomeLevy', to: 'residentTax', label: '+均等割' },
-      ],
-    }),
+    getFormula: (params) => [
+      `住民税 =（所得金額 − 所得控除）× ${(params.residentTax.incomeRate * 100).toFixed(0)}% + 均等割`,
+    ],
     getNotes: (params) => [
       `所得割の税率: ${(params.residentTax.incomeRate * 100).toFixed(0)}%（市区町村6% + 道府県4%）`,
       `均等割: 年額${params.residentTax.perCapitaLevy.toLocaleString()}円（森林環境税を含む）`,
@@ -107,17 +84,9 @@ export const learnTopics: LearnTopic[] = [
     description: '一定の事業を営む個人にかかる地方税',
     introduction:
       '個人事業税は、法律で定められた業種の事業を営む個人事業主にかかる地方税です。青色申告特別控除を適用する前の事業所得から290万円の事業主控除を差し引いた金額に、業種ごとの税率（3%〜5%）を掛けて計算します。事業所得が290万円以下なら課税されません。',
-    getFlowChart: (params) => ({
-      nodes: [
-        { id: 'businessIncome', label: '事業所得' },
-        { id: 'taxBase', label: '課税標準' },
-        { id: 'businessTax', label: '個人事業税', type: 'result' },
-      ],
-      edges: [
-        { from: 'businessIncome', to: 'taxBase', label: `−事業主控除${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円` },
-        { from: 'taxBase', to: 'businessTax', label: '×税率（業種により3〜5%）' },
-      ],
-    }),
+    getFormula: (params) => [
+      `個人事業税 =（事業所得 − 事業主控除${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円）× 税率`,
+    ],
     getNotes: (params) => [
       `事業主控除: 年額${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円`,
       `税率: 業種により3%〜5%（大半の業種は5%）`,
@@ -134,25 +103,11 @@ export const learnTopics: LearnTopic[] = [
     description: '商品・サービスの販売にかかる間接税',
     introduction:
       '消費税は、商品やサービスの販売時にかかる間接税です。フリーランスが課税事業者の場合、受け取った消費税から仕入れ等で支払った消費税を差し引いて納付します。計算方法は原則課税・簡易課税・2割特例の3つから選べます。',
-    getFlowChart: () => ({
-      nodes: [
-        { id: 'salesTax', label: '売上にかかる消費税' },
-        { id: 'choice', label: '計算方式を選択', type: 'decision' },
-        { id: 'standard', label: '原則課税' },
-        { id: 'simplified', label: '簡易課税' },
-        { id: 'special20', label: '2割特例' },
-        { id: 'applied', label: '納付する消費税', type: 'result' },
-      ],
-      edges: [
-        { from: 'salesTax', to: 'choice', label: '−仕入にかかる消費税' },
-        { from: 'choice', to: 'standard' },
-        { from: 'choice', to: 'simplified' },
-        { from: 'choice', to: 'special20' },
-        { from: 'standard', to: 'applied' },
-        { from: 'simplified', to: 'applied' },
-        { from: 'special20', to: 'applied' },
-      ],
-    }),
+    getFormula: () => [
+      '原則課税 = 売上にかかる消費税 − 仕入にかかる消費税',
+      '簡易課税 = 売上にかかる消費税 ×（1 − みなし仕入率）',
+      '2割特例 = 売上にかかる消費税 × 20%',
+    ],
     getNotes: (params) => {
       const ct = params.consumptionTax;
       const years = ct.twentyPercentSpecialEligibleYears;
@@ -182,23 +137,9 @@ export const learnTopics: LearnTopic[] = [
     description: '適格請求書による仕入税額控除の仕組み',
     introduction:
       'インボイス制度（適格請求書等保存方式）は、消費税の仕入税額控除を受けるために「適格請求書（インボイス）」の保存を求める制度です。2023年10月に開始されました。登録するかどうかは「取引先が誰か」で判断します。取引先が企業（BtoB）なら、登録しないと取引先が消費税を余分に負担することになり、値下げや取引解消を求められるリスクがあります。取引先が一般消費者（BtoC）中心なら、登録しなくても実務上の影響は小さいです。',
-    getFlowChart: () => ({
-      nodes: [
-        { id: 'question', label: '取引先のタイプは？', type: 'decision' },
-        { id: 'btob', label: '企業中心（BtoB）' },
-        { id: 'btoc', label: '消費者中心（BtoC）' },
-        { id: 'register', label: 'インボイス登録する' },
-        { id: 'noRegister', label: '登録しなくてよい', type: 'result' },
-        { id: 'special', label: '2割特例で負担を抑える', type: 'result' },
-      ],
-      edges: [
-        { from: 'question', to: 'btob', label: '企業が多い' },
-        { from: 'question', to: 'btoc', label: '消費者が多い' },
-        { from: 'btob', to: 'register' },
-        { from: 'btoc', to: 'noRegister' },
-        { from: 'register', to: 'special' },
-      ],
-    }),
+    getFormula: () => [
+      '納付税額 = 売上にかかる消費税 × 20%（2割特例利用時）',
+    ],
     getNotes: (params) => {
       const ct = params.consumptionTax;
       const years = ct.twentyPercentSpecialEligibleYears;
@@ -241,19 +182,10 @@ export const learnTopics: LearnTopic[] = [
     description: 'フリーランスが加入する公的保険制度',
     introduction:
       'フリーランスは国民健康保険と国民年金に加入します。国民年金は定額の保険料を毎月納付します。国民健康保険は前年の所得をもとに市区町村が算定し、医療分・後期高齢者支援金分・介護分の3区分で計算されます。',
-    getFlowChart: (params) => ({
-      nodes: [
-        { id: 'income', label: '所得金額' },
-        { id: 'base', label: '算定基礎額' },
-        { id: 'nhi', label: '国民健康保険料' },
-        { id: 'total', label: '社会保険料', type: 'result' },
-      ],
-      edges: [
-        { from: 'income', to: 'base', label: `−基礎控除${(params.socialInsurance.nationalHealthInsurance.baseDeduction / 10000).toFixed(0)}万円` },
-        { from: 'base', to: 'nhi', label: '所得割+均等割+世帯割' },
-        { from: 'nhi', to: 'total', label: '+国民年金（定額）' },
-      ],
-    }),
+    getFormula: (params) => [
+      '社会保険料 = 国民健康保険料 + 国民年金（定額）',
+      `国保 =（所得 − 基礎控除${(params.socialInsurance.nationalHealthInsurance.baseDeduction / 10000).toFixed(0)}万円）× 所得割率 + 均等割 + 世帯割`,
+    ],
     getNotes: (params) => {
       const nhi = params.socialInsurance.nationalHealthInsurance.models['standard'];
       return [
@@ -274,19 +206,9 @@ export const learnTopics: LearnTopic[] = [
     description: '報酬から天引きされる所得税の前払い',
     introduction:
       '源泉徴収とは、報酬を支払う側（クライアント）が、支払額から所得税分を差し引いて国に納付する仕組みです。フリーランスが受け取る報酬のうち、原稿料・デザイン料・コンサルティング料などの特定の報酬は源泉徴収の対象となります。天引きされた税額は確定申告で精算し、納めすぎた分は還付されます。',
-    getFlowChart: () => ({
-      nodes: [
-        { id: 'payment', label: '報酬額（1回の支払い）' },
-        { id: 'withheld', label: '源泉徴収税額（天引き）' },
-        { id: 'filing', label: '確定申告で精算' },
-        { id: 'refund', label: '差額が還付 or 追加納付', type: 'result' },
-      ],
-      edges: [
-        { from: 'payment', to: 'withheld', label: '×源泉徴収税率' },
-        { from: 'withheld', to: 'filing', label: 'クライアントが国に納付' },
-        { from: 'filing', to: 'refund', label: '年間の所得税額と比較' },
-      ],
-    }),
+    getFormula: () => [
+      '源泉徴収税額 = 報酬額 × 源泉徴収税率',
+    ],
     getNotes: (params) => {
       const wt = params.withholdingTax;
       return [
@@ -324,17 +246,9 @@ export const learnTopics: LearnTopic[] = [
     description: '掛金が全額所得控除になる積立制度',
     introduction:
       'iDeCo（個人型確定拠出年金）と小規模企業共済は、フリーランスが利用できる代表的な積立制度です。どちらも掛金の全額が所得控除の対象となるため、節税しながら将来に備えることができます。確定申告では「小規模企業共済等掛金控除」として所得から差し引かれ、課税所得が減ることで所得税・住民税の両方が軽減されます。',
-    getFlowChart: () => ({
-      nodes: [
-        { id: 'income', label: '所得金額' },
-        { id: 'reduced', label: '課税所得が減少' },
-        { id: 'savings', label: '所得税・住民税が軽減', type: 'result' },
-      ],
-      edges: [
-        { from: 'income', to: 'reduced', label: '−掛金（全額所得控除）' },
-        { from: 'reduced', to: 'savings', label: '×税率' },
-      ],
-    }),
+    getFormula: () => [
+      '節税額 = 掛金 ×（所得税率 + 住民税率10%）',
+    ],
     getNotes: (params) => {
       const sd = params.savingsDeduction;
       const idecoMax = sd.iDeCo.maxMonthlyContribution;

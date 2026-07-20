@@ -2,7 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { getTopicById } from '../../content/learnTopics';
 import { glossaryTerms } from '../../content/glossary';
 import { taxParams } from '../../data/taxParams';
-import { FlowChart } from './FlowChart';
+import { CalcFormula } from './CalcFormula';
 import { Disclaimer } from './Disclaimer';
 import styles from '../styles/LearnTopicPage.module.css';
 
@@ -14,7 +14,7 @@ export function LearnTopicPage() {
     return <Navigate to="/learn" replace />;
   }
 
-  const flowChart = topic.getFlowChart(taxParams);
+  const formulas = topic.getFormula(taxParams);
   const notes = topic.getNotes(taxParams);
   const related = topic.relatedTerms
     .map((id) => glossaryTerms.find((t) => t.id === id))
@@ -35,8 +35,8 @@ export function LearnTopicPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>計算の流れ</h2>
-        <FlowChart data={flowChart} />
+        <h2 className={styles.sectionTitle}>計算式</h2>
+        <CalcFormula formulas={formulas} />
       </section>
 
       {notes.length > 0 && (
