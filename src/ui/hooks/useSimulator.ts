@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import type { SimulatorInput, SimulatorResult, IncorporationResult } from '../../data/types';
 import { simulate, calcIncorporation } from '../../logic';
 import { taxParams } from '../../data/taxParams';
@@ -32,6 +32,7 @@ const defaultInput: SimulatorInput = {
 
 export function useSimulator() {
   const [input, setInput] = useState<SimulatorInput>(defaultInput);
+  const userModified = useRef(false);
 
   const result: SimulatorResult = useMemo(() => simulate(input, params), [input]);
 
@@ -56,8 +57,11 @@ export function useSimulator() {
   }, [input, result.businessIncome, params]);
 
   const updateField = <K extends keyof SimulatorInput>(field: K, value: SimulatorInput[K]) => {
+    userModified.current = true;
     setInput((prev) => ({ ...prev, [field]: value }));
   };
 
-  return { input, result, updateField, incorporationResult };
+  const isSample = !userModified.current;
+
+  return { input, result, updateField, incorporationResult, isSample };
 }
