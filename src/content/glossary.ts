@@ -32,6 +32,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '1月1日から12月31日までの1年間の所得と税額を計算し、翌年の2月16日〜3月15日に税務署へ申告・納税する手続き。フリーランスは原則として毎年行う必要がある。',
+    relatedTopicId: 'income-tax',
   },
   {
     id: 'aoiro-shinkoku',
@@ -49,6 +50,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '国税庁が提供するオンライン申告・納税システム。e-Taxで確定申告を行うと、青色申告特別控除が55万円から65万円に引き上げられる。マイナンバーカードとICカードリーダー（またはスマートフォン）が必要。',
+    relatedTopicId: 'income-tax',
   },
   {
     id: 'aoiro-shinsei',
@@ -57,6 +59,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '青色申告を行うために税務署に提出する届出書。開業から2か月以内、または適用を受けたい年の3月15日までに提出する必要がある。',
+    relatedTopicId: 'income-tax',
   },
   {
     id: 'kiso-koujo',
@@ -83,6 +86,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '所得控除は課税所得を計算する前に所得金額から差し引くもの（基礎控除・社会保険料控除など）。税額控除は算出された税額から直接差し引くもの（住宅ローン控除など）。所得控除は税率分だけ税額が減るのに対し、税額控除は金額がそのまま税額から減る。',
+    relatedTopicId: 'income-tax',
   },
   {
     id: 'shoukibo-kyousai',
@@ -91,6 +95,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '個人事業主や小規模企業の経営者のための退職金制度。月額1,000円〜70,000円の掛金を積み立て、廃業・退職時に共済金を受け取れる。掛金は全額が所得控除の対象となるため、節税効果が高い。',
+    relatedTopicId: 'savings-deduction',
   },
   {
     id: 'ideco',
@@ -99,6 +104,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '自分で掛金を拠出し、運用方法を選んで老後資金を準備する私的年金制度。フリーランスは月額最大68,000円まで拠出でき、掛金は全額が所得控除の対象。運用益も非課税で、受取時にも税制優遇がある。',
+    relatedTopicId: 'savings-deduction',
   },
   {
     id: 'fuyou-koujo',
@@ -215,7 +221,16 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'consumptionTax',
     definition:
       '適格請求書等保存方式。登録を受けた事業者（適格請求書発行事業者）のみが、仕入税額控除の対象となる請求書（インボイス）を発行できる制度。登録すると課税事業者となり、消費税の申告・納税が必要になる。',
-    relatedTopicId: 'consumption-tax',
+    relatedTopicId: 'invoice',
+  },
+  {
+    id: 'tekikaku-seikyusho',
+    term: '適格請求書',
+    reading: 'てきかくせいきゅうしょ',
+    category: 'consumptionTax',
+    definition:
+      'インボイス制度で定められた記載事項を満たす請求書。登録番号・税率ごとの消費税額・適用税率などの記載が必要。適格請求書発行事業者として登録した事業者のみが発行できる。',
+    relatedTopicId: 'invoice',
   },
   {
     id: 'kijun-kikan',

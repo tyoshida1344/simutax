@@ -160,6 +160,21 @@
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm"
     ]
   },
+  "savingsDeduction": {
+    "iDeCo": {
+      "maxMonthlyContribution": 68000,
+      "months": 12
+    },
+    "smallBusinessMutualAid": {
+      "minMonthlyContribution": 1000,
+      "maxMonthlyContribution": 70000,
+      "months": 12
+    },
+    "sources": [
+      "https://www.ideco-koushiki.jp/guide/",
+      "https://www.smrj.go.jp/kyosai/skyosai/about/index.html"
+    ]
+  },
   "withholdingTax": {
     "brackets": [
       { "upperLimit": 1000000, "rate": 0.1021, "base": 0 },

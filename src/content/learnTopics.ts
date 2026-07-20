@@ -201,6 +201,53 @@ export const learnTopics: LearnTopic[] = [
     relatedTerms: ['invoice', 'kijun-kikan', 'minashi-shiirritsu', 'niwari-tokurei', 'kani-kazei'],
   },
   {
+    id: 'invoice',
+    title: 'インボイス制度',
+    description: '適格請求書による仕入税額控除の仕組み',
+    introduction:
+      'インボイス制度（適格請求書等保存方式）は、消費税の仕入税額控除を受けるために「適格請求書（インボイス）」の保存を求める制度です。2023年10月に開始されました。フリーランスにとっては、インボイス発行事業者として登録するかどうかが大きな判断ポイントになります。',
+    getSteps: (_input, _result, _params) => [
+      {
+        label: '免税事業者（売上1,000万円以下）',
+        connector: { operator: '→', label: '登録するかどうかを判断' },
+      },
+      {
+        label: 'インボイス発行事業者として登録',
+        connector: { operator: '→', label: '課税事業者になる' },
+      },
+      {
+        label: '消費税の申告・納付が必要に',
+        connector: { operator: '→', label: '計算方法を選択' },
+      },
+      {
+        label: '原則課税 / 簡易課税 / 2割特例',
+        highlight: true,
+      },
+    ],
+    getNotes: (params) => {
+      const ct = params.consumptionTax;
+      const years = ct.twentyPercentSpecialEligibleYears;
+      return [
+        {
+          type: 'table' as const,
+          title: '登録する場合・しない場合の比較',
+          headers: ['', '登録する', '登録しない'],
+          rows: [
+            ['消費税の納付', '必要', '不要'],
+            ['インボイスの発行', 'できる', 'できない'],
+            ['取引先の仕入税額控除', '全額控除可能', '控除不可（経過措置あり）'],
+            ['2割特例の利用', `可能（${years[years.length - 1]}年分まで）`, '−'],
+          ],
+        },
+        '登録していない事業者からの仕入れは、取引先が仕入税額控除を受けられないため、取引条件に影響する可能性がある',
+        `免税事業者がインボイス登録した場合、2割特例を使えば売上税額の2割の納付で済む（${years[0]}〜${years[years.length - 1]}年分）`,
+        '登録は任意。取引先が一般消費者中心（BtoC）の場合は、登録しなくても影響が小さいことが多い',
+        '登録の届出は「適格請求書発行事業者の登録申請書」を税務署に提出する（e-Taxでも可能）',
+      ];
+    },
+    relatedTerms: ['invoice', 'kijun-kikan', 'niwari-tokurei', 'kani-kazei', 'tekikaku-seikyusho'],
+  },
+  {
     id: 'social-insurance',
     title: '国保・国民年金',
     description: 'フリーランスが加入する公的保険制度',
@@ -294,6 +341,55 @@ export const learnTopics: LearnTopic[] = [
       ];
     },
     relatedTerms: ['gensen-choushu', 'gensen-choushu-hyou', 'kanpu-shinkoku'],
+  },
+  {
+    id: 'savings-deduction',
+    title: 'iDeCo・小規模企業共済',
+    description: '掛金が全額所得控除になる積立制度',
+    introduction:
+      'iDeCo（個人型確定拠出年金）と小規模企業共済は、フリーランスが利用できる代表的な積立制度です。どちらも掛金の全額が所得控除の対象となるため、節税しながら将来に備えることができます。確定申告では「小規模企業共済等掛金控除」として所得から差し引かれ、課税所得が減ることで所得税・住民税の両方が軽減されます。',
+    getSteps: (_input, result, _params) => [
+      {
+        label: '所得金額',
+        value: result.totalIncome,
+        connector: { operator: '−', label: '掛金（全額が所得控除）' },
+      },
+      {
+        label: '課税所得が減少',
+        connector: { operator: '→', label: '税率を掛ける' },
+      },
+      {
+        label: '所得税・住民税が軽減',
+        highlight: true,
+      },
+    ],
+    getNotes: (params) => {
+      const sd = params.savingsDeduction;
+      const idecoMax = sd.iDeCo.maxMonthlyContribution;
+      const sbMax = sd.smallBusinessMutualAid.maxMonthlyContribution;
+      const sbMin = sd.smallBusinessMutualAid.minMonthlyContribution;
+      return [
+        {
+          type: 'table' as const,
+          title: 'iDeCoと小規模企業共済の比較',
+          headers: ['', 'iDeCo', '小規模企業共済'],
+          rows: [
+            ['掛金上限', `月額${idecoMax.toLocaleString()}円`, `月額${sbMax.toLocaleString()}円`],
+            ['掛金下限', `月額${(5000).toLocaleString()}円`, `月額${sbMin.toLocaleString()}円`],
+            ['年間最大控除額', `${(idecoMax * sd.iDeCo.months).toLocaleString()}円`, `${(sbMax * sd.smallBusinessMutualAid.months).toLocaleString()}円`],
+            ['受取時期', '原則60歳以降', '廃業・退職時'],
+            ['中途解約', '原則不可', '可能（元本割れあり）'],
+            ['運用', '自分で運用商品を選択', '機構が運用（予定利率1.0%）'],
+            ['所得控除の種類', '小規模企業共済等掛金控除', '小規模企業共済等掛金控除'],
+          ],
+        },
+        '掛金は全額が「小規模企業共済等掛金控除」として所得から差し引かれる（社会保険料控除とは別枠）',
+        '節税額の目安: 掛金 × （所得税率 + 住民税率10%）。課税所得が高いほど節税効果が大きい',
+        'iDeCoは原則60歳まで引き出せないため、直近で資金が必要な場合は小規模企業共済が柔軟',
+        '両制度の併用も可能。合計で年間最大約165万円の所得控除を受けられる',
+      ];
+    },
+    relatedTerms: ['ideco', 'shoukibo-kyousai', 'shotoku-koujo-zeigaku-koujo'],
   },
 ];
 

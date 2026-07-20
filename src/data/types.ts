@@ -159,6 +159,19 @@ export interface CorporateSocialInsuranceParams {
   sources: string[];
 }
 
+export interface SavingsDeductionParams {
+  iDeCo: {
+    maxMonthlyContribution: number;
+    months: number;
+  };
+  smallBusinessMutualAid: {
+    minMonthlyContribution: number;
+    maxMonthlyContribution: number;
+    months: number;
+  };
+  sources: string[];
+}
+
 export interface WithholdingTaxBracket {
   upperLimit: number | null;
   rate: number;
@@ -184,6 +197,7 @@ export interface TaxParams {
   corporateEnterpriseTax: CorporateEnterpriseTaxParams;
   employmentIncomeDeduction: EmploymentIncomeDeductionParams;
   corporateSocialInsurance: CorporateSocialInsuranceParams;
+  savingsDeduction: SavingsDeductionParams;
   withholdingTax: WithholdingTaxParams;
 }
 
