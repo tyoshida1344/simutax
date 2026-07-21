@@ -12,3 +12,10 @@
   color: var(--text);
   line-height: 1.6;
 }
+
+.termLink {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
