@@ -32,7 +32,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '1月1日から12月31日までの1年間の所得と税額を計算し、翌年の2月16日〜3月15日に税務署へ申告・納税する手続き。フリーランスは原則として毎年行う必要がある。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'aoiro-shinkoku',
@@ -41,7 +40,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '事前に税務署へ「青色申告承認申請書」を提出して行う申告方法。帳簿の記帳方法に応じて最大65万円の特別控除が受けられるほか、赤字の繰越控除（3年間）などの特典がある。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'etax',
@@ -50,7 +48,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '国税庁が提供するオンライン申告・納税システム。e-Taxで確定申告を行うと、青色申告特別控除が55万円から65万円に引き上げられる。マイナンバーカードとICカードリーダー（またはスマートフォン）が必要。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'aoiro-shinsei',
@@ -59,7 +56,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'filing',
     definition:
       '青色申告を行うために税務署に提出する届出書。開業から2か月以内、または適用を受けたい年の3月15日までに提出する必要がある。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'kiso-koujo',
@@ -68,7 +64,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       'すべての納税者に適用される所得控除。所得税では合計所得金額に応じて段階的に減額され、2,500万円超でゼロになる。住民税では一律43万円。令和8年分は時限特例により、所得税の基礎控除が引き上げられている。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'aoiro-tokubetsu-koujo',
@@ -77,7 +72,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '青色申告者が事業所得から差し引ける控除。複式簿記＋e-Tax申告で65万円、複式簿記のみで55万円、簡易簿記で10万円の3段階。白色申告にはこの控除はない。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'shotoku-koujo-zeigaku-koujo',
@@ -86,7 +80,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '所得控除は課税所得を計算する前に所得金額から差し引くもの（基礎控除・社会保険料控除など）。税額控除は算出された税額から直接差し引くもの（住宅ローン控除など）。所得控除は税率分だけ税額が減るのに対し、税額控除は金額がそのまま税額から減る。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'shoukibo-kyousai',
@@ -95,7 +88,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '個人事業主や小規模企業の経営者のための退職金制度。月額1,000円〜70,000円の掛金を積み立て、廃業・退職時に共済金を受け取れる。掛金は全額が所得控除の対象となるため、節税効果が高い。',
-    relatedTopicId: 'savings-deduction',
+    relatedTopicId: 'shoukibo-kyousai',
   },
   {
     id: 'ideco',
@@ -104,7 +97,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '自分で掛金を拠出し、運用方法を選んで老後資金を準備する私的年金制度。フリーランスは月額最大68,000円まで拠出でき、掛金は全額が所得控除の対象。運用益も非課税で、受取時にも税制優遇がある。',
-    relatedTopicId: 'savings-deduction',
+    relatedTopicId: 'ideco',
   },
   {
     id: 'fuyou-koujo',
@@ -113,7 +106,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '16歳以上の扶養親族がいる場合に受けられる所得控除。一般の扶養親族で38万円（所得税）。扶養親族の合計所得金額が48万円以下であることが条件。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'haiguusha-koujo',
@@ -122,7 +114,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'deduction',
     definition:
       '配偶者の合計所得金額が48万円以下の場合に受けられる所得控除。納税者の合計所得金額が1,000万円以下の場合に適用され、最大38万円（所得税）。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'gokei-shotoku-shuunyuu',
@@ -131,7 +122,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'calculation',
     definition:
       '収入（売上）は事業で得た金額そのもの。所得は収入から必要経費を差し引いた金額。フリーランスの場合、「事業所得 ＝ 売上 − 必要経費」。税金は所得に対して計算される。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'kazei-shotoku',
@@ -140,7 +130,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'calculation',
     definition:
       '所得金額から各種所得控除（基礎控除・社会保険料控除など）を差し引いた金額。この金額に税率を掛けて税額を計算する。1,000円未満の端数は切り捨て。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'ruishin-kazei',
@@ -158,7 +147,6 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'calculation',
     definition:
       '東日本大震災の復興財源として、所得税額に2.1%を上乗せして徴収される税金。2037年（令和19年）まで課税される。',
-    relatedTopicId: 'income-tax',
   },
   {
     id: 'kintouwari',
@@ -166,8 +154,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     reading: 'きんとうわり',
     category: 'calculation',
     definition:
-      '住民税のうち、所得の金額に関係なく定額で課される部分。市区町村民税と道府県民税の合計に森林環境税を加えた額が課される。',
-    relatedTopicId: 'resident-tax',
+      '住民税のうち、所得の金額に関係なく定額で課される部分。標準は市区町村民税3,000円＋道府県民税1,000円＋森林環境税1,000円＝年額5,000円だが、自治体によって独自の上乗せがあるため金額は異なる。',
   },
   {
     id: 'shotokuwari',
@@ -186,6 +173,15 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition:
       '個人事業税の計算で事業所得から差し引ける控除額。年額290万円。事業所得がこの金額以下であれば、個人事業税は課税されない。',
     relatedTopicId: 'business-tax',
+  },
+  {
+    id: 'shakai-hokenryou',
+    term: '社会保険料',
+    reading: 'しゃかいほけんりょう',
+    category: 'socialInsurance',
+    definition:
+      'フリーランスが納める公的保険料の総称。国民健康保険料と国民年金保険料の合計を指す。確定申告では「社会保険料控除」として全額を所得から差し引ける。',
+    relatedTopicId: 'social-insurance',
   },
   {
     id: 'kokumin-kenko-hoken',
