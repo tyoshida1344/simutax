@@ -172,7 +172,7 @@ export const learnTopics: LearnTopic[] = [
           ],
         },
         `登録した場合でも、[[niwari-tokurei|2割特例]]を使えば売上税額の2割の納付で済む（${years[0]}〜${years[years.length - 1]}年分）。売上500万円（税込）なら年間約9万円の負担`,
-        '登録の届出は「適格請求書発行事業者の登録申請書」を税務署に提出する（e-Taxでも可能）',
+        '登録の届出は「[[tekikaku-seikyusho|適格請求書]]発行事業者の登録申請書」を税務署に提出する（[[etax|e-Tax]]でも可能）',
       ];
     },
     references: [
