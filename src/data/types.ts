@@ -185,6 +185,16 @@ export interface WithholdingTaxParams {
   sources: string[];
 }
 
+export interface PrefectureData {
+  name: string;
+  capital: string;
+  nhi: NHIModelParams;
+  kyokaiKenpoRate: number;
+  corporateResidentTaxLevyRate: number;
+  residentTaxIncomeRate: number;
+  residentTaxPerCapitaLevy: number;
+}
+
 export interface TaxParams {
   meta: TaxParamsMeta;
   incomeTax: IncomeTaxParams;
@@ -200,6 +210,7 @@ export interface TaxParams {
   corporateSocialInsurance: CorporateSocialInsuranceParams;
   savingsDeduction: SavingsDeductionParams;
   withholdingTax: WithholdingTaxParams;
+  prefectures: Record<string, PrefectureData>;
 }
 
 export type FilingType = 'blue65' | 'blue55' | 'blue10' | 'white';
@@ -220,7 +231,7 @@ export interface SimulatorInput {
   manualSocialInsurance: number | null;
   age: number;
   householdMembers: number;
-  nhiModel: string;
+  prefecture: string;
   basePeriodSales: 'under10m' | 'over10m' | 'over50m';
   invoiceRegistered: boolean;
   taxablePurchaseAmount: number;
@@ -313,6 +324,7 @@ export interface SimulatorResult {
 
 export interface IncorporationInput extends Pick<SimulatorInput,
   | 'age'
+  | 'prefecture'
   | 'iDeCoContribution'
   | 'smallBusinessMutualAid'
   | 'dependentCount'

@@ -20,7 +20,7 @@ function makeInput(overrides: Partial<SimulatorInput> = {}): SimulatorInput {
     manualSocialInsurance: null,
     age: 35,
     householdMembers: 1,
-    nhiModel: 'standard',
+    prefecture: 'tokyo',
     basePeriodSales: 'under10m',
     invoiceRegistered: false,
     taxablePurchaseAmount: 0,
@@ -156,5 +156,13 @@ describe('simulate 統合テスト', () => {
     expect(r.totalIncome).toBe(14350000);
     expect(r.incomeTax.appliedBracketRate).toBeGreaterThanOrEqual(0.33);
     expect(r.disposableIncome).toBeGreaterThan(0);
+  });
+
+  it('都道府県による住民税率の違い', () => {
+    const base = { revenue: 8000000, expenses: 2000000 };
+    const rTokyo = simulate(makeInput({ ...base, prefecture: 'tokyo' }), params);
+    const rKanagawa = simulate(makeInput({ ...base, prefecture: 'kanagawa' }), params);
+    // 横浜市は住民税超過税率があるため税額が高い
+    expect(rKanagawa.residentTax.totalResidentTax).toBeGreaterThan(rTokyo.residentTax.totalResidentTax);
   });
 });

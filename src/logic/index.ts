@@ -1,5 +1,5 @@
 import type { TaxParams, SimulatorInput, SimulatorResult } from '../data/types';
-import { clampMin } from './common';
+import { clampMin, buildPrefResidentTaxParams } from './common';
 import { getBlueReturnDeduction, calcDeductionsForIncomeTax, calcDeductionsForResidentTax } from './deductions';
 import { calcIncomeTax } from './incomeTax';
 import { calcResidentTax } from './residentTax';
@@ -10,6 +10,7 @@ import { calcSocialInsurance } from './socialInsurance';
 export { calcIncorporation } from './incorporation';
 
 export function simulate(input: SimulatorInput, params: TaxParams): SimulatorResult {
+  const pref = params.prefectures[input.prefecture];
   const businessIncome = clampMin(input.revenue - input.expenses, 0);
 
   const blueReturnDeduction = getBlueReturnDeduction(input.filingType, params.blueReturnDeductions);
@@ -19,7 +20,7 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
     totalIncome,
     input.age,
     input.householdMembers,
-    input.nhiModel,
+    pref.nhi,
     params.socialInsurance,
   );
 
@@ -40,8 +41,10 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
     input.medicalExpenseDeduction,
   );
 
+  const prefResidentTaxParams = buildPrefResidentTaxParams(params.residentTax, pref);
+
   const residentTaxDeductions = calcDeductionsForResidentTax(
-    params.residentTax,
+    prefResidentTaxParams,
     socialInsuranceDeduction,
     input.iDeCoContribution,
     input.smallBusinessMutualAid,
@@ -53,7 +56,7 @@ export function simulate(input: SimulatorInput, params: TaxParams): SimulatorRes
 
   const incomeTax = calcIncomeTax(totalIncome - incomeTaxDeductions.total, params.incomeTax, incomeTaxDeductions.basicDeduction);
 
-  const residentTax = calcResidentTax(totalIncome - residentTaxDeductions.total, params.residentTax, residentTaxDeductions.basicDeduction);
+  const residentTax = calcResidentTax(totalIncome - residentTaxDeductions.total, prefResidentTaxParams, residentTaxDeductions.basicDeduction);
 
   // 事業税は青色申告控除を戻した事業所得で計算
   const businessTax = calcBusinessTax(businessIncome, input.businessType, params.businessTax);

@@ -3,7 +3,7 @@ import type { SimulatorInput, FilingType } from '../../data/types';
 import { NumberInput } from './NumberInput';
 import { FilingTypeChecker } from './FilingTypeChecker';
 import { HelpPopover } from './HelpPopover';
-import { MAX_AMOUNT, filingTypeLabels } from '../constants';
+import { MAX_AMOUNT, filingTypeLabels, prefectureOptions } from '../constants';
 import styles from '../styles/InputSection.module.css';
 
 const filingOptions = (Object.keys(filingTypeLabels) as FilingType[]).map((value) => ({
@@ -50,7 +50,7 @@ export function InputSection({ input, updateField }: Props) {
       <div className={styles.field}>
         <div className={styles.labelRow}>
           <div className={styles.labelWithHelp}>
-            <label className={styles.label}>申告区分</label>
+            <label htmlFor="filing-type" className={styles.label}>申告区分</label>
             <HelpPopover
               description="青色申告の控除額は、帳簿の記帳方法や申告方法で異なります。複式簿記＋e-Taxで最大65万円の控除を受けられます。"
               linkTo="/glossary?term=aoiro-tokubetsu-koujo"
@@ -65,10 +65,32 @@ export function InputSection({ input, updateField }: Props) {
           </button>
         </div>
         <select
+          id="filing-type"
           value={input.filingType}
           onChange={(e) => updateField('filingType', e.target.value as FilingType)}
         >
           {filingOptions.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.labelRow}>
+          <div className={styles.labelWithHelp}>
+            <label htmlFor="prefecture" className={styles.label}>都道府県</label>
+            <HelpPopover
+              description="国民健康保険・協会けんぽ・住民税の料率は都道府県（市区町村）により異なります。お住まいの都道府県を選択してください。"
+            />
+          </div>
+        </div>
+        <select
+          id="prefecture"
+          value={input.prefecture}
+          onChange={(e) => updateField('prefecture', e.target.value)}
+        >
+          {prefectureOptions.map((o) => (
             <option key={o.value} value={o.value}>
               {o.label}
             </option>

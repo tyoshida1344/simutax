@@ -6,28 +6,78 @@
     "sources": [
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm",
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm",
-      "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html"
+      "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html",
+      "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html"
     ]
   },
   "incomeTax": {
     "brackets": [
-      { "upperLimit": 1950000,  "rate": 0.05, "deduction": 0 },
-      { "upperLimit": 3300000,  "rate": 0.10, "deduction": 97500 },
-      { "upperLimit": 6950000,  "rate": 0.20, "deduction": 427500 },
-      { "upperLimit": 9000000,  "rate": 0.23, "deduction": 636000 },
-      { "upperLimit": 18000000, "rate": 0.33, "deduction": 1536000 },
-      { "upperLimit": 40000000, "rate": 0.40, "deduction": 2796000 },
-      { "upperLimit": null,     "rate": 0.45, "deduction": 4796000 }
+      {
+        "upperLimit": 1950000,
+        "rate": 0.05,
+        "deduction": 0
+      },
+      {
+        "upperLimit": 3300000,
+        "rate": 0.1,
+        "deduction": 97500
+      },
+      {
+        "upperLimit": 6950000,
+        "rate": 0.2,
+        "deduction": 427500
+      },
+      {
+        "upperLimit": 9000000,
+        "rate": 0.23,
+        "deduction": 636000
+      },
+      {
+        "upperLimit": 18000000,
+        "rate": 0.33,
+        "deduction": 1536000
+      },
+      {
+        "upperLimit": 40000000,
+        "rate": 0.4,
+        "deduction": 2796000
+      },
+      {
+        "upperLimit": null,
+        "rate": 0.45,
+        "deduction": 4796000
+      }
     ],
     "reconstructionSurtaxRate": 0.021,
     "basicDeduction": [
-      { "totalIncomeUpperLimit": 4890000,  "amount": 1040000 },
-      { "totalIncomeUpperLimit": 6550000,  "amount": 670000 },
-      { "totalIncomeUpperLimit": 23500000, "amount": 620000 },
-      { "totalIncomeUpperLimit": 24000000, "amount": 480000 },
-      { "totalIncomeUpperLimit": 24500000, "amount": 320000 },
-      { "totalIncomeUpperLimit": 25000000, "amount": 160000 },
-      { "totalIncomeUpperLimit": null,      "amount": 0 }
+      {
+        "totalIncomeUpperLimit": 4890000,
+        "amount": 1040000
+      },
+      {
+        "totalIncomeUpperLimit": 6550000,
+        "amount": 670000
+      },
+      {
+        "totalIncomeUpperLimit": 23500000,
+        "amount": 620000
+      },
+      {
+        "totalIncomeUpperLimit": 24000000,
+        "amount": 480000
+      },
+      {
+        "totalIncomeUpperLimit": 24500000,
+        "amount": 320000
+      },
+      {
+        "totalIncomeUpperLimit": 25000000,
+        "amount": 160000
+      },
+      {
+        "totalIncomeUpperLimit": null,
+        "amount": 0
+      }
     ],
     "roundTaxableIncomeDownTo": 1000,
     "roundTaxAmountDownTo": 100,
@@ -35,7 +85,7 @@
     "spouseDeduction": 380000
   },
   "residentTax": {
-    "incomeRate": 0.10,
+    "incomeRate": 0.1,
     "perCapitaLevy": 5000,
     "basicDeduction": 430000,
     "roundTaxableIncomeDownTo": 1000,
@@ -46,11 +96,26 @@
   "businessTax": {
     "businessOwnerDeduction": 2900000,
     "types": {
-      "type1":     { "label": "第1種事業（物品販売・飲食等）", "rate": 0.05 },
-      "type2":     { "label": "第2種事業（畜産・水産等）",     "rate": 0.04 },
-      "type3_5pct": { "label": "第3種事業（医業・デザイン等）", "rate": 0.05 },
-      "type3_3pct": { "label": "第3種事業（あん摩・鍼灸等）",  "rate": 0.03 },
-      "exempt":    { "label": "非課税業種（文筆業等）",        "rate": 0 }
+      "type1": {
+        "label": "第1種事業（物品販売・飲食等）",
+        "rate": 0.05
+      },
+      "type2": {
+        "label": "第2種事業（畜産・水産等）",
+        "rate": 0.04
+      },
+      "type3_5pct": {
+        "label": "第3種事業（医業・デザイン等）",
+        "rate": 0.05
+      },
+      "type3_3pct": {
+        "label": "第3種事業（あん摩・鍼灸等）",
+        "rate": 0.03
+      },
+      "exempt": {
+        "label": "非課税業種（文筆業等）",
+        "rate": 0
+      }
     },
     "defaultType": "type1"
   },
@@ -61,21 +126,47 @@
     "white": 0
   },
   "consumptionTax": {
-    "taxRate": 0.10,
-    "taxRateFraction": [10, 110],
+    "taxRate": 0.1,
+    "taxRateFraction": [
+      10,
+      110
+    ],
     "taxableThreshold": 10000000,
     "simplifiedThreshold": 50000000,
     "simplifiedCategories": {
-      "cat1": { "label": "第1種（卸売業）", "deemedPurchaseRate": 0.90 },
-      "cat2": { "label": "第2種（小売業）", "deemedPurchaseRate": 0.80 },
-      "cat3": { "label": "第3種（製造業等）", "deemedPurchaseRate": 0.70 },
-      "cat4": { "label": "第4種（飲食業等）", "deemedPurchaseRate": 0.60 },
-      "cat5": { "label": "第5種（サービス業）", "deemedPurchaseRate": 0.50 },
-      "cat6": { "label": "第6種（不動産業）", "deemedPurchaseRate": 0.40 }
+      "cat1": {
+        "label": "第1種（卸売業）",
+        "deemedPurchaseRate": 0.9
+      },
+      "cat2": {
+        "label": "第2種（小売業）",
+        "deemedPurchaseRate": 0.8
+      },
+      "cat3": {
+        "label": "第3種（製造業等）",
+        "deemedPurchaseRate": 0.7
+      },
+      "cat4": {
+        "label": "第4種（飲食業等）",
+        "deemedPurchaseRate": 0.6
+      },
+      "cat5": {
+        "label": "第5種（サービス業）",
+        "deemedPurchaseRate": 0.5
+      },
+      "cat6": {
+        "label": "第6種（不動産業）",
+        "deemedPurchaseRate": 0.4
+      }
     },
     "defaultSimplifiedCategory": "cat5",
-    "twentyPercentSpecialRate": 0.20,
-    "twentyPercentSpecialEligibleYears": [2023, 2024, 2025, 2026],
+    "twentyPercentSpecialRate": 0.2,
+    "twentyPercentSpecialEligibleYears": [
+      2023,
+      2024,
+      2025,
+      2026
+    ],
     "sources": [
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6505.htm",
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6509.htm",
@@ -95,13 +186,13 @@
             "incomeRate": 0.0789,
             "perCapita": 45400,
             "perHousehold": 24800,
-            "cap": 650000
+            "cap": 670000
           },
           "elderlySupport": {
             "incomeRate": 0.0278,
             "perCapita": 15700,
             "perHousehold": 8500,
-            "cap": 240000
+            "cap": 260000
           },
           "nursingCare": {
             "incomeRate": 0.0224,
@@ -118,8 +209,14 @@
   },
   "corporateTax": {
     "brackets": [
-      { "upperLimit": 8000000, "rate": 0.15 },
-      { "upperLimit": null, "rate": 0.232 }
+      {
+        "upperLimit": 8000000,
+        "rate": 0.15
+      },
+      {
+        "upperLimit": null,
+        "rate": 0.232
+      }
     ],
     "localCorporateTaxRate": 0.103,
     "roundTaxableIncomeDownTo": 1000,
@@ -131,17 +228,35 @@
   "corporateResidentTax": {
     "taxLevyRate": 0.07,
     "perCapitaLevy": {
-      "under10m":  { "label": "1,000万円以下",           "amount": 70000 },
-      "under100m": { "label": "1,000万円超〜1億円以下",   "amount": 180000 },
-      "under1b":   { "label": "1億円超〜10億円以下",      "amount": 290000 }
+      "under10m": {
+        "label": "1,000万円以下",
+        "amount": 70000
+      },
+      "under100m": {
+        "label": "1,000万円超〜1億円以下",
+        "amount": 180000
+      },
+      "under1b": {
+        "label": "1億円超〜10億円以下",
+        "amount": 290000
+      }
     },
     "defaultCapitalRange": "under10m"
   },
   "corporateEnterpriseTax": {
     "brackets": [
-      { "upperLimit": 4000000, "rate": 0.035 },
-      { "upperLimit": 8000000, "rate": 0.053 },
-      { "upperLimit": null,    "rate": 0.070 }
+      {
+        "upperLimit": 4000000,
+        "rate": 0.035
+      },
+      {
+        "upperLimit": 8000000,
+        "rate": 0.053
+      },
+      {
+        "upperLimit": null,
+        "rate": 0.07
+      }
     ],
     "specialTaxRate": 0.37,
     "roundTaxableIncomeDownTo": 1000,
@@ -149,12 +264,36 @@
   },
   "employmentIncomeDeduction": {
     "brackets": [
-      { "upperLimit": 1625000,  "rate": 0,    "base": 650000 },
-      { "upperLimit": 1800000,  "rate": 0.40, "base": -100000 },
-      { "upperLimit": 3600000,  "rate": 0.30, "base": 80000 },
-      { "upperLimit": 6600000,  "rate": 0.20, "base": 440000 },
-      { "upperLimit": 8500000,  "rate": 0.10, "base": 1100000 },
-      { "upperLimit": null,     "rate": 0,    "base": 1950000 }
+      {
+        "upperLimit": 1625000,
+        "rate": 0,
+        "base": 650000
+      },
+      {
+        "upperLimit": 1800000,
+        "rate": 0.4,
+        "base": -100000
+      },
+      {
+        "upperLimit": 3600000,
+        "rate": 0.3,
+        "base": 80000
+      },
+      {
+        "upperLimit": 6600000,
+        "rate": 0.2,
+        "base": 440000
+      },
+      {
+        "upperLimit": 8500000,
+        "rate": 0.1,
+        "base": 1100000
+      },
+      {
+        "upperLimit": null,
+        "rate": 0,
+        "base": 1950000
+      }
     ],
     "sources": [
       "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm"
@@ -178,8 +317,16 @@
   },
   "withholdingTax": {
     "brackets": [
-      { "upperLimit": 1000000, "rate": 0.1021, "base": 0 },
-      { "upperLimit": null,    "rate": 0.2042, "base": 102100 }
+      {
+        "upperLimit": 1000000,
+        "rate": 0.1021,
+        "base": 0
+      },
+      {
+        "upperLimit": null,
+        "rate": 0.2042,
+        "base": 102100
+      }
     ],
     "reconstructionSurtaxRate": 0.021,
     "sources": [
@@ -188,21 +335,1480 @@
   },
   "corporateSocialInsurance": {
     "healthInsurance": {
-      "rate": 0.1000,
+      "rate": 0.1,
       "maxMonthlyCompensation": 1390000
     },
     "nursingCare": {
-      "rate": 0.0160,
+      "rate": 0.016,
       "minAge": 40,
       "maxAge": 64
     },
     "employeesPension": {
-      "rate": 0.18300,
+      "rate": 0.183,
       "maxMonthlyCompensation": 650000
     },
     "sources": [
       "https://www.kyoukaikenpo.or.jp/g7/cat330/sb3150/",
       "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku.html"
     ]
+  },
+  "prefectures": {
+    "hokkaido": {
+      "name": "北海道",
+      "capital": "札幌市",
+      "nhi": {
+        "label": "北海道（札幌市）",
+        "medical": {
+          "incomeRate": 0.0935,
+          "perCapita": 19830,
+          "perHousehold": 33380,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0278,
+          "perCapita": 6150,
+          "perHousehold": 10330,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0254,
+          "perCapita": 5790,
+          "perHousehold": 7690,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1028,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "aomori": {
+      "name": "青森県",
+      "capital": "青森市",
+      "nhi": {
+        "label": "青森県（青森市）",
+        "medical": {
+          "incomeRate": 0.0941,
+          "perCapita": 18640,
+          "perHousehold": 23820,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0246,
+          "perCapita": 6360,
+          "perHousehold": 7680,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0274,
+          "perCapita": 9260,
+          "perHousehold": 4540,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0985,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "iwate": {
+      "name": "岩手県",
+      "capital": "盛岡市",
+      "nhi": {
+        "label": "岩手県（盛岡市）",
+        "medical": {
+          "incomeRate": 0.084,
+          "perCapita": 22000,
+          "perHousehold": 23900,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.026,
+          "perCapita": 6200,
+          "perHousehold": 7100,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.025,
+          "perCapita": 6400,
+          "perHousehold": 6700,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0951,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6000
+    },
+    "miyagi": {
+      "name": "宮城県",
+      "capital": "仙台市",
+      "nhi": {
+        "label": "宮城県（仙台市）",
+        "medical": {
+          "incomeRate": 0.0796,
+          "perCapita": 27850,
+          "perHousehold": 26700,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.03,
+          "perCapita": 10410,
+          "perHousehold": 9980,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0244,
+          "perCapita": 9440,
+          "perHousehold": 7070,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.101,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6200
+    },
+    "akita": {
+      "name": "秋田県",
+      "capital": "秋田市",
+      "nhi": {
+        "label": "秋田県（秋田市）",
+        "medical": {
+          "incomeRate": 0.0922,
+          "perCapita": 22960,
+          "perHousehold": 28690,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0251,
+          "perCapita": 6620,
+          "perHousehold": 7450,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0288,
+          "perCapita": 8950,
+          "perHousehold": 8570,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1001,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5800
+    },
+    "yamagata": {
+      "name": "山形県",
+      "capital": "山形市",
+      "nhi": {
+        "label": "山形県（山形市）",
+        "medical": {
+          "incomeRate": 0.0942,
+          "perCapita": 22800,
+          "perHousehold": 26700,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0279,
+          "perCapita": 6700,
+          "perHousehold": 8400,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0208,
+          "perCapita": 13600,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0975,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6000
+    },
+    "fukushima": {
+      "name": "福島県",
+      "capital": "福島市",
+      "nhi": {
+        "label": "福島県（福島市）",
+        "medical": {
+          "incomeRate": 0.062,
+          "perCapita": 22400,
+          "perHousehold": 16700,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.028,
+          "perCapita": 9500,
+          "perHousehold": 8100,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.024,
+          "perCapita": 10400,
+          "perHousehold": 5800,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.095,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6000
+    },
+    "ibaraki": {
+      "name": "茨城県",
+      "capital": "水戸市",
+      "nhi": {
+        "label": "茨城県（水戸市）",
+        "medical": {
+          "incomeRate": 0.0785,
+          "perCapita": 31600,
+          "perHousehold": 0,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.035,
+          "perCapita": 13700,
+          "perHousehold": 0,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0237,
+          "perCapita": 16300,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0952,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6000
+    },
+    "tochigi": {
+      "name": "栃木県",
+      "capital": "宇都宮市",
+      "nhi": {
+        "label": "栃木県（宇都宮市）",
+        "medical": {
+          "incomeRate": 0.0695,
+          "perCapita": 26500,
+          "perHousehold": 19400,
+          "cap": 660000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0276,
+          "perCapita": 10100,
+          "perHousehold": 7500,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0224,
+          "perCapita": 10800,
+          "perHousehold": 6600,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0982,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5700
+    },
+    "gunma": {
+      "name": "群馬県",
+      "capital": "前橋市",
+      "nhi": {
+        "label": "群馬県（前橋市）",
+        "medical": {
+          "incomeRate": 0.07,
+          "perCapita": 29000,
+          "perHousehold": 19400,
+          "cap": 660000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.031,
+          "perCapita": 12600,
+          "perHousehold": 8400,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.025,
+          "perCapita": 12200,
+          "perHousehold": 6200,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0968,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5700
+    },
+    "saitama": {
+      "name": "埼玉県",
+      "capital": "さいたま市",
+      "nhi": {
+        "label": "埼玉県（さいたま市）",
+        "medical": {
+          "incomeRate": 0.0764,
+          "perCapita": 43300,
+          "perHousehold": 0,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0273,
+          "perCapita": 14900,
+          "perHousehold": 0,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0237,
+          "perCapita": 16100,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0967,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "chiba": {
+      "name": "千葉県",
+      "capital": "千葉市",
+      "nhi": {
+        "label": "千葉県（千葉市）",
+        "medical": {
+          "incomeRate": 0.0721,
+          "perCapita": 23280,
+          "perHousehold": 26640,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0285,
+          "perCapita": 8880,
+          "perHousehold": 10320,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0257,
+          "perCapita": 16560,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0973,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "tokyo": {
+      "name": "東京都",
+      "capital": "新宿区",
+      "nhi": {
+        "label": "東京都（新宿区）",
+        "medical": {
+          "incomeRate": 0.0751,
+          "perCapita": 47600,
+          "perHousehold": 0,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.028,
+          "perCapita": 17600,
+          "perHousehold": 0,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0243,
+          "perCapita": 17800,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0985,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "kanagawa": {
+      "name": "神奈川県",
+      "capital": "横浜市",
+      "nhi": {
+        "label": "神奈川県（横浜市）",
+        "medical": {
+          "incomeRate": 0.0833,
+          "perCapita": 40870,
+          "perHousehold": 0,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0262,
+          "perCapita": 13380,
+          "perHousehold": 0,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0284,
+          "perCapita": 16200,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0992,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.10025,
+      "residentTaxPerCapitaLevy": 6200
+    },
+    "niigata": {
+      "name": "新潟県",
+      "capital": "新潟市",
+      "nhi": {
+        "label": "新潟県（新潟市）",
+        "medical": {
+          "incomeRate": 0.074,
+          "perCapita": 14700,
+          "perHousehold": 19200,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.031,
+          "perCapita": 7200,
+          "perHousehold": 9000,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.025,
+          "perCapita": 14100,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0921,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "toyama": {
+      "name": "富山県",
+      "capital": "富山市",
+      "nhi": {
+        "label": "富山県（富山市）",
+        "medical": {
+          "incomeRate": 0.064,
+          "perCapita": 25000,
+          "perHousehold": 17500,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.023,
+          "perCapita": 8200,
+          "perHousehold": 7000,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.023,
+          "perCapita": 9500,
+          "perHousehold": 6500,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0959,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "ishikawa": {
+      "name": "石川県",
+      "capital": "金沢市",
+      "nhi": {
+        "label": "石川県（金沢市）",
+        "medical": {
+          "incomeRate": 0.0908,
+          "perCapita": 24000,
+          "perHousehold": 25200,
+          "cap": 660000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0274,
+          "perCapita": 11280,
+          "perHousehold": 7440,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0242,
+          "perCapita": 12360,
+          "perHousehold": 6000,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.097,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "fukui": {
+      "name": "福井県",
+      "capital": "福井市",
+      "nhi": {
+        "label": "福井県（福井市）",
+        "medical": {
+          "incomeRate": 0.0615,
+          "perCapita": 27000,
+          "perHousehold": 16400,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.028,
+          "perCapita": 10000,
+          "perHousehold": 6200,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0272,
+          "perCapita": 11400,
+          "perHousehold": 6000,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0971,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "yamanashi": {
+      "name": "山梨県",
+      "capital": "甲府市",
+      "nhi": {
+        "label": "山梨県（甲府市）",
+        "medical": {
+          "incomeRate": 0.0849,
+          "perCapita": 27300,
+          "perHousehold": 25500,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0234,
+          "perCapita": 9600,
+          "perHousehold": 6700,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0218,
+          "perCapita": 9800,
+          "perHousehold": 6000,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0955,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "nagano": {
+      "name": "長野県",
+      "capital": "長野市",
+      "nhi": {
+        "label": "長野県（長野市）",
+        "medical": {
+          "incomeRate": 0.082,
+          "perCapita": 17760,
+          "perHousehold": 19680,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.028,
+          "perCapita": 6240,
+          "perHousehold": 7560,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.026,
+          "perCapita": 8760,
+          "perHousehold": 7080,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0963,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "gifu": {
+      "name": "岐阜県",
+      "capital": "岐阜市",
+      "nhi": {
+        "label": "岐阜県（岐阜市）",
+        "medical": {
+          "incomeRate": 0.0755,
+          "perCapita": 28580,
+          "perHousehold": 28800,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0226,
+          "perCapita": 8920,
+          "perHousehold": 9000,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0162,
+          "perCapita": 7980,
+          "perHousehold": 6100,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.098,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6000
+    },
+    "shizuoka": {
+      "name": "静岡県",
+      "capital": "静岡市",
+      "nhi": {
+        "label": "静岡県（静岡市）",
+        "medical": {
+          "incomeRate": 0.0673,
+          "perCapita": 29400,
+          "perHousehold": 20900,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0257,
+          "perCapita": 10500,
+          "perHousehold": 7900,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0233,
+          "perCapita": 18400,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0961,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5400
+    },
+    "aichi": {
+      "name": "愛知県",
+      "capital": "名古屋市",
+      "nhi": {
+        "label": "愛知県（名古屋市）",
+        "medical": {
+          "incomeRate": 0.0877,
+          "perCapita": 38400,
+          "perHousehold": 0,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.026,
+          "perCapita": 11100,
+          "perHousehold": 0,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0227,
+          "perCapita": 15900,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0993,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.097,
+      "residentTaxPerCapitaLevy": 5300
+    },
+    "mie": {
+      "name": "三重県",
+      "capital": "津市",
+      "nhi": {
+        "label": "三重県（津市）",
+        "medical": {
+          "incomeRate": 0.08,
+          "perCapita": 29100,
+          "perHousehold": 21600,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.029,
+          "perCapita": 10500,
+          "perHousehold": 7600,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.029,
+          "perCapita": 12500,
+          "perHousehold": 6000,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0977,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6000
+    },
+    "shiga": {
+      "name": "滋賀県",
+      "capital": "大津市",
+      "nhi": {
+        "label": "滋賀県（大津市）",
+        "medical": {
+          "incomeRate": 0.071,
+          "perCapita": 30900,
+          "perHousehold": 19200,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.025,
+          "perCapita": 11400,
+          "perHousehold": 6900,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.024,
+          "perCapita": 11100,
+          "perHousehold": 5400,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0988,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5800
+    },
+    "kyoto": {
+      "name": "京都府",
+      "capital": "京都市",
+      "nhi": {
+        "label": "京都府（京都市）",
+        "medical": {
+          "incomeRate": 0.0794,
+          "perCapita": 30080,
+          "perHousehold": 17930,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0266,
+          "perCapita": 10360,
+          "perHousehold": 6180,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0251,
+          "perCapita": 11090,
+          "perHousehold": 5370,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0989,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5600
+    },
+    "osaka": {
+      "name": "大阪府",
+      "capital": "大阪市",
+      "nhi": {
+        "label": "大阪府（大阪市）",
+        "medical": {
+          "incomeRate": 0.095,
+          "perCapita": 34990,
+          "perHousehold": 33908,
+          "cap": 660000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0306,
+          "perCapita": 11191,
+          "perHousehold": 10845,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.026,
+          "perCapita": 18682,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1013,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5300
+    },
+    "hyogo": {
+      "name": "兵庫県",
+      "capital": "神戸市",
+      "nhi": {
+        "label": "兵庫県（神戸市）",
+        "medical": {
+          "incomeRate": 0.0738,
+          "perCapita": 33700,
+          "perHousehold": 21800,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0297,
+          "perCapita": 13510,
+          "perHousehold": 8740,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0278,
+          "perCapita": 13970,
+          "perHousehold": 6880,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1012,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 6200
+    },
+    "nara": {
+      "name": "奈良県",
+      "capital": "奈良市",
+      "nhi": {
+        "label": "奈良県（奈良市）",
+        "medical": {
+          "incomeRate": 0.0764,
+          "perCapita": 27600,
+          "perHousehold": 20000,
+          "cap": 660000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0327,
+          "perCapita": 11500,
+          "perHousehold": 8400,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0303,
+          "perCapita": 16900,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0991,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "wakayama": {
+      "name": "和歌山県",
+      "capital": "和歌山市",
+      "nhi": {
+        "label": "和歌山県（和歌山市）",
+        "medical": {
+          "incomeRate": 0.0904,
+          "perCapita": 30720,
+          "perHousehold": 22560,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0286,
+          "perCapita": 10200,
+          "perHousehold": 7200,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0265,
+          "perCapita": 10800,
+          "perHousehold": 5760,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1006,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "tottori": {
+      "name": "鳥取県",
+      "capital": "鳥取市",
+      "nhi": {
+        "label": "鳥取県（鳥取市）",
+        "medical": {
+          "incomeRate": 0.065,
+          "perCapita": 22500,
+          "perHousehold": 22500,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.027,
+          "perCapita": 9200,
+          "perHousehold": 9000,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.025,
+          "perCapita": 9600,
+          "perHousehold": 7100,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0986,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "shimane": {
+      "name": "島根県",
+      "capital": "松江市",
+      "nhi": {
+        "label": "島根県（松江市）",
+        "medical": {
+          "incomeRate": 0.0798,
+          "perCapita": 31380,
+          "perHousehold": 19560,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0261,
+          "perCapita": 11560,
+          "perHousehold": 7320,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0238,
+          "perCapita": 11280,
+          "perHousehold": 5640,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0994,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "okayama": {
+      "name": "岡山県",
+      "capital": "岡山市",
+      "nhi": {
+        "label": "岡山県（岡山市）",
+        "medical": {
+          "incomeRate": 0.0815,
+          "perCapita": 28320,
+          "perHousehold": 20880,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0295,
+          "perCapita": 10320,
+          "perHousehold": 6960,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.026,
+          "perCapita": 10920,
+          "perHousehold": 5280,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1005,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "hiroshima": {
+      "name": "広島県",
+      "capital": "広島市",
+      "nhi": {
+        "label": "広島県（広島市）",
+        "medical": {
+          "incomeRate": 0.0818,
+          "perCapita": 31228,
+          "perHousehold": 30403,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0264,
+          "perCapita": 10342,
+          "perHousehold": 10069,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0252,
+          "perCapita": 10443,
+          "perHousehold": 7860,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0978,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "yamaguchi": {
+      "name": "山口県",
+      "capital": "山口市",
+      "nhi": {
+        "label": "山口県（山口市）",
+        "medical": {
+          "incomeRate": 0.093,
+          "perCapita": 24600,
+          "perHousehold": 23000,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.03,
+          "perCapita": 8200,
+          "perHousehold": 7400,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.031,
+          "perCapita": 9200,
+          "perHousehold": 6100,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1015,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "tokushima": {
+      "name": "徳島県",
+      "capital": "徳島市",
+      "nhi": {
+        "label": "徳島県（徳島市）",
+        "medical": {
+          "incomeRate": 0.083,
+          "perCapita": 32600,
+          "perHousehold": 21500,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.03,
+          "perCapita": 11900,
+          "perHousehold": 7700,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.026,
+          "perCapita": 12500,
+          "perHousehold": 6400,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1024,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "kagawa": {
+      "name": "香川県",
+      "capital": "高松市",
+      "nhi": {
+        "label": "香川県（高松市）",
+        "medical": {
+          "incomeRate": 0.0988,
+          "perCapita": 31700,
+          "perHousehold": 21700,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.026,
+          "perCapita": 8700,
+          "perHousehold": 5800,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0216,
+          "perCapita": 9400,
+          "perHousehold": 4600,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1002,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    },
+    "ehime": {
+      "name": "愛媛県",
+      "capital": "松山市",
+      "nhi": {
+        "label": "愛媛県（松山市）",
+        "medical": {
+          "incomeRate": 0.076,
+          "perCapita": 25200,
+          "perHousehold": 19920,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.032,
+          "perCapita": 9600,
+          "perHousehold": 7800,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.027,
+          "perCapita": 9960,
+          "perHousehold": 5880,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0998,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5700
+    },
+    "kochi": {
+      "name": "高知県",
+      "capital": "高知市",
+      "nhi": {
+        "label": "高知県（高知市）",
+        "medical": {
+          "incomeRate": 0.083,
+          "perCapita": 32600,
+          "perHousehold": 21500,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.03,
+          "perCapita": 11900,
+          "perHousehold": 7700,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.026,
+          "perCapita": 12500,
+          "perHousehold": 6400,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1005,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "fukuoka": {
+      "name": "福岡県",
+      "capital": "福岡市",
+      "nhi": {
+        "label": "福岡県（福岡市）",
+        "medical": {
+          "incomeRate": 0.0558,
+          "perCapita": 19807,
+          "perHousehold": 18664,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0314,
+          "perCapita": 10441,
+          "perHousehold": 9838,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0261,
+          "perCapita": 10160,
+          "perHousehold": 7751,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1011,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "saga": {
+      "name": "佐賀県",
+      "capital": "佐賀市",
+      "nhi": {
+        "label": "佐賀県（佐賀市）",
+        "medical": {
+          "incomeRate": 0.092,
+          "perCapita": 30500,
+          "perHousehold": 32500,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.027,
+          "perCapita": 10000,
+          "perHousehold": 8800,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.021,
+          "perCapita": 10700,
+          "perHousehold": 5500,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1055,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "nagasaki": {
+      "name": "長崎県",
+      "capital": "長崎市",
+      "nhi": {
+        "label": "長崎県（長崎市）",
+        "medical": {
+          "incomeRate": 0.093,
+          "perCapita": 27700,
+          "perHousehold": 19800,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.033,
+          "perCapita": 9700,
+          "perHousehold": 6900,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.027,
+          "perCapita": 9500,
+          "perHousehold": 5400,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1006,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "kumamoto": {
+      "name": "熊本県",
+      "capital": "熊本市",
+      "nhi": {
+        "label": "熊本県（熊本市）",
+        "medical": {
+          "incomeRate": 0.0634,
+          "perCapita": 28400,
+          "perHousehold": 18100,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0298,
+          "perCapita": 13300,
+          "perHousehold": 8500,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0294,
+          "perCapita": 20300,
+          "perHousehold": 0,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1008,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "oita": {
+      "name": "大分県",
+      "capital": "大分市",
+      "nhi": {
+        "label": "大分県（大分市）",
+        "medical": {
+          "incomeRate": 0.0868,
+          "perCapita": 30600,
+          "perHousehold": 25400,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0268,
+          "perCapita": 9700,
+          "perHousehold": 7500,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0248,
+          "perCapita": 10100,
+          "perHousehold": 6000,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1008,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "miyazaki": {
+      "name": "宮崎県",
+      "capital": "宮崎市",
+      "nhi": {
+        "label": "宮崎県（宮崎市）",
+        "medical": {
+          "incomeRate": 0.087,
+          "perCapita": 27000,
+          "perHousehold": 19800,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.03,
+          "perCapita": 9100,
+          "perHousehold": 6600,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.022,
+          "perCapita": 9100,
+          "perHousehold": 5000,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0977,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "kagoshima": {
+      "name": "鹿児島県",
+      "capital": "鹿児島市",
+      "nhi": {
+        "label": "鹿児島県（鹿児島市）",
+        "medical": {
+          "incomeRate": 0.0826,
+          "perCapita": 34600,
+          "perHousehold": 23000,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0294,
+          "perCapita": 12200,
+          "perHousehold": 8100,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0247,
+          "perCapita": 12000,
+          "perHousehold": 6100,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.1013,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5500
+    },
+    "okinawa": {
+      "name": "沖縄県",
+      "capital": "那覇市",
+      "nhi": {
+        "label": "沖縄県（那覇市）",
+        "medical": {
+          "incomeRate": 0.097,
+          "perCapita": 18200,
+          "perHousehold": 25400,
+          "cap": 670000
+        },
+        "elderlySupport": {
+          "incomeRate": 0.0159,
+          "perCapita": 3300,
+          "perHousehold": 5300,
+          "cap": 260000
+        },
+        "nursingCare": {
+          "incomeRate": 0.0156,
+          "perCapita": 7700,
+          "perHousehold": 4600,
+          "cap": 170000,
+          "minAge": 40,
+          "maxAge": 64
+        }
+      },
+      "kyokaiKenpoRate": 0.0944,
+      "corporateResidentTaxLevyRate": 0.07,
+      "residentTaxIncomeRate": 0.1,
+      "residentTaxPerCapitaLevy": 5000
+    }
   }
 }

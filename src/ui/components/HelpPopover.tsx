@@ -4,7 +4,7 @@ import styles from '../styles/HelpPopover.module.css';
 
 interface Props {
   description: string;
-  linkTo: string;
+  linkTo?: string;
   linkLabel?: string;
 }
 
@@ -43,9 +43,11 @@ export function HelpPopover({ description, linkTo, linkLabel = '詳しく見る'
       {open && (
         <div className={styles.popover}>
           <p className={styles.description}>{description}</p>
-          <Link to={linkTo} className={styles.link} onClick={() => setOpen(false)}>
-            {linkLabel} →
-          </Link>
+          {linkTo && (
+            <Link to={linkTo} className={styles.link} onClick={() => setOpen(false)}>
+              {linkLabel} →
+            </Link>
+          )}
         </div>
       )}
     </span>

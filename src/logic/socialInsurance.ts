@@ -4,6 +4,7 @@ import type {
   NationalPensionResult,
   NHIResult,
   NHICategoryParams,
+  NHIModelParams,
 } from '../data/types';
 import { clampMin } from './common';
 
@@ -31,11 +32,10 @@ export function calcNHI(
   totalIncome: number,
   age: number,
   householdMembers: number,
-  modelKey: string,
-  params: SocialInsuranceParams['nationalHealthInsurance'],
+  model: NHIModelParams,
+  baseDeduction: number,
 ): NHIResult {
-  const model = params.models[modelKey] ?? params.models['standard'];
-  const basis = clampMin(totalIncome - params.baseDeduction, 0);
+  const basis = clampMin(totalIncome - baseDeduction, 0);
 
   const medical = calcNHICategory(basis, householdMembers, model.medical);
   const elderlySupport = calcNHICategory(basis, householdMembers, model.elderlySupport);
@@ -58,11 +58,11 @@ export function calcSocialInsurance(
   totalIncome: number,
   age: number,
   householdMembers: number,
-  nhiModelKey: string,
+  nhiModel: NHIModelParams,
   params: SocialInsuranceParams,
 ): SocialInsuranceResult {
   const nationalPension = calcNationalPension(params.nationalPension);
-  const nhi = calcNHI(totalIncome, age, householdMembers, nhiModelKey, params.nationalHealthInsurance);
+  const nhi = calcNHI(totalIncome, age, householdMembers, nhiModel, params.nationalHealthInsurance.baseDeduction);
 
   return {
     nationalPension,

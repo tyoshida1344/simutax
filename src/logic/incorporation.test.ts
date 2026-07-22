@@ -4,6 +4,7 @@ import { taxParams } from '../data/taxParams';
 import type { IncorporationInput } from '../data/types';
 
 const params = taxParams;
+const tokyoKenpoRate = params.prefectures['tokyo'].kyokaiKenpoRate;
 
 function makeInput(overrides: Partial<IncorporationInput> = {}): IncorporationInput {
   return {
@@ -12,6 +13,7 @@ function makeInput(overrides: Partial<IncorporationInput> = {}): IncorporationIn
     additionalCosts: 0,
     capitalRange: 'under10m',
     age: 35,
+    prefecture: 'tokyo',
     iDeCoContribution: 0,
     smallBusinessMutualAid: 0,
     dependentCount: 0,
@@ -67,12 +69,13 @@ describe('calcIncorporation', () => {
     expect(r.corporateSide.localCorporateTax).toBe(expected);
   });
 
-  it('法人住民税法人税割 = 法人税 × 7%', () => {
+  it('法人住民税法人税割 = 法人税 × 都道府県別税率', () => {
     const r = calcIncorporation(makeInput({
       businessProfit: 8000000,
       officerCompensation: 0,
     }), params);
-    const expected = Math.floor(Math.floor(r.corporateSide.corporateTax * 0.07) / 100) * 100;
+    const prefRate = params.prefectures['tokyo'].corporateResidentTaxLevyRate;
+    const expected = Math.floor(Math.floor(r.corporateSide.corporateTax * prefRate) / 100) * 100;
     expect(r.corporateSide.residentTaxLevy).toBe(expected);
   });
 
@@ -128,7 +131,7 @@ describe('calcIncorporation', () => {
 
   it('社保: 35歳なら介護保険なし', () => {
     const r = calcIncorporation(makeInput({ officerCompensation: 300000, age: 35 }), params);
-    const healthMonthly = 300000 * 0.1000;
+    const healthMonthly = 300000 * tokyoKenpoRate;
     const pensionMonthly = 300000 * 0.18300;
     const halfMonthly = Math.floor((healthMonthly + pensionMonthly) / 2);
     expect(r.corporateSide.socialInsurance).toBe(halfMonthly * 12);
@@ -137,7 +140,7 @@ describe('calcIncorporation', () => {
 
   it('社保: 45歳なら介護保険あり', () => {
     const r = calcIncorporation(makeInput({ officerCompensation: 300000, age: 45 }), params);
-    const healthMonthly = 300000 * 0.1000;
+    const healthMonthly = 300000 * tokyoKenpoRate;
     const nursingMonthly = 300000 * 0.0160;
     const pensionMonthly = 300000 * 0.18300;
     const halfMonthly = Math.floor((healthMonthly + nursingMonthly + pensionMonthly) / 2);
@@ -146,7 +149,7 @@ describe('calcIncorporation', () => {
 
   it('厚生年金: 月額65万超で上限適用', () => {
     const r = calcIncorporation(makeInput({ officerCompensation: 1000000, age: 35 }), params);
-    const healthMonthly = 1000000 * 0.1000;
+    const healthMonthly = 1000000 * tokyoKenpoRate;
     const pensionMonthly = 650000 * 0.18300;
     const halfMonthly = Math.floor((healthMonthly + pensionMonthly) / 2);
     expect(r.corporateSide.socialInsurance).toBe(halfMonthly * 12);
@@ -158,7 +161,7 @@ describe('calcIncorporation', () => {
       officerCompensation: 1500000,
       age: 35,
     }), params);
-    const healthMonthly = 1390000 * 0.1000;
+    const healthMonthly = 1390000 * tokyoKenpoRate;
     const pensionMonthly = 650000 * 0.18300;
     const halfMonthly = Math.floor((healthMonthly + pensionMonthly) / 2);
     expect(r.corporateSide.socialInsurance).toBe(halfMonthly * 12);
@@ -208,7 +211,7 @@ describe('calcIncorporation', () => {
     const annualComp = 400000 * 12;
     expect(r.individualSide.annualCompensation).toBe(annualComp);
 
-    const healthMonthly = 400000 * 0.1000;
+    const healthMonthly = 400000 * tokyoKenpoRate;
     const pensionMonthly = 400000 * 0.18300;
     const halfMonthly = Math.floor((healthMonthly + pensionMonthly) / 2);
     const annualSI = halfMonthly * 12;
@@ -221,5 +224,12 @@ describe('calcIncorporation', () => {
 
     expect(r.totalBurden).toBeLessThan(8000000);
     expect(r.disposableIncome).toBeGreaterThan(0);
+  });
+
+  it('都道府県による協会けんぽ料率の違い', () => {
+    const rTokyo = calcIncorporation(makeInput({ prefecture: 'tokyo' }), params);
+    const rSaga = calcIncorporation(makeInput({ prefecture: 'saga' }), params);
+    // 佐賀は協会けんぽ料率が最も高い
+    expect(rSaga.corporateSide.socialInsurance).toBeGreaterThan(rTokyo.corporateSide.socialInsurance);
   });
 });
