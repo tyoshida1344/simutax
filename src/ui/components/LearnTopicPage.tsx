@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { getTopicById } from '../../content/learnTopics';
 import { glossaryTerms } from '../../content/glossary';
 import { taxParams } from '../../data/taxParams';
+import { renderTermLinks } from '../utils/termLink';
 import { CalcFormula } from './CalcFormula';
 import { Disclaimer } from './Disclaimer';
 import styles from '../styles/LearnTopicPage.module.css';
@@ -31,7 +32,7 @@ export function LearnTopicPage() {
       </header>
 
       <section className={styles.section}>
-        <p className={styles.introduction}>{topic.introduction}</p>
+        <p className={styles.introduction}>{renderTermLinks(topic.introduction)}</p>
       </section>
 
       <section className={styles.section}>
@@ -45,7 +46,7 @@ export function LearnTopicPage() {
           <ul className={styles.notesList}>
             {notes.map((note, i) =>
               typeof note === 'string' ? (
-                <li key={i} className={styles.noteItem}>{note}</li>
+                <li key={i} className={styles.noteItem}>{renderTermLinks(note)}</li>
               ) : (
                 <li key={i} className={styles.noteTableWrapper}>
                   <div className={styles.noteTableScroll}>
@@ -62,7 +63,7 @@ export function LearnTopicPage() {
                         {note.rows.map((row, ri) => (
                           <tr key={ri}>
                             {row.map((cell, ci) => (
-                              <td key={ci}>{cell}</td>
+                              <td key={ci}>{renderTermLinks(cell)}</td>
                             ))}
                           </tr>
                         ))}

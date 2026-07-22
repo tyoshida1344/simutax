@@ -32,7 +32,7 @@ export const learnTopics: LearnTopic[] = [
     title: '所得税',
     description: 'フリーランスの所得にかかる国税',
     introduction:
-      '所得税は、1年間の所得（もうけ）に対してかかる国税です。所得が多いほど税率が上がる「累進課税」方式で、税率は5%〜45%の7段階。東日本大震災の復興財源として、所得税額の2.1%が復興特別所得税として上乗せされます。',
+      '所得税は、1年間の所得（もうけ）に対してかかる国税です。所得が多いほど税率が上がる「[[ruishin-kazei|累進課税]]」方式で、税率は5%〜45%の7段階。東日本大震災の復興財源として、所得税額の2.1%が[[fukkou-tokubetsu-zei|復興特別所得税]]として上乗せされます。',
     getFormula: () => [
       '売上 − 経費 − [[aoiro-tokubetsu-koujo|青色申告特別控除]] = ①',
       '① − [[kiso-koujo|基礎控除]]48万円 − [[shakai-hokenryou|社会保険料]]など = ②',
@@ -51,7 +51,7 @@ export const learnTopics: LearnTopic[] = [
             `${b.deduction.toLocaleString()}円`,
           ]),
         },
-        `復興特別所得税: 所得税額 × ${(params.incomeTax.reconstructionSurtaxRate * 100).toFixed(1)}%（2037年まで）`,
+        `[[fukkou-tokubetsu-zei|復興特別所得税]]: 所得税額 × ${(params.incomeTax.reconstructionSurtaxRate * 100).toFixed(1)}%（2037年まで）`,
       ];
     },
     references: [
@@ -66,15 +66,15 @@ export const learnTopics: LearnTopic[] = [
     title: '住民税',
     description: '都道府県・市区町村に納める地方税',
     introduction:
-      '住民税は、前年の所得をもとに都道府県と市区町村に納める地方税です。所得に応じた「所得割」（税率10%）と、所得に関係なく定額の「均等割」の合計で算出されます。所得税とは基礎控除額などが異なる点に注意が必要です。',
+      '住民税は、前年の所得をもとに都道府県と市区町村に納める地方税です。所得に応じた「[[shotokuwari|所得割]]」（税率10%）と、所得に関係なく定額の「[[kintouwari|均等割]]」の合計で算出されます。所得税とは[[kiso-koujo|基礎控除]]額などが異なる点に注意が必要です。',
     getFormula: (params) => [
       '売上 − 経費 − [[aoiro-tokubetsu-koujo|青色控除]] − [[kiso-koujo|基礎控除]]43万円 − [[shakai-hokenryou|社会保険料]]など = ①',
       `① × ${(params.residentTax.incomeRate * 100).toFixed(0)}% + [[kintouwari|均等割]] = 住民税`,
     ],
     getNotes: (params) => [
-      `所得割の税率: ${(params.residentTax.incomeRate * 100).toFixed(0)}%（市区町村6% + 道府県4%）`,
-      `均等割: 年額${params.residentTax.perCapitaLevy.toLocaleString()}円（森林環境税を含む）`,
-      `基礎控除: ${(params.residentTax.basicDeduction / 10000).toLocaleString()}万円（所得税とは異なり一律）`,
+      `[[shotokuwari|所得割]]の税率: ${(params.residentTax.incomeRate * 100).toFixed(0)}%（市区町村6% + 道府県4%）`,
+      `[[kintouwari|均等割]]: 年額${params.residentTax.perCapitaLevy.toLocaleString()}円（森林環境税を含む）`,
+      `[[kiso-koujo|基礎控除]]: ${(params.residentTax.basicDeduction / 10000).toLocaleString()}万円（所得税とは異なり一律）`,
     ],
     references: [
       { label: '個人住民税のしくみ（総務省）', url: 'https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_06.html' },
@@ -86,13 +86,13 @@ export const learnTopics: LearnTopic[] = [
     title: '個人事業税',
     description: '一定の事業を営む個人にかかる地方税',
     introduction:
-      '個人事業税は、法律で定められた業種の事業を営む個人事業主にかかる地方税です。青色申告特別控除を適用する前の事業所得から290万円の事業主控除を差し引いた金額に、業種ごとの税率（3%〜5%）を掛けて計算します。事業所得が290万円以下なら課税されません。',
+      '個人事業税は、法律で定められた業種の事業を営む個人事業主にかかる地方税です。[[aoiro-tokubetsu-koujo|青色申告特別控除]]を適用する前の事業所得から290万円の[[jigyounushi-koujo|事業主控除]]を差し引いた金額に、業種ごとの税率（3%〜5%）を掛けて計算します。事業所得が290万円以下なら課税されません。',
     getFormula: (params) => [
-      `（売上 − 経費 − ${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円）× 税率（3〜5%）= 個人事業税`,
+      `（売上 − 経費 − [[jigyounushi-koujo|事業主控除]]${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円）× 税率（3〜5%）= 個人事業税`,
       '※[[aoiro-tokubetsu-koujo|青色申告特別控除]]は差し引けない',
     ],
     getNotes: (params) => [
-      `事業主控除: 年額${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円`,
+      `[[jigyounushi-koujo|事業主控除]]: 年額${(params.businessTax.businessOwnerDeduction / 10000).toLocaleString()}万円`,
       `税率: 業種により3%〜5%（大半の業種は5%）`,
       `非課税業種: 文筆業・漫画家・音楽家など`,
     ],
@@ -106,11 +106,11 @@ export const learnTopics: LearnTopic[] = [
     title: '消費税',
     description: '商品・サービスの販売にかかる間接税',
     introduction:
-      '消費税は、商品やサービスの販売時にかかる間接税です。フリーランスが課税事業者の場合、受け取った消費税から仕入れ等で支払った消費税を差し引いて納付します。計算方法は原則課税・簡易課税・2割特例の3つから選べます。',
+      '消費税は、商品やサービスの販売時にかかる間接税です。フリーランスが課税事業者の場合、受け取った消費税から仕入れ等で支払った消費税を差し引いて納付します。計算方法は原則課税・[[kani-kazei|簡易課税]]・[[niwari-tokurei|2割特例]]の3つから選べます。',
     getFormula: () => [
       '売上の消費税 = 税込売上 × 10/110',
       '原則課税: 売上の消費税 − 仕入で払った消費税',
-      '簡易課税: 売上の消費税 ×（1 − [[minashi-shiirritsu|みなし仕入率]]）',
+      '[[kani-kazei|簡易課税]]: 売上の消費税 ×（1 − [[minashi-shiirritsu|みなし仕入率]]）',
       '[[niwari-tokurei|2割特例]]: 売上の消費税 × 20%',
     ],
     getNotes: (params) => {
@@ -119,15 +119,15 @@ export const learnTopics: LearnTopic[] = [
       const categories = Object.values(ct.simplifiedCategories);
       return [
         `消費税率: ${(ct.taxRate * 100).toFixed(0)}%`,
-        `免税事業者の基準: 基準期間の課税売上高${(ct.taxableThreshold / 10000).toLocaleString()}万円以下`,
+        `免税事業者の基準: [[kijun-kikan|基準期間]]の課税売上高${(ct.taxableThreshold / 10000).toLocaleString()}万円以下`,
         {
           type: 'table',
           title: '簡易課税のみなし仕入率',
           headers: ['業種区分', 'みなし仕入率'],
           rows: categories.map((c) => [c.label, `${(c.deemedPurchaseRate * 100).toFixed(0)}%`]),
         },
-        `簡易課税の適用条件: 基準期間の課税売上高${(ct.simplifiedThreshold / 10000).toLocaleString()}万円以下`,
-        `2割特例: インボイス登録で新たに課税事業者になった場合に利用可能（${years[0]}〜${years[years.length - 1]}年分）`,
+        `[[kani-kazei|簡易課税]]の適用条件: [[kijun-kikan|基準期間]]の課税売上高${(ct.simplifiedThreshold / 10000).toLocaleString()}万円以下`,
+        `[[niwari-tokurei|2割特例]]: インボイス登録で新たに課税事業者になった場合に利用可能（${years[0]}〜${years[years.length - 1]}年分）`,
       ];
     },
     references: [
@@ -141,7 +141,7 @@ export const learnTopics: LearnTopic[] = [
     title: 'インボイス制度',
     description: '適格請求書による仕入税額控除の仕組み',
     introduction:
-      'インボイス制度（適格請求書等保存方式）は、消費税の仕入税額控除を受けるために「適格請求書（インボイス）」の保存を求める制度です。2023年10月に開始されました。登録するかどうかは「取引先が誰か」で判断します。取引先が企業（BtoB）なら、登録しないと取引先が消費税を余分に負担することになり、値下げや取引解消を求められるリスクがあります。取引先が一般消費者（BtoC）中心なら、登録しなくても実務上の影響は小さいです。',
+      'インボイス制度（適格請求書等保存方式）は、消費税の仕入税額控除を受けるために「[[tekikaku-seikyusho|適格請求書]]（インボイス）」の保存を求める制度です。2023年10月に開始されました。登録するかどうかは「取引先が誰か」で判断します。取引先が企業（BtoB）なら、登録しないと取引先が消費税を余分に負担することになり、値下げや取引解消を求められるリスクがあります。取引先が一般消費者（BtoC）中心なら、登録しなくても実務上の影響は小さいです。',
     getFormula: () => [
       '登録した場合: 売上の消費税 × 20%（[[niwari-tokurei|2割特例]]）を納付',
       '登録しない場合: 消費税の納付は不要',
@@ -168,11 +168,11 @@ export const learnTopics: LearnTopic[] = [
             ['消費税の納付', '必要', '不要'],
             ['インボイスの発行', 'できる', 'できない'],
             ['取引先の仕入税額控除', '全額控除可能', '控除不可'],
-            ['2割特例の利用', `可能（${years[years.length - 1]}年分まで）`, '−'],
+            ['[[niwari-tokurei|2割特例]]の利用', `可能（${years[years.length - 1]}年分まで）`, '−'],
           ],
         },
-        `登録した場合でも、2割特例を使えば売上税額の2割の納付で済む（${years[0]}〜${years[years.length - 1]}年分）。売上500万円（税込）なら年間約9万円の負担`,
-        '登録の届出は「適格請求書発行事業者の登録申請書」を税務署に提出する（e-Taxでも可能）',
+        `登録した場合でも、[[niwari-tokurei|2割特例]]を使えば売上税額の2割の納付で済む（${years[0]}〜${years[years.length - 1]}年分）。売上500万円（税込）なら年間約9万円の負担`,
+        '登録の届出は「[[tekikaku-seikyusho|適格請求書]]発行事業者の登録申請書」を税務署に提出する（[[etax|e-Tax]]でも可能）',
       ];
     },
     references: [
@@ -187,16 +187,16 @@ export const learnTopics: LearnTopic[] = [
     title: '国保・国民年金',
     description: 'フリーランスが加入する公的保険制度',
     introduction:
-      'フリーランスは国民健康保険と国民年金に加入します。国民年金は定額の保険料を毎月納付します。国民健康保険は前年の所得をもとに市区町村が算定し、医療分・後期高齢者支援金分・介護分の3区分で計算されます。',
+      'フリーランスは[[kokumin-kenko-hoken|国民健康保険]]と[[kokumin-nenkin|国民年金]]に加入します。国民年金は定額の保険料を毎月納付します。国民健康保険は前年の所得をもとに市区町村が算定し、医療分・後期高齢者支援金分・介護分の3区分で計算されます。',
     getFormula: (params) => [
-      `（売上 − 経費 − [[aoiro-tokubetsu-koujo|青色控除]] − ${(params.socialInsurance.nationalHealthInsurance.baseDeduction / 10000).toFixed(0)}万円）× [[shotokuwari|所得割]]率 + [[kintouwari|均等割]] = 国保`,
-      `国保 + 国民年金（月額${params.socialInsurance.nationalPension.monthlyAmount.toLocaleString()}円 × 12）= 社会保険料`,
+      `（売上 − 経費 − [[aoiro-tokubetsu-koujo|青色控除]] − ${(params.socialInsurance.nationalHealthInsurance.baseDeduction / 10000).toFixed(0)}万円）× [[shotokuwari|所得割]]率 + [[kintouwari|均等割]] = [[kokumin-kenko-hoken|国保]]`,
+      `[[kokumin-kenko-hoken|国保]] + [[kokumin-nenkin|国民年金]]（月額${params.socialInsurance.nationalPension.monthlyAmount.toLocaleString()}円 × 12）= [[shakai-hokenryou|社会保険料]]`,
     ],
     getNotes: (params) => {
       const nhi = params.socialInsurance.nationalHealthInsurance.models['standard'];
       return [
-        `国民年金保険料: 月額${params.socialInsurance.nationalPension.monthlyAmount.toLocaleString()}円（${params.meta.eraYear}度）`,
-        `国保の賦課限度額: 医療分${(nhi.medical.cap / 10000).toLocaleString()}万円 + 後期高齢者支援金分${(nhi.elderlySupport.cap / 10000).toLocaleString()}万円 + 介護分${(nhi.nursingCare.cap / 10000).toLocaleString()}万円`,
+        `[[kokumin-nenkin|国民年金]]保険料: 月額${params.socialInsurance.nationalPension.monthlyAmount.toLocaleString()}円（${params.meta.eraYear}度）`,
+        `[[kokumin-kenko-hoken|国保]]の[[fuka-gendo-gaku|賦課限度額]]: 医療分${(nhi.medical.cap / 10000).toLocaleString()}万円 + 後期高齢者支援金分${(nhi.elderlySupport.cap / 10000).toLocaleString()}万円 + 介護分${(nhi.nursingCare.cap / 10000).toLocaleString()}万円`,
         `介護分は40歳以上65歳未満の場合に加算`,
       ];
     },
@@ -211,7 +211,7 @@ export const learnTopics: LearnTopic[] = [
     title: '源泉徴収',
     description: '報酬から天引きされる所得税の前払い',
     introduction:
-      '源泉徴収とは、報酬を支払う側（クライアント）が、支払額から所得税分を差し引いて国に納付する仕組みです。フリーランスが受け取る報酬のうち、原稿料・デザイン料・コンサルティング料などの特定の報酬は源泉徴収の対象となります。天引きされた税額は確定申告で精算し、納めすぎた分は還付されます。',
+      '源泉徴収とは、報酬を支払う側（クライアント）が、支払額から所得税分を差し引いて国に納付する仕組みです。フリーランスが受け取る報酬のうち、原稿料・デザイン料・コンサルティング料などの特定の報酬は源泉徴収の対象となります。天引きされた税額は[[kakutei-shinkoku|確定申告]]で精算し、納めすぎた分は還付されます。',
     getFormula: () => [
       '1回の報酬 × 10.21% = 天引きされる額',
       '年間の天引き合計 − 確定した所得税 → 差額が還付 or 追加納付',
@@ -235,10 +235,10 @@ export const learnTopics: LearnTopic[] = [
                 ],
           ),
         },
-        `税率には復興特別所得税（${(wt.reconstructionSurtaxRate * 100).toFixed(1)}%）が含まれている`,
+        `税率には[[fukkou-tokubetsu-zei|復興特別所得税]]（${(wt.reconstructionSurtaxRate * 100).toFixed(1)}%）が含まれている`,
         '源泉徴収の対象となる報酬: 原稿料、デザイン料、講演料、コンサルティング料、弁護士・税理士等の報酬など',
         '源泉徴収されない報酬: プログラミング、Web制作、物品販売など（業務委託契約の内容による）',
-        '確定申告で源泉徴収額を申告すると、納めすぎた税金が還付される。経費が多い場合や各種控除を適用する場合は還付になることが多い',
+        '[[kakutei-shinkoku|確定申告]]で源泉徴収額を申告すると、納めすぎた税金が還付される。経費が多い場合や各種控除を適用する場合は還付になることが多い',
       ];
     },
     references: [
@@ -269,7 +269,7 @@ export const learnTopics: LearnTopic[] = [
         '受取時期: 原則60歳以降',
         '中途解約: 原則不可（掛金の停止・減額は可能）',
         '運用: 自分で運用商品（投資信託・定期預金など）を選択',
-        '所得控除の種類: 小規模企業共済等掛金控除',
+        '所得控除の種類: [[shoukibo-kyousai|小規模企業共済]]等掛金控除',
       ];
     },
     references: [
@@ -283,7 +283,7 @@ export const learnTopics: LearnTopic[] = [
     title: '小規模企業共済',
     description: 'フリーランスのための退職金積立制度',
     introduction:
-      '小規模企業共済は、個人事業主や小規模企業の経営者のための退職金制度です。掛金は全額が所得控除の対象となり、廃業・退職時にまとまった共済金を受け取れます。iDeCoと異なり、必要なときに解約して資金を引き出せる柔軟さがあります（ただし早期解約は元本割れの可能性あり）。',
+      '小規模企業共済は、個人事業主や小規模企業の経営者のための退職金制度です。掛金は全額が所得控除の対象となり、廃業・退職時にまとまった共済金を受け取れます。[[ideco|iDeCo]]と異なり、必要なときに解約して資金を引き出せる柔軟さがあります（ただし早期解約は元本割れの可能性あり）。',
     getFormula: (params) => {
       const max = params.savingsDeduction.smallBusinessMutualAid.maxMonthlyContribution;
       return [
