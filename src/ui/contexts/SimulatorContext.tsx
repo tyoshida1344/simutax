@@ -17,7 +17,7 @@ export const sampleInput: SimulatorInput = {
   manualSocialInsurance: null,
   age: 35,
   householdMembers: 1,
-  nhiModel: 'standard',
+  prefecture: 'tokyo',
   basePeriodSales: 'under10m',
   invoiceRegistered: false,
   taxablePurchaseAmount: 0,

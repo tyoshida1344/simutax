@@ -5,7 +5,7 @@ import type {
   CorporateTaxBracket,
   EmploymentIncomeDeductionBracket,
 } from '../data/types';
-import { clampMin, roundDownTo } from './common';
+import { clampMin, roundDownTo, buildPrefResidentTaxParams } from './common';
 import { calcIncomeTax } from './incomeTax';
 import { calcResidentTax } from './residentTax';
 import { calcDeductionsForIncomeTax, calcDeductionsForResidentTax } from './deductions';
@@ -45,12 +45,13 @@ function calcEmploymentIncomeDeduction(
 function calcCorporateSocialInsurance(
   monthlyCompensation: number,
   age: number,
+  kyokaiKenpoRate: number,
   params: TaxParams,
 ): { employerShare: number; employeeShare: number } {
   const csi = params.corporateSocialInsurance;
 
   const healthBase = Math.min(monthlyCompensation, csi.healthInsurance.maxMonthlyCompensation);
-  const healthMonthly = healthBase * csi.healthInsurance.rate;
+  const healthMonthly = healthBase * kyokaiKenpoRate;
 
   const nursingMonthly =
     age >= csi.nursingCare.minAge && age <= csi.nursingCare.maxAge
@@ -73,9 +74,10 @@ export function calcIncorporation(
   input: IncorporationInput,
   params: TaxParams,
 ): IncorporationResult {
+  const pref = params.prefectures[input.prefecture];
   const annualCompensation = input.officerCompensation * 12;
 
-  const si = calcCorporateSocialInsurance(input.officerCompensation, input.age, params);
+  const si = calcCorporateSocialInsurance(input.officerCompensation, input.age, pref.kyokaiKenpoRate, params);
 
   // --- Corporate side ---
   const rawCorporateIncome = input.businessProfit - annualCompensation - si.employerShare - input.additionalCosts;
@@ -95,7 +97,7 @@ export function calcIncorporation(
   );
 
   const residentTaxLevy = roundDownTo(
-    corporateTax * params.corporateResidentTax.taxLevyRate,
+    corporateTax * pref.corporateResidentTaxLevyRate,
     100,
   );
 
@@ -137,8 +139,10 @@ export function calcIncorporation(
     input.medicalExpenseDeduction,
   );
 
+  const prefResidentTaxParams = buildPrefResidentTaxParams(params.residentTax, pref);
+
   const residentTaxDeductions = calcDeductionsForResidentTax(
-    params.residentTax,
+    prefResidentTaxParams,
     si.employeeShare,
     input.iDeCoContribution,
     input.smallBusinessMutualAid,
@@ -156,7 +160,7 @@ export function calcIncorporation(
 
   const residentTax = calcResidentTax(
     employmentIncome - residentTaxDeductions.total,
-    params.residentTax,
+    prefResidentTaxParams,
     residentTaxDeductions.basicDeduction,
   );
 
